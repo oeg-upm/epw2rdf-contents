@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.rawgit.com/bassjobsen/Bootstrap-3-Typeahead/master/bootstrap3-typeahead.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-autocomplete/1.3.5/jquery.easy-autocomplete.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'converter/style.css' %}?version=23" />
+        <title>Search</title>
+</head>
+<body>
+    {% csrf_token %}
+    <script>
+            document.body.onkeydown = function(e) {
+                if (e.keyCode == 13){
+                    correctSentence();
+                    returnSentence();
+                
+                }
+            };
+
+
+            function correctSentence(){
+                var elemento = document.getElementById("Search").value
+                $.ajax({
+                    type : 'POST',
+                    url : '/correct',
+                    data : JSON.stringify({
+                        sentence : elemento
+                    }),
+                    success : (data, textStatus, jqXHR) => {
+                        console.log(data,textStatus,jqXHR)
+                        if (data == false){} // No se hace nada
+                        else{
+                            // alert(data)
+                            document.getElementById("correct").style.visibility = "visible";
+                            $( "#correct" ).append('"'+data+'"');
+                            document.getElementById("correct").value = data;
+                        }
+                    },
+                    contentType : 'application/json',
+                    dataType : 'json'
+                })
+            }
+
+            function fillTextCorrection(){
+                    var element = document.getElementById("correct").value
+                    document.getElementById("Search").value = element
+                    returnSentence();
+                    document.getElementById("correct").style.visibility = "hidden";
+                    $("#correct").empty();
+                    $("#correct").append("Quizá quiso decir... ");
+                    document.getElementById("correct").value = ""
+            }
+
+
+            function autoComplete(){
+                var elemento = document.getElementById("Search").value;
+                $.ajax({
+                    type : 'POST',
+                    url : '/autocomplete',
+                    data : JSON.stringify({
+                        frase : elemento
+                    }),
+                    success : (data,textStatus,jqXHR) =>{
+                        console.log(data,textStatus,jqXHR)
+                        productos = data["productos"]
+                        var arr = []
+                        $.each(productos, function(key, value) {
+                            if ($.inArray(value.name, arr) === -1) {
+                                    arr.push(value.name)
+                                }
+                            })
+                        $("#Search").autocomplete({
+                            source: arr
+                        });
+                        
+                    },
+                    contentType : 'application/json',
+                    dataType : 'json'
+                })
+            }
+
+            function returnSentence(){
+                // Clean suggestion of correction
+                document.getElementById("correct").style.visibility = "hidden";
+                $("#correct").empty();
+                $("#correct").append("Quizá quiso decir... ");
+                document.getElementById("correct").value = ""
+
+                // Make Search of element
+
+                var elemento = document.getElementById("Search").value
+                // alert(elemento)
+                
+                $.ajax({
+                    type : 'POST',
+                    url : '/search',
+                    data : JSON.stringify({
+                        sentence : elemento
+                    }),
+                    success : (data, textStatus, jqXHR) => {
+                        console.log(data,textStatus,jqXHR)
+                        $('table > tbody > tr > td').parent().remove();
+                        numberProducts(data);
+                        
+                    },
+                    contentType : 'application/json',
+                    dataType : 'json'
+                })
+                
+                }
+
+            function numberProducts(data){
+                productos = data["productos"];
+                var items = [];
+                $.each(productos,function(key, val){
+                    items.push("<tr>");
+                    items.push("<td id=''"+key+"''>"+val.id+"</td>");
+                    items.push("<td id=''"+key+"''>"+val.name+"</td>");
+                    items.push("</tr>");
+                })
+                
+                $('<tbody/>',{html:items.join("")}).appendTo("table");
+                getNumber();
+            }
+
+
+
+            
+            function getNumber(){
+                $(document).on("click", '#bu5',function(){
+                    $("table > tbody > tr").hide().slice(0, 6).show();
+                })
+                $(document).on("click", '#bu10',function(){
+                    $("table > tbody > tr").hide().slice(0, 11).show();
+                })
+                $(document).on("click", '#bu15',function(){
+                    $("table > tbody > tr").hide().slice(0, 16).show();
+                })
+                $(document).on("click", '#bu20',function(){
+                    $("table > tbody > tr").hide().slice(0, 21).show();
+                })
+                $(document).on("click", '#bu30',function(){
+                    $("table > tbody > tr").hide().slice(0, 31).show();
+                })
+                $(document).on("click", '#bu50',function(){
+                    $("table > tbody > tr").hide().slice(0, 51).show();
+                })
+                $(document).on("click", '#buTOT',function(){
+                    $("table > tbody > tr").show();
+                })
+            }
+
+                   
+                   
+        </script>
+    <div class="container theme-showcase" role="main">
+            <div class="jumbotron">
+                <h1 align="center">RDF File Converter</h1>
+                <p class="text-center">
+                    <input type="text" name="Search" id="Search" value="" onkeyup="autoComplete()" placeholder="Search..">
+                    <div class="w3-container" align="center">
+
+                        <input type="submit" value="Search" id="send" onclick="returnSentence();correctSentence()"> 
+                        <div id="load" style="display: none" class="loader"></div>
+                        <div>
+                            <a style="font-size: 25px; text-decoration: none; visibility: hidden" id="correct" value="" href="javascript:fillTextCorrection();">Quizá quiso decir... </a>
+                        </div>
+                    </div>
+
+                    <div class="w3-container" align="center">
+                        <h6>Number of products:</h6>    
+                            <button class="button" id="bu5">5</button>
+                            <button class="button" id="bu10">10</button>
+                            <button class="button" id="bu15">15</button>
+                            <button class="button" id="bu20">20</button>
+                            <button class="button" id="bu30">30</button>
+                            <button class="button" id="bu50">50</button>
+                            <button class="button" id="buTOT">All</button>
+                        </div>
+                        
+                        
+                </p>
+                    <table class = "table table-bordered table-striped table-hover">
+                     <thread> 
+                        <tr align="center">
+                            <th bgcolor="#9bffbc">ID</th>
+                            <th bgcolor="#9bffbc">NAME</th>
+                        </tr>
+                    </thread>
+                    </table>
+            </div>  
+
+            
+    </div>
+
+</body>
+</html>
