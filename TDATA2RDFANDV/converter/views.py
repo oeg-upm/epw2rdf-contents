@@ -4,4 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-	return render(request,'/home/salva/epw2rdf-contents/TDATA2RDFANDV/converter/templates/converter/index.html')
+	return render(request,'converter/index.html')
