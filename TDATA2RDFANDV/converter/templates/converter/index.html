@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'converter/style.css' %}?version=23" />
+    <link rel="stylesheet" type="text/css" href="{% static 'converter/style.css' %}?version=4" />
         <title>Search</title>
 </head>
 <body>
@@ -167,11 +167,13 @@
             <div class="jumbotron">
                 <h1 align="center">RDF File Converter</h1>
                 <p class="text-center">
-                    <input type="text" name="Search" id="Search" value="" onkeyup="autoComplete()" placeholder="Search..">
+                    <input type="file" name="file" id="file" class="inputfile" />
+                    <label for="file"></label>
                     <div class="w3-container" align="center">
-
-                        <input type="submit" value="Search" id="send" onclick="returnSentence();correctSentence()"> 
-                        <div id="load" style="display: none" class="loader"></div>
+                    <input type="text" name="Search" id="Search" value="" onkeyup="autoComplete()" placeholder="Search..">
+                    </div>
+                    <div class="w3-container" align="center">
+                        <input type="submit" value="Search" id="send" onclick="returnSentence();correctSentence()">
                         <div>
                             <a style="font-size: 25px; text-decoration: none; visibility: hidden" id="correct" value="" href="javascript:fillTextCorrection();">Quizá quiso decir... </a>
                         </div>
