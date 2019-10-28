@@ -5,26 +5,17 @@ import time
 import os
 
 
+
+
+countriesList = []
+
+
 urlContinents = "https://energyplus.net/weather"
 responseContinents = requests.get(urlContinents,timeout=10)
 continent = BeautifulSoup(responseContinents.content, "html.parser")
 
 
-def removeFile():
-    if os.path.exists("Data/countries.txt"):
-        os.remove("Data/countries.txt")
-        return
-    else:
-        return
-
-
-def createDocument():
-    documentCTD=open("Data/countries.txt", "a+")
-    return documentCTD
-
 # Primer for para continentes
-removeFile()
-documentCTD = createDocument()
 
 for continent in continent.find_all('a', attrs={"class": "btn btn-default left-justify blue-btn"}, href=True):
     continentLink = continent['href']
@@ -42,6 +33,6 @@ for continent in continent.find_all('a', attrs={"class": "btn btn-default left-j
         countryText = country.find_all(text=True)
         countryText = countryText[0].split(" - ")
         countryText = countryText[1]
-        documentCTD.write(countryText + "\n")
+        countriesList.append(countryText)
 
-documentCTD.close()
+print(countriesList)
