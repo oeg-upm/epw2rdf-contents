@@ -28,40 +28,6 @@
             };
 
 
-            function correctSentence(){
-                var elemento = document.getElementById("Search").value
-                $.ajax({
-                    type : 'POST',
-                    url : '/correct',
-                    data : JSON.stringify({
-                        sentence : elemento
-                    }),
-                    success : (data, textStatus, jqXHR) => {
-                        console.log(data,textStatus,jqXHR)
-                        if (data == false){} // No se hace nada
-                        else{
-                            // alert(data)
-                            document.getElementById("correct").style.visibility = "visible";
-                            $( "#correct" ).append('"'+data+'"');
-                            document.getElementById("correct").value = data;
-                        }
-                    },
-                    contentType : 'application/json',
-                    dataType : 'json'
-                })
-            }
-
-            function fillTextCorrection(){
-                    var element = document.getElementById("correct").value
-                    document.getElementById("Search").value = element
-                    returnSentence();
-                    document.getElementById("correct").style.visibility = "hidden";
-                    $("#correct").empty();
-                    $("#correct").append("Quizá quiso decir... ");
-                    document.getElementById("correct").value = ""
-            }
-
-
             function autoComplete(){
                 var elemento = document.getElementById("Search").value;
                 $.ajax({
