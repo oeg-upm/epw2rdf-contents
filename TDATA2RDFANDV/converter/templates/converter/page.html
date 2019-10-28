@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>File2RDF</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.rawgit.com/bassjobsen/Bootstrap-3-Typeahead/master/bootstrap3-typeahead.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-autocomplete/1.3.5/jquery.easy-autocomplete.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=4" />
+        <title>File2RDF</title>
+</head>
+<body>
+    <!-- {% csrf_token %} -->
+
+    <p>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 align="center" class="font-weight-bold, p-3 mb-2 bg-info text-white">RDF File Converter</h1>
+            </div>
+        </div>
+    </p>
+
+    <p>
+        <div class="container">
+            <form>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" value="" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file to convert to RDF</label>
+                </div>
+                <div class="mt-3" align="center">
+                    <button type="submit" value="customFile" class="btn btn-primary" onclick="convertFile()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </p>
+
+    <!-- SEARCH DATA -->
+    <p>
+        <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-9">
+                    <input type="text" class="form-control" id="Search" value="" name="Search" onkeyup="autoComplete()" placeholder="Make yout search here...">
+                </div>
+                <div class="form-group col-md-3">   
+                    <select id="inputState" class="form-control">
+                        <option selected>Where you want to search?</option>
+                        <option>Weather Data</option>
+                        <option>Buildings</option>
+                        <option>Etc...</option>
+                        </select>
+                </div>
+            </div>
+            <div class="mt-3" align="center">
+                    <button type="submit" value="Search" id="send" class="btn btn-primary" onclick="makeSearch()">Submit</button>
+            </div>
+        </div>
+    </p>
+    <!-- SEARCH DATA -->
+
+    <!-- MAKE BUTTONS -->
+    <p>
+        <div class="container" align="center">
+            <div class="btn-group btn-group-lg" align="center">
+                <button type="button" id="WeatherData" class="btn btn-success">Weather Data</button>
+                <button type="button" id="BuildingsData" class="btn btn-primary">Buildings Data</button>
+                <button type="button" id="Etc" class="btn btn-info">Etc...</button>
+            </div>
+        </div>
+    </p>
+    <!-- MAKE BUTTONS -->
+
+    <!-- BIG BOX -->
+    <p>
+        <div class="container">
+            <div class="jumbotron">
+                <div id='map' style="visibility: hidden;"></div>
+            </div>
+        </div>
+    </p>
+    <!-- BIG BOX -->
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="{% static 'converter/continents.js' %}"></script>
+
+    <script>
+
+        document.body.onkeydown = function(e) {
+                if (e.keyCode == 13){
+                    makeSearch();
+                
+                }
+            };
+
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        //  CÓDIGO PARA BOTONES
+                $(document).on("click", '#WeatherData',function(){
+                    $("#map").css('visibility','visible');
+                })
+                $(document).on("click", '#BuildingsData',function(){
+                    $("#map").css('visibility','hidden');
+                })
+                $(document).on("click", '#Etc',function(){
+                    $("#map").css('visibility','hidden');
+                })
+
+
+        // CÓDIGO PARA BOTONES
+
+
+        // AQUÍ ESTÁ LA PARTE DEL MAPA
+        var map = L.map('map');
+
+        map.createPane('labels');
+
+        // This pane is above markers but below popups
+        map.getPane('labels').style.zIndex = 650;
+
+        // Layers in this pane are non-interactive and do not obscure mouse/touch events
+        map.getPane('labels').style.pointerEvents = 'none';
+
+        var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
+
+        var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+            attribution: cartodbAttribution
+        }).addTo(map);
+
+        var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+            attribution: cartodbAttribution,
+            pane: 'labels'
+        }).addTo(map);
+
+        geojson = L.geoJson(geoLocations).addTo(map);
+
+        geojson.eachLayer(function (layer) {
+            layer.bindPopup(layer.feature.properties.name);
+        });
+
+        map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 2);
+
+
+
+        //  AQUÍ TERMINA LA PARTE DEL MAPA
+
+    </script>
+
+
+
+    
+    <!--    FIN SCRIPTS -->
+
+</body>
+</html>
