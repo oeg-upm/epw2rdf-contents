@@ -35,4 +35,9 @@ for continent in continent.find_all('a', attrs={"class": "btn btn-default left-j
         countryText = countryText[1]
         countriesList.append(countryText)
 
+
+
+
+
+
 print(countriesList)
