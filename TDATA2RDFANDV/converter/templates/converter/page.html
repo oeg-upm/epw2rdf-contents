@@ -153,6 +153,36 @@
             pane: 'labels'
         }).addTo(map);
 
+
+
+        function getColor(d) {
+            return d == 1 ? '#800026' : 
+                d == 2 ? '#1570BF' : 
+                d == 3 ? '#38A673' : 
+                d == 4 ? '#F2D129' : 
+                d == 5 ? '#F26430' : 
+                d == 6 ? '#F22F1D' : 
+                d == 7 ? '#F22E62' : 
+                '#092601'; 
+        }
+
+        function style(feature) { 
+            return { 
+            fillColor: getColor(
+            feature.properties.mapcolor7), 
+            weight: 1, 
+            opacity: 1, 
+            color: 'white', 
+            dashArray: '', 
+            fillOpacity: 0.3
+            }; 
+            }
+
+	
+            L.geoJson(geoLocations, { style: style }).addTo(map);
+
+
+
         geojson = L.geoJson(geoLocations).addTo(map);
 
         geojson.eachLayer(function (layer) {
@@ -169,52 +199,56 @@
 
 
 
-        function highlightFeature(e) {
-        var layer = e.target;
+            function highlightFeature(e) {
+            var layer = e.target;
 
-        layer.setStyle({
-            weight: 5,
-            color: '#666',
-            dashArray: '',
-            fillOpacity: 0.7
-        });
-
-        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-            layer.bringToFront();
-        }
-    }
-
-
-
-        function resetHighlight(e) {
-            geojson.resetStyle(e.target);
-        }
-
-
-
-
-        var geojson;
-        // ... our listeners
-        geojson = L.geoJson(geoLocations);
-
-        function zoomToFeature(e) {
-            map.fitBounds(e.target.getBounds());
-        }
-
-
-
-
-        function onEachFeature(feature, layer) {
-            layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight,
-                click: zoomToFeature
+            layer.setStyle({
+                weight: 1,
+                color: '#FFFF',
+                dashArray: '',
+                opacity: 1,
+                fillOpacity: 1
             });
+
+            
+
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
         }
 
-        geojson = L.geoJson(geoLocations, {
-            onEachFeature: onEachFeature
-        }).addTo(map);
+
+
+            function resetHighlight(e) {
+                geojson.resetStyle(e.target);
+            }
+
+
+
+
+            var geojson;
+            // ... our listeners
+            geojson = L.geoJson(geoLocations);
+
+            function zoomToFeature(e) {
+                map.fitBounds(e.target.getBounds());
+            }
+
+
+
+
+            function onEachFeature(feature, layer) {
+                layer.on({
+                    mouseover: highlightFeature,
+                    mouseout: resetHighlight,
+                    click: zoomToFeature
+                });
+            }
+
+            geojson = L.geoJson(geoLocations, {
+                style: style,
+                onEachFeature: onEachFeature
+            }).addTo(map);
 
 
 
