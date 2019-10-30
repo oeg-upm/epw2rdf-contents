@@ -1,4 +1,4 @@
-{
+var geoLocations = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -26442,7 +26442,7 @@
                 "filename": "ESP.geojson"
             },
             "geometry": {
-                "type": "Polygon",
+                "type": "MultiPolygon",
                 "coordinates": [
                     [
                         [
