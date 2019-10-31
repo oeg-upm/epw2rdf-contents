@@ -124,14 +124,15 @@
                                 </div>
                         </div>
                     </p>
+                    
         </div>
     </div>
 
     <!-- BIG BOX -->
-    <p>
-            <div class="container">
-                <div class="jumbotron">
-                    <div id='map' style="visibility: hidden;"></div>
+    <p id="mapContainer" style="visibility: hidden;">
+            <div class="container" style="visibility: hidden;" id="mapContainer2">
+                <div class="jumbotron" style="visibility: hidden;" id="mapJumbotron">
+                    <div id='map'  style="visibility: hidden;"></div>
                 </div>
             </div>
         </p>
@@ -178,16 +179,28 @@
 
         //  CÓDIGO PARA BOTONES
                 $(document).on("click", '#WeatherData',function(){
+                    $("#mapContainer").css('visibility','visible');
                     $("#map").css('visibility','visible');
+                    $("#mapContainer2").css('visibility','visible');
+                    $("#mapJumbotron").css('visibility','visible');
                 })
                 $(document).on("click", '#BuildingsData',function(){
+                    $("#mapContainer").css('visibility','hidden');
                     $("#map").css('visibility','hidden');
+                    $("#mapContainer2").css('visibility','hidden');
+                    $("#mapJumbotron").css('visibility','hidden');
                 })
                 $(document).on("click", '#Etc',function(){
+                    $("#mapContainer").css('visibility','hidden');
                     $("#map").css('visibility','hidden');
+                    $("#mapContainer2").css('visibility','hidden');
+                    $("#mapJumbotron").css('visibility','hidden');
                 })
                 $(document).on("click", '#tab2',function(){
+                    $("#mapContainer").css('visibility','hidden');
                     $("#map").css('visibility','hidden');
+                    $("#mapContainer2").css('visibility','hidden');
+                    $("#mapJumbotron").css('visibility','hidden');
                 })
 
 
