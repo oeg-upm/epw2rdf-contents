@@ -87,8 +87,8 @@
                         <div class="container" align="center">
                             <div class="btn-group btn-group-lg" align="center">
                                 <button type="button" id="WeatherData" class="btn btn-success">Weather Data</button>
-                                <button type="button" id="BuildingsData" class="btn btn-primary">Buildings Data</button>
-                                <button type="button" id="Etc" class="btn btn-info">Etc...</button>
+                                <button type="button" id="BuildingsData" class="btn btn-success">Buildings Data</button>
+                                <button type="button" id="Etc" class="btn btn-success">Etc...</button>
                             </div>
                         </div>
                     </p>
@@ -139,13 +139,11 @@
         <!-- BIG BOX -->
 
 
-    
-
 
     <!-- SCRIPTS -->
     <script type="text/javascript" src="{% static 'converter/worldEP.js' %}"></script>
     <script type="text/javascript" src="{% static 'converter/oceans.js' %}"></script>
-    
+
 
     <script>
 
@@ -178,7 +176,7 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
 
-        //  CÓDIGO PARA BOTONES
+        //  CÓDIGO PARA BOTONES Y TABS OCULTAR Y MOSTRAR
                 $(document).on("click", '#WeatherData',function(){
                     $("#mapContainer").css('visibility','visible');
                     $("#map").css('visibility','visible');
@@ -205,7 +203,7 @@
                 })
 
 
-        // CÓDIGO PARA BOTONES
+        // CÓDIGO PARA BOTONES Y TABS OCULTAR Y MOSTRAR
 
 
         // AQUÍ ESTÁ LA PARTE DEL MAPA
@@ -270,14 +268,7 @@
         map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 2);
 
 
-
-        //  AQUÍ TERMINA LA PARTE DEL MAPA
-
-
-
-
-
-            function highlightFeature(e) {
+        function highlightFeature(e) {
             var layer = e.target;
 
             layer.setStyle({
@@ -329,7 +320,7 @@
             }).addTo(map);
 
 
-
+        //  AQUÍ TERMINA LA PARTE DEL MAPA
 
     </script>
 
