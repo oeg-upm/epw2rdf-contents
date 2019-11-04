@@ -8,6 +8,7 @@ import urllib.request
 import time
 
 from climateContinents import getContinentsURL
+from zipScraperFunctions import scraperZip, extractEPWFile, getCountryCode
 
 
 # COGEMOS LAS URLs DE LOS CONTINENTES
@@ -16,39 +17,53 @@ africaURL, asiaURL, south_AmericaURL, north_central_AmericaURL, southWest_Pacifi
 
 # AKGNDSG
 
-responseCountries = requests.get(africaURL, timeout=10)
-countries = BeautifulSoup(responseCountries.content,"html.parser")
+urls = [africaURL, asiaURL, south_AmericaURL, north_central_AmericaURL, southWest_PacificURL, europeURL, antarticaURL]
 
-lista = []
-
-for country in countries.find_all('a', attrs={"href": "".endswith('/index.html')}, href=True):
-    countryLink = country['href']
-    if not str(countryLink).startswith('../') and not str(countryLink).startswith('default.html'):
-        lista.append(countryLink)
+# urls = [0=Africa,1=Asia,2=Sudamérica,3=Norte-Centroamérica,4=Sudoeste del Pacífico,5=Europa,6=Antartica]
 
 
-print(lista)
-
-# PARTE PERTENECIENTE AL ACCESO DEL ZIP Y LA EXTRACCIÓN DE DATOS
-
-# resp = urlopen('http://climate.onebuilding.org/WMO_Region_6_Europe/ESP_Spain/AN_Andalusia/ESP_AN_Malaga.AP.084820_TMYx.2003-2017.zip')
-# zipfile = zipfile.ZipFile(BytesIO(resp.read()))
-# file = zipfile.namelist()[2]
-
-# epwFile = [file for file in zipfile.namelist() if file.endswith('.epw')]
-
-# file = epwFile[0]
-
-# print(file)
+allCountries = [scraperZip(url,'/index.html') for url in urls] # Lista con todos los Países del Mundo
 
 
-# data = zipfile.open(file).readlines()
-# print(data)
+allCountryCodes = [getCountryCode(country) for countries in allCountries for country in countries] # Lista con todos los Códigos de los países del mundo HABRÁ QUE QUITARLA PORQUE SE COGERAN DE LAS CIUDADESS
 
-# FIN PARTE PERTENECIENTE AL ACCESO DEL ZIP Y LA EXTRACCIÓN DE DATOS
+allCountries = [country for countries in allCountries for country in countries]
+
+# [print(country) for country in allCountries]
+
+# AQUÍ YA TENEMOS UNA LISTA CON LOS PAISES Y OTRA LISTA CON LOS CÓDIGOS DE CADA PAÍS, TIENEN LAS MISMAS POSICIONES ENTRE ELLOS
+allCities = []
+
+# for country in allCountries:
+#     listCountry = scraperZip(country,'.zip')
+#     print(country)
+#     allCities.append(listCountry)
+
+[allCities.append(scraperZip(str(country),'.zip')) for country in allCountries]
+
+
+# allCities = [scraperZip(str(country),'.zip') and print(country) for country in allCountries]
+
+
+allCountries = [city for cities in allCities for city in cities]
+
+print(allCities)
+
+
+# url = urls[0] + firstCountry
+
+# citiesList = scraperZip(url,'.zip')
+
+# firstCity = citiesList[0]
 
 
 
+#http://climate.onebuilding.org/WMO_Region_7_Antarctica/HMD_Heard_and_McDonald_Islands/
+
+# lista = scraperZip('http://climate.onebuilding.org/WMO_Region_7_Antarctica/HMD_Heard_and_McDonald_Islands/','.zip')
+
+
+# print(lista)
 
 
 
