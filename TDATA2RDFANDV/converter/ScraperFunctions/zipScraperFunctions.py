@@ -39,8 +39,8 @@ def extractEPWFile(url):
     data = zipfiles.open(file).readlines() # Información perteneciente al archivo EPW
 
 
-def getCountryCode(country):
-    countryCode = country.split('/')[-2][:3]
+def getCountryCode(city):
+    countryCode = city.split('/')[-1][:3]
     if countryCode.endswith('_'):
         countryCode = countryCode[:2] # Mirar el caso en el que se necesite el _
     return countryCode
