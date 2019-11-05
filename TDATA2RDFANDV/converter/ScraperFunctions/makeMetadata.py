@@ -17,7 +17,7 @@ def createFileJSON(link,countryCode):
 
     a_dict = {
     "link": link,
-    "admin03": countryCode
+    "adm0_a3": countryCode
     }
 
     with open("../static/converter/taxonomyCities.json") as f:
