@@ -42,7 +42,7 @@ def extractEPWFile(url):
 def getCountryCode(city):
     countryCode = city.split('/')[-1][:3]
     if countryCode.endswith('_'):
-        countryCode = countryCode[:2] # Mirar el caso en el que se necesite el _
+        countryCode = countryCode[:2] # Mirar el caso en el que se necesite el "_":
     return countryCode
 
 
