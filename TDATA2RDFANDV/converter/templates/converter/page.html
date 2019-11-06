@@ -232,11 +232,17 @@
 
         function Map(data){
 
-            var container = L.DomUtil.get('map');
-            if(container != null){
-                container._leaflet_id = null;
+            function refreshMap(){
+                var remove = document.getElementById('map');
+                remove.parentNode.removeChild(remove)
+                var p = document.getElementById('mapJumbotron')
+                var element = document.createElement('div');
+                element.setAttribute('id', 'map');
+                p.appendChild(element)
             }
 
+            refreshMap();
+      
             var map = L.map('map');
 
             map.createPane('labels');
@@ -291,9 +297,7 @@
             geojson = L.geoJson(data).addTo(map);
             geojson = L.geoJson(geoOceans).addTo(map)
 
-            geojson.eachLayer(function (layer) {
-                layer.bindPopup(layer.feature.properties.name);
-            });
+            
 
             map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 2);
 
@@ -336,12 +340,17 @@
 
 
 
-                function onEachFeature(feature, layer) {
+                function onEachFeature(feature, layer){
                     layer.on({
                         mouseover: highlightFeature,
                         mouseout: resetHighlight,
                         click: zoomToFeature
                     });
+                    layer.bindPopup(function (layer){
+                        console.log(layer.feature.properties.adm0_a3);
+                        return layer.feature.properties.name;
+                    });
+                    
                 }
 
                 geojson = L.geoJson(data, {
