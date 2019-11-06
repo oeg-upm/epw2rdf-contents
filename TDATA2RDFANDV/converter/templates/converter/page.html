@@ -29,7 +29,7 @@
                 <h1 align="center" class="font-weight-bold, p-3 mb-2 bg-primary text-white">RDF File Converter</h1>
             </div>
         </div>
-    </p>
+    </p>   
 
     <div class="container">
         <div class="tab">
@@ -93,6 +93,14 @@
                             </div>
                         </div>
                     </p>
+                    <p>
+                        <div class="container" align="center">
+                            <div class="btn-group btn-group-lg" align="center" id="WeatherData2" style="visibility: hidden;">
+                                <button type="button" id="Climate1" onclick="Map(geoLocations)" class="btn btn-success">Climate-OneBuilding</button>
+                                <button type="button" id="Energy" onclick="Map(geoLocations1)" class="btn btn-success">Energy Plus</button>
+                            </div>
+                        </div>
+                    </p>
 
                     
                     <!-- MAKE BUTTONS -->
@@ -133,7 +141,7 @@
     <p id="mapContainer" style="visibility: hidden;">
             <div class="container" style="visibility: hidden;" id="mapContainer2">
                 <div class="jumbotron" style="visibility: hidden;" id="mapJumbotron">
-                    <div id='map'  style="visibility: hidden;"></div>
+                    <div id='map' style="visibility: hidden;"></div>
                 </div>
             </div>
         </p>
@@ -142,12 +150,13 @@
 
 
     <!-- SCRIPTS -->
+    <script type="text/javascript" src="{% static 'converter/worldEnPl.js' %}"></script>
     <script type="text/javascript" src="{% static 'converter/oneBuilding.js' %}"></script>
     <script type="text/javascript" src="{% static 'converter/oceans.js' %}"></script>
+    
 
 
     <script>
-
 
         function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
@@ -179,24 +188,36 @@
 
         //  CÓDIGO PARA BOTONES Y TABS OCULTAR Y MOSTRAR
                 $(document).on("click", '#WeatherData',function(){
+                    $("#WeatherData2").css('visibility','visible');
+                })
+                $(document).on("click", '#Climate1', function(){
+                    $("#mapContainer").css('visibility','visible');
+                    $("#map").css('visibility','visible');
+                    $("#mapContainer2").css('visibility','visible');
+                    $("#mapJumbotron").css('visibility','visible');
+                })
+                $(document).on("click", '#Energy', function(){
                     $("#mapContainer").css('visibility','visible');
                     $("#map").css('visibility','visible');
                     $("#mapContainer2").css('visibility','visible');
                     $("#mapJumbotron").css('visibility','visible');
                 })
                 $(document).on("click", '#BuildingsData',function(){
+                    $("#WeatherData2").css('visibility','hidden');
                     $("#mapContainer").css('visibility','hidden');
                     $("#map").css('visibility','hidden');
                     $("#mapContainer2").css('visibility','hidden');
                     $("#mapJumbotron").css('visibility','hidden');
                 })
                 $(document).on("click", '#Etc',function(){
+                    $("#WeatherData2").css('visibility','hidden');
                     $("#mapContainer").css('visibility','hidden');
                     $("#map").css('visibility','hidden');
                     $("#mapContainer2").css('visibility','hidden');
                     $("#mapJumbotron").css('visibility','hidden');
                 })
                 $(document).on("click", '#tab2',function(){
+                    $("#WeatherData2").css('visibility','hidden');
                     $("#mapContainer").css('visibility','hidden');
                     $("#map").css('visibility','hidden');
                     $("#mapContainer2").css('visibility','hidden');
@@ -208,120 +229,129 @@
 
 
         // AQUÍ ESTÁ LA PARTE DEL MAPA
-        var map = L.map('map');
 
-        map.createPane('labels');
+        function Map(data){
 
-        // This pane is above markers but below popups
-        map.getPane('labels').style.zIndex = 650;
-
-        // Layers in this pane are non-interactive and do not obscure mouse/touch events
-        map.getPane('labels').style.pointerEvents = 'none';
-
-        var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
-
-            var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-                attribution: cartodbAttribution
-            }).addTo(map);
-
-        var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-            attribution: cartodbAttribution,
-            pane: 'labels'
-        }).addTo(map);
-
-
-
-        function getColor(d) {
-            return d == 1 ? '#800026' : 
-                d == 2 ? '#1570BF' : 
-                d == 3 ? '#38A673' : 
-                d == 4 ? '#F2D129' : 
-                d == 5 ? '#F26430' : 
-                d == 6 ? '#F22F1D' : 
-                d == 7 ? '#F22E62' : 
-                '#092601'; 
-        }
-
-        function style(feature) { 
-            return { 
-            fillColor: getColor(
-            feature.properties.mapcolor7), 
-            weight: 1, 
-            opacity: 1, 
-            color: 'white', 
-            dashArray: '', 
-            fillOpacity: 0.3
-            }; 
+            var container = L.DomUtil.get('map');
+            if(container != null){
+                container._leaflet_id = null;
             }
 
-	
-            L.geoJson(geoLocations, { style: style }).addTo(map);
+            var map = L.map('map');
+
+            map.createPane('labels');
+
+            // This pane is above markers but below popups
+            map.getPane('labels').style.zIndex = 650;
+
+            // Layers in this pane are non-interactive and do not obscure mouse/touch events
+            map.getPane('labels').style.pointerEvents = 'none';
+
+            var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
+
+                var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+                    attribution: cartodbAttribution
+                }).addTo(map);
+
+            var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+                attribution: cartodbAttribution,
+                pane: 'labels'
+            }).addTo(map);
 
 
 
-        geojson = L.geoJson(geoLocations).addTo(map);
-        geojson = L.geoJson(geoOceans).addTo(map)
+            function getColor(d) {
+                return d == 1 ? '#800026' : 
+                    d == 2 ? '#1570BF' : 
+                    d == 3 ? '#38A673' : 
+                    d == 4 ? '#F2D129' : 
+                    d == 5 ? '#F26430' : 
+                    d == 6 ? '#F22F1D' : 
+                    d == 7 ? '#F22E62' : 
+                    '#092601'; 
+            }
 
-        geojson.eachLayer(function (layer) {
-            layer.bindPopup(layer.feature.properties.name);
-        });
+            function style(feature) { 
+                return { 
+                fillColor: getColor(
+                feature.properties.mapcolor7), 
+                weight: 1, 
+                opacity: 1, 
+                color: 'white', 
+                dashArray: '', 
+                fillOpacity: 0.3
+                }; 
+                }
 
-        map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 2);
+        
+                L.geoJson(data, { style: style }).addTo(map);
 
 
-        function highlightFeature(e) {
-            var layer = e.target;
 
-            layer.setStyle({
-                weight: 1,
-                color: '#FFFF',
-                dashArray: '',
-                opacity: 1,
-                fillOpacity: 1
+            geojson = L.geoJson(data).addTo(map);
+            geojson = L.geoJson(geoOceans).addTo(map)
+
+            geojson.eachLayer(function (layer) {
+                layer.bindPopup(layer.feature.properties.name);
             });
 
-            
-
-            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                layer.bringToFront();
-            }
-        }
+            map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 2);
 
 
+            function highlightFeature(e) {
+                var layer = e.target;
 
-            function resetHighlight(e) {
-                geojson.resetStyle(e.target);
-            }
-
-
-
-
-            var geojson;
-            // ... our listeners
-            geojson = L.geoJson(geoLocations);
-
-            function zoomToFeature(e) {
-                map.fitBounds(e.target.getBounds());
-            }
-
-
-
-
-            function onEachFeature(feature, layer) {
-                layer.on({
-                    mouseover: highlightFeature,
-                    mouseout: resetHighlight,
-                    click: zoomToFeature
+                layer.setStyle({
+                    weight: 1,
+                    color: '#FFFF',
+                    dashArray: '',
+                    opacity: 1,
+                    fillOpacity: 1
                 });
+
+                
+
+                if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                    layer.bringToFront();
+                }
             }
 
-            geojson = L.geoJson(geoLocations, {
-                style: style,
-                onEachFeature: onEachFeature
-            }).addTo(map);
 
 
-        //  AQUÍ TERMINA LA PARTE DEL MAPA
+                function resetHighlight(e) {
+                    geojson.resetStyle(e.target);
+                }
+
+
+
+
+                var geojson;
+                // ... our listeners
+                geojson = L.geoJson(data);
+
+                function zoomToFeature(e) {
+                    map.fitBounds(e.target.getBounds());
+                }
+
+
+
+
+                function onEachFeature(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight,
+                        click: zoomToFeature
+                    });
+                }
+
+                geojson = L.geoJson(data, {
+                    style: style,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+
+
+            //  AQUÍ TERMINA LA PARTE DEL MAPA
+        }
 
     </script>
 

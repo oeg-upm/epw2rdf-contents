@@ -1,4 +1,4 @@
-var geoLocations = {
+var geoLocations1 = {
     "type": "FeatureCollection",
     "features": [
         {
