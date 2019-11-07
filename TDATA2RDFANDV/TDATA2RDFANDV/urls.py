@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from converter.views import index
+from converter.views import index,mapData
 
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
+    url(r'getInfoMap',mapData)
 ]

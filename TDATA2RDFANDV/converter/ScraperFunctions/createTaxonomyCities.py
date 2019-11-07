@@ -65,11 +65,6 @@ allCitiesCCodes = [getCountryCode(city) for city in allCities]
 
 tamaño = int(len(allCities)/2)
 
-# tamaño1 = int(len(allCities)/4)
-
-# tamaño2 = tamaño1 + tamaño1
-
-# tamaño3 = tamaño1 + tamaño2
 
 allCities1 = allCities[:tamaño]
 allCities2 = allCities[tamaño:]

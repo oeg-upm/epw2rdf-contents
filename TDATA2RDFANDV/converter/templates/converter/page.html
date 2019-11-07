@@ -21,8 +21,6 @@
         <title>File2RDF</title>
 </head>
 <body>
-    <!-- {% csrf_token %} -->
-
     <p>
         <div class="container">
             <div class="jumbotron">
@@ -147,9 +145,23 @@
         </p>
         <!-- BIG BOX -->
 
+    <!-- RESULTS FROM CALLING MAP -->
+    <table class = "table table-bordered table-striped table-hover">
+        <thread> 
+           <tr align="center">
+               <th bgcolor="#9bffbc">ID</th>
+               <th bgcolor="#9bffbc">NAME</th>
+           </tr>
+       </thread>
+       </table>
+
+    <!-- RESULT FROM CALLING MAP -->
 
 
     <!-- SCRIPTS -->
+
+    {% csrf_token %}
+
     <script type="text/javascript" src="{% static 'converter/worldEnPl.js' %}"></script>
     <script type="text/javascript" src="{% static 'converter/oneBuilding.js' %}"></script>
     <script type="text/javascript" src="{% static 'converter/oceans.js' %}"></script>
@@ -347,7 +359,21 @@
                         click: zoomToFeature
                     });
                     layer.bindPopup(function (layer){
-                        console.log(layer.feature.properties.adm0_a3);
+                        // console.log(layer.feature.properties.adm0_a3);
+                        $.ajax({
+                            type : 'POST',
+                            url : '/getInfoMap',
+                            data : JSON.stringify({
+                                code : layer.feature.properties.adm0_a3
+                            }),
+                            success : (data, textStatus, jqXHR) => {
+                                console.log(data,textStatus,jqXHR)
+                                $('table > tbody > tr > td').parent().remove();
+                            },
+                            contentType : 'application/json',
+                            dataType : 'json'
+                        });
+
                         return layer.feature.properties.name;
                     });
                     
