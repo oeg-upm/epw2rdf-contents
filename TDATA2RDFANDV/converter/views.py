@@ -12,7 +12,7 @@ from converter.Functions.takeDataJson import takeData
 
 
 def index(request):
-	return render(request,'converter/page.html')
+	return render(request,'converter/data.html')
 
 
 
