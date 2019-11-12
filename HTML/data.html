@@ -15,17 +15,19 @@
      <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
     <!-- {% load static %} -->
+    <link rel="stylesheet" type="text/css" href="form.css" />
+    <!-- <link rel="shortcut icon" type="image/png" href="{% static 'converter/favicon2.ico' %}"/> -->
 </head>
 <body>
 
 <!-- MAP -->
 
         <p>
-            <!-- <div class="container"> -->
-                <!-- <div class="jumbotron" id="mapJumbotron"> -->
+            <div class="container">
+                <div class="jumbotron" id="mapJumbotron">
                     <div id='map'></div>
-                <!-- </div> -->
-            <!-- </div> -->
+                </div>
+            </div>
         </p>
 
 <!-- SCRIPT -->
@@ -49,16 +51,16 @@
 
     function Map(geoLocarions){
 
-                // function refreshMap(){
-                //     var remove = document.getElementById('map');
-                //     remove.parentNode.removeChild(remove)
-                //     var p = document.getElementById('mapJumbotron')
-                //     var element = document.createElement('div');
-                //     element.setAttribute('id', 'map');
-                //     p.appendChild(element)
-                // }
+                function refreshMap(){
+                    var remove = document.getElementById('map');
+                    remove.parentNode.removeChild(remove)
+                    var p = document.getElementById('mapJumbotron')
+                    var element = document.createElement('div');
+                    element.setAttribute('id', 'map');
+                    p.appendChild(element)
+                }
 
-                // refreshMap();
+                refreshMap();
         
                 var map = L.map('map');
 
