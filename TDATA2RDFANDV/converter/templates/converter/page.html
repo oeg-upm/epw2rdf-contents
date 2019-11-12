@@ -146,14 +146,16 @@
         <!-- BIG BOX -->
 
     <!-- RESULTS FROM CALLING MAP -->
-    <table class = "table table-bordered table-striped table-hover">
-        <thread> 
-           <tr align="center">
-               <th bgcolor="#9bffbc">ID</th>
-               <th bgcolor="#9bffbc">NAME</th>
-           </tr>
-       </thread>
-       </table>
+    <div class="container" id="tableContainer" style="visibility: hidden;">
+        <table class = "table table-bordered table-striped table-hover">
+            <thread> 
+                <tr align="center">
+                    <th bgcolor="#9bffbc">adm0_a3</th>
+                    <th bgcolor="#9bffbc">link</th>
+                </tr>
+            </thread>
+        </table>
+    </div>
 
     <!-- RESULT FROM CALLING MAP -->
 
@@ -207,12 +209,14 @@
                     $("#map").css('visibility','visible');
                     $("#mapContainer2").css('visibility','visible');
                     $("#mapJumbotron").css('visibility','visible');
+                    $("#tableContainer").css('visibility','visible');
                 })
                 $(document).on("click", '#Energy', function(){
                     $("#mapContainer").css('visibility','visible');
                     $("#map").css('visibility','visible');
                     $("#mapContainer2").css('visibility','visible');
                     $("#mapJumbotron").css('visibility','visible');
+                    $("#tableContainer").css('visibility','visible');
                 })
                 $(document).on("click", '#BuildingsData',function(){
                     $("#WeatherData2").css('visibility','hidden');
@@ -220,6 +224,7 @@
                     $("#map").css('visibility','hidden');
                     $("#mapContainer2").css('visibility','hidden');
                     $("#mapJumbotron").css('visibility','hidden');
+                    $("#tableContainer").css('visibility','hidden');
                 })
                 $(document).on("click", '#Etc',function(){
                     $("#WeatherData2").css('visibility','hidden');
@@ -227,6 +232,7 @@
                     $("#map").css('visibility','hidden');
                     $("#mapContainer2").css('visibility','hidden');
                     $("#mapJumbotron").css('visibility','hidden');
+                    $("#tableContainer").css('visibility','hidden');
                 })
                 $(document).on("click", '#tab2',function(){
                     $("#WeatherData2").css('visibility','hidden');
@@ -234,10 +240,26 @@
                     $("#map").css('visibility','hidden');
                     $("#mapContainer2").css('visibility','hidden');
                     $("#mapJumbotron").css('visibility','hidden');
+                    $("#tableContainer").css('visibility','hidden');
                 })
 
 
         // CÓDIGO PARA BOTONES Y TABS OCULTAR Y MOSTRAR
+
+
+        // CÓDIGO PARA IMPRIMIR DATOS EN TABLA DE LOS DOCUMENTOS
+
+        function numberProducts(data){
+                productos = data["cities"];
+                var items = [];
+                $.each(productos,function(key, val){
+                    items.push("<tr>");
+                    items.push("<td id=''"+key+"''>"+val.adm0_a3+"</td>");
+                    items.push("<td id=''"+key+"''>"+val.link+"</td>");
+                    items.push("</tr>");
+                })
+                $('<tbody/>',{html:items.join("")}).appendTo("table");
+            }
 
 
         // AQUÍ ESTÁ LA PARTE DEL MAPA
@@ -369,6 +391,7 @@
                             success : (data, textStatus, jqXHR) => {
                                 console.log(data,textStatus,jqXHR)
                                 $('table > tbody > tr > td').parent().remove();
+                                numberProducts(data)
                             },
                             contentType : 'application/json',
                             dataType : 'json'

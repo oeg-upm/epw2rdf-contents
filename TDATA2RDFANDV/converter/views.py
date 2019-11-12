@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 
@@ -12,7 +13,7 @@ from converter.Functions.takeDataJson import takeData
 
 
 def index(request):
-	return render(request,'converter/data.html')
+	return render(request,'converter/page.html')
 
 
 
@@ -21,5 +22,16 @@ def mapData(request):
 	if request.method == "POST":
 		response = json.loads(request.body)
 		data = takeData(response)
-		print(data)
-		return
+		# print(data)
+		with open('converter/static/converter/taxonomyCities.json') as jsonFile:
+			jsonData = json.load(jsonFile)
+
+		jsonDictionary ={'cities':[]}
+
+		[jsonDictionary['cities'].append({'adm0_a3':city['adm0_a3'],'link':city['link']}) for city in jsonData['cities'] if city['adm0_a3']==data]
+
+		jsonFile.close()
+
+		# print(jsonDictionary)
+
+		return JsonResponse(jsonDictionary,safe=False)
