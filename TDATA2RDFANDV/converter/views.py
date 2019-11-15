@@ -8,7 +8,10 @@ import json
 
 # TAKE DATA FUNCTIONS
 
-from converter.Functions.takeDataJson import takeData
+from converter.Functions.takeDataJson import takeData # take data from json['code']
+from converter.Functions.extractFile import extractEPWFile # extract the epw file from url zip
+
+# directory to storage data == DataStorage
 
 
 
@@ -35,3 +38,11 @@ def mapData(request):
 		# print(jsonDictionary)
 
 		return JsonResponse(jsonDictionary,safe=False)
+
+@csrf_exempt
+def extract_Convert(request):
+	if request.method == "POST":
+		response = json.loads(request.body)
+		link = takeData(response)
+		data = extractEPWFile(link) # get data from EPW file that is inside Zip File
+		return HttpResponse(data)

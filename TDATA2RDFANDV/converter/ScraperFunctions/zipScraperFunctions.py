@@ -25,20 +25,6 @@ def scraperZip(url, searchData):
     return resultList
 
 
-
-def extractEPWFile(url):
-
-    resp = urlopen(url)
-    zipfiles = zipfile.ZipFile(BytesIO(resp.read()))
-    file = zipfiles.namelist()[2]
-
-    epwFile = [file for file in zipfiles.namelist() if file.endswith('.epw')]
-
-    file = epwFile[0]
-
-    data = zipfiles.open(file).readlines() # Información perteneciente al archivo EPW
-
-
 def getCountryCode(city):
     countryCode = city.split('/')[-1][:3]
     if countryCode.endswith('_'):

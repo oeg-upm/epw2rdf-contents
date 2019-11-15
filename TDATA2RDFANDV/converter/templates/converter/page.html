@@ -146,6 +146,10 @@
         <!-- BIG BOX -->
 
     <!-- RESULTS FROM CALLING MAP -->
+    <div class="container" id="tableContainerSearch" style="visibility:hidden;">
+        <input type="text" class="form-control" id="SearchTable" value="" placeholder="Filter your search here..."></div>
+    </div>
+
     <div class="container" id="tableContainer" style="visibility: hidden;">
         <table class = "table table-bordered table-striped table-hover">
             <thread> 
@@ -171,6 +175,9 @@
 
 
     <script>
+
+        let jsonDataMap;
+        
 
         function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
@@ -210,6 +217,7 @@
                     $("#mapContainer2").css('visibility','visible');
                     $("#mapJumbotron").css('visibility','visible');
                     $("#tableContainer").css('visibility','visible');
+                    $("#tableContainerSearch").css('visibility','visible');
                 })
                 $(document).on("click", '#Energy', function(){
                     $("#mapContainer").css('visibility','visible');
@@ -217,6 +225,7 @@
                     $("#mapContainer2").css('visibility','visible');
                     $("#mapJumbotron").css('visibility','visible');
                     $("#tableContainer").css('visibility','visible');
+                    $("#tableContainerSearch").css('visibility','visible');
                 })
                 $(document).on("click", '#BuildingsData',function(){
                     $("#WeatherData2").css('visibility','hidden');
@@ -225,6 +234,7 @@
                     $("#mapContainer2").css('visibility','hidden');
                     $("#mapJumbotron").css('visibility','hidden');
                     $("#tableContainer").css('visibility','hidden');
+                    $("#tableContainerSearch").css('visibility','hidden');
                 })
                 $(document).on("click", '#Etc',function(){
                     $("#WeatherData2").css('visibility','hidden');
@@ -233,6 +243,7 @@
                     $("#mapContainer2").css('visibility','hidden');
                     $("#mapJumbotron").css('visibility','hidden');
                     $("#tableContainer").css('visibility','hidden');
+                    $("#tableContainerSearch").css('visibility','hidden');
                 })
                 $(document).on("click", '#tab2',function(){
                     $("#WeatherData2").css('visibility','hidden');
@@ -241,6 +252,7 @@
                     $("#mapContainer2").css('visibility','hidden');
                     $("#mapJumbotron").css('visibility','hidden');
                     $("#tableContainer").css('visibility','hidden');
+                    $("#tableContainerSearch").css('visibility','hidden');
                 })
 
 
@@ -255,13 +267,28 @@
                 $.each(productos,function(key, val){
                     items.push("<tr>");
                     items.push("<td id=''"+key+"''>"+val.adm0_a3+"</td>");
-                    items.push("<td id=''"+key+"''>"+val.link+"</td>");
+                    items.push("<td onclick='redirectTo(\""+ val.link + "\")' id='"+val.link+"'>"+val.link+"</td>");
+                    console.log(val.link)
                     items.push("</tr>");
                 })
                 $('<tbody/>',{html:items.join("")}).appendTo("table");
             }
 
-
+            function redirectTo(link){
+                $.ajax({
+                    type : 'POST',
+                    url : '/makeExtractAndConversion',
+                    data : JSON.stringify({
+                        code : link
+                    }),
+                    success : (data, textStatus, jqXHR) => {
+                        console.log(data,textStatus,jqXHR);
+                        console.log(data);
+                    },
+                    contentType : 'application/json',
+                    dataType : 'json'
+                });
+            }
         // AQUÍ ESTÁ LA PARTE DEL MAPA
 
         function Map(data){
@@ -390,6 +417,7 @@
                             }),
                             success : (data, textStatus, jqXHR) => {
                                 console.log(data,textStatus,jqXHR)
+                                jsonDataMap = data
                                 $('table > tbody > tr > td').parent().remove();
                                 numberProducts(data)
                             },
