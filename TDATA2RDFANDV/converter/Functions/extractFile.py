@@ -15,4 +15,5 @@ def extractEPWFile(url):
     file = epwFile[0]
 
     data = zipfiles.open(file).readlines() # Información perteneciente al archivo EPW
+    data = [d.decode("utf-8") for d in data]
     return data

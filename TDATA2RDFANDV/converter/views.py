@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import shutil
+import pathlib
+import glob, os
+
 
 # Create your views here.
 
@@ -10,7 +14,13 @@ import json
 
 from converter.Functions.takeDataJson import takeData # take data from json['code']
 from converter.Functions.extractFile import extractEPWFile # extract the epw file from url zip
-
+from converter.Functions.makeCSVW import removeFileJSON, createFileJson # make metadata
+from converter.Functions.getDataFromJson import getJsonData # get json from created csvw
+from converter.Functions.parse2CSV import parseToCSV # parse epw file to csv
+from converter.Functions.makePropertiesFile import createFileProperties, removeFileProperties # create file properties
+from converter.Functions.makeTTLFile import createFileTTL, removeFileTTL # create R2RML file
+from converter.Functions.makeSH import makeSH
+from converter.Functions.createEPWFile import removeFileEPW, createEPW
 # directory to storage data == DataStorage
 
 
@@ -42,7 +52,59 @@ def mapData(request):
 @csrf_exempt
 def extract_Convert(request):
 	if request.method == "POST":
+		if not os.getcwd().endswith("DataStorage"):
+			shutil.rmtree('converter/DataStorage/', ignore_errors=True)
+			pathlib.Path("converter/DataStorage").mkdir(parents=True, exist_ok=True)
+			for file in glob.glob("converter/static/converter/*.nt"):
+				os.remove(file)
+			for file in glob.glob("converter/static/converter/*.epw"):
+				os.remove(file)
+
+		else:
+			shutil.rmtree('../../converter/DataStorage/', ignore_errors=True)
+			pathlib.Path("../DataStorage").mkdir(parents=True, exist_ok=True)
+			os.chdir("../../../../epw2rdf-contents/TDATA2RDFANDV")
+			for file in glob.glob("converter/static/converter/*.nt"):
+				os.remove(file)
+			for file in glob.glob("converter/static/converter/*.epw"):
+				os.remove(file)
+
 		response = json.loads(request.body)
 		link = takeData(response)
 		data = extractEPWFile(link) # get data from EPW file that is inside Zip File
-		return HttpResponse(data)
+		removeFileJSON()
+		city = createFileJson(data)
+		headers,numberRowstoSkip = getJsonData(city)
+		
+		headers = str(str(headers).strip('[]').replace("'","").split(', ')).strip('[]').replace(", ",",")
+		
+		headers = str(headers).strip('[]').replace("'","").replace(", ",",")
+
+		parseToCSV(data, numberRowstoSkip, headers, city) # parse data to csv
+
+		# removeFileProperties(city)
+		propertiesFile = createFileProperties(city)
+
+		# removeFileTTL(city)
+		createFileTTL(city)
+
+		createEPW(data,city)
+
+		# print(propertiesFile)
+		makeSH(propertiesFile)
+
+		if not os.getcwd().endswith("DataStorage"):
+			os.chdir("converter/DataStorage")
+
+		for file in glob.glob("*.nt"):
+			for epw in glob.glob("*.epw"):
+				dictionary = {
+					'EPW': "static/converter/" + epw,
+					'RDF': "static/converter/" + file
+				}
+				data = file
+				data2 = epw
+		shutil.move(data, '../../converter/static/converter/')
+		shutil.move(epw, '../../converter/static/converter/')
+
+		return JsonResponse(dictionary,safe=False)
