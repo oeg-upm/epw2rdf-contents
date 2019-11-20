@@ -30,7 +30,7 @@ def index(request):
 
 
 
-@csrf_exempt
+@csrf_exempt # ONEBUILDIND.ORG WEATHER MAP
 def mapData(request):
 	if request.method == "POST":
 		response = json.loads(request.body)
@@ -49,7 +49,23 @@ def mapData(request):
 
 		return JsonResponse(jsonDictionary,safe=False)
 
-@csrf_exempt
+@csrf_exempt # ENERGY PLUS WEATHER MAP
+def mapDataEnergyPlus(request):
+	if request.method == "POST":
+		response = json.loads(request.body)
+		data = takeData(response)
+		with open('converter/static/converter/taxonomyCitiesEnergyPlus.json') as jsonFile:
+			jsonData = json.load(jsonFile)
+			
+		jsonDictionary = {'cities':[]}
+
+		[jsonDictionary['cities'].append({'adm0_a3':city['adm0_a3'],'link':city['link']}) for city in jsonData['cities'] if city['adm0_a3']==data]
+
+		jsonFile.close()
+
+		return JsonResponse(jsonDictionary,safe=False)
+
+@csrf_exempt # EXTRACT DATA FROM LINK FROM ONEBUILDING.ORG WEATHER
 def extract_Convert(request):
 	if request.method == "POST":
 		if not os.getcwd().endswith("DataStorage"):
@@ -108,3 +124,8 @@ def extract_Convert(request):
 		shutil.move(epw, '../../converter/static/converter/')
 
 		return JsonResponse(dictionary,safe=False)
+
+@csrf_exempt
+def extract_ConvertEnergyPlus(request):
+	if request.method == "POST":
+		return
