@@ -3,7 +3,7 @@
     "skipRows": 8,
     "tables": [
         {
-            "url": "San_Sebastian_AP.csv",
+            "url": "Ceuta.csv",
             "tableSchema": {
                 "columns": [
                     {
