@@ -79,5 +79,8 @@ tamaño = (int(len(resultList)/2))
 resultList1 = resultList[:tamaño]
 resultList2 = resultList[tamaño:]
 
+print("Se empieza a generar el fichero JSON")
 [createFileJSON(res[0],res[1]) for res in resultList1]
+print("Primera parte completada")
 [createFileJSON(res[0],res[1]) for res in resultList2]
+print("Segunda parte completada y fin de ejecución")
