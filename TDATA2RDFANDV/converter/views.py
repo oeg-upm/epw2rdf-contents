@@ -54,14 +54,16 @@ def mapDataEnergyPlus(request):
 	if request.method == "POST":
 		response = json.loads(request.body)
 		data = takeData(response)
-		with open('converter/static/converter/taxonomyCitiesEnergyPlus.json') as jsonFile:
+		with open('converter/static/converter/taxonomyCitiesEPlus.json') as jsonFile:
 			jsonData = json.load(jsonFile)
+			# print(jsonData)
 			
 		jsonDictionary = {'cities':[]}
 
 		[jsonDictionary['cities'].append({'adm0_a3':city['adm0_a3'],'link':city['link']}) for city in jsonData['cities'] if city['adm0_a3']==data]
 
 		jsonFile.close()
+		#print(jsonDictionary)
 
 		return JsonResponse(jsonDictionary,safe=False)
 

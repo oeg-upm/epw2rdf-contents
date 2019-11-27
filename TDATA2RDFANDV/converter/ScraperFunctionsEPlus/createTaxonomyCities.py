@@ -72,7 +72,7 @@ for continent in continent.find_all('a', attrs={"class": "btn btn-default left-j
                     result = [adm0_a3,downloadLink]
                     resultList.append(result)
 
-print(resultList[0])
+#print(resultList[0])
 
 tamaño = (int(len(resultList)/2))
 
@@ -80,7 +80,7 @@ resultList1 = resultList[:tamaño]
 resultList2 = resultList[tamaño:]
 
 print("Se empieza a generar el fichero JSON")
-[createFileJSON(res[0],res[1]) for res in resultList1]
+[createFileJSON(res[1],res[0]) for res in resultList1]
 print("Primera parte completada")
-[createFileJSON(res[0],res[1]) for res in resultList2]
+[createFileJSON(res[1],res[0]) for res in resultList2]
 print("Segunda parte completada y fin de ejecución")

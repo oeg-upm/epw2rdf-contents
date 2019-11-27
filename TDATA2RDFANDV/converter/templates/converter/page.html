@@ -94,8 +94,8 @@
                     <p>
                         <div class="container" align="center">
                             <div class="btn-group btn-group-lg" align="center" id="WeatherData2" style="visibility: hidden;">
-                                <button type="button" id="Climate1" onclick="Map(geoLocations)" class="btn btn-success">Climate-OneBuilding</button>
-                                <button type="button" id="Energy" onclick="Map(geoLocations1)" class="btn btn-success">Energy Plus</button>
+                                <button type="button" id="Climate1" onclick="clickButton('Climate1')" class="btn btn-success">Climate-OneBuilding</button>
+                                <button type="button" id="Energy" onclick="clickButton('Energy')" class="btn btn-success">Energy Plus</button>
                             </div>
                         </div>
                     </p>
@@ -429,21 +429,42 @@
                     });
                     layer.bindPopup(function (layer){
                         // console.log(layer.feature.properties.adm0_a3);
-                        $.ajax({
-                            type : 'POST',
-                            url : '/getInfoMap',
-                            data : JSON.stringify({
-                                code : layer.feature.properties.adm0_a3
-                            }),
-                            success : (data, textStatus, jqXHR) => {
-                                console.log(data,textStatus,jqXHR)
-                                jsonDataMap = data
-                                $('table > tbody > tr > td').parent().remove();
-                                numberProducts(data)
-                            },
-                            contentType : 'application/json',
-                            dataType : 'json'
-                        });
+                        console.log('BC:' + buttonClicked);
+                        if(buttonClicked == 'Climate1'){
+                            $.ajax({
+                                type : 'POST',
+                                url : '/getInfoMap/',
+                                data : JSON.stringify({
+                                    code : layer.feature.properties.adm0_a3
+                                }),
+                                success : (data, textStatus, jqXHR) => {
+                                    console.log(data,textStatus,jqXHR)
+                                    jsonDataMap = data
+                                    $('table > tbody > tr > td').parent().remove();
+                                    numberProducts(data)
+                                },
+                                contentType : 'application/json',
+                                dataType : 'json'
+                            });
+                        }
+                        else if(buttonClicked == 'Energy'){
+                            $.ajax({
+                                type : 'POST',
+                                url : '/getInfoMapEP/',
+                                data : JSON.stringify({
+                                    code : layer.feature.properties.adm0_a3
+                                }),
+                                success : (data, textStatus, jqXHR) => {
+                                    console.log(data,textStatus,jqXHR)
+                                    jsonDataMap = data
+                                    $('table > tbody > tr > td').parent().remove();
+                                    numberProducts(data)
+                                },
+                                contentType : 'application/json',
+                                dataType : 'json'
+                            });
+                        }
+                        
 
                         return layer.feature.properties.name;
                     });
@@ -478,6 +499,17 @@
             }
         }
 
+let buttonClicked = ''
+function clickButton(id){
+        buttonClicked = id;
+        console.log(id)
+        if (id == 'Climate1'){
+            Map(geoLocations);
+        }
+        else if (id == 'Energy'){
+            Map(geoLocations1);
+        }
+}
 
 
 
