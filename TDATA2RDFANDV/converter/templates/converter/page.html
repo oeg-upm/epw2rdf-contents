@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
      <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
     {% load static %}
@@ -150,29 +151,37 @@
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for link.." title="Type in a link">
     </div>
 
-    <div class="container" id="tableContainer" style="visibility: hidden;">
-        <table id="myTable" class = "table table-bordered table-striped table-hover">
-            <thread> 
-                <tr align="center">
-                    <th bgcolor="#9bffbc">adm0_a3</th>
-                    <th bgcolor="#9bffbc">link</th>
-                </tr>
-            </thread>
-        </table>
-    </div>
-
     <div class="container" id="DownloadContainer" style="visibility: hidden;">
         <h3 align="center">Results</h3>
         <p align="center">
             <a id="epw" href="{% static '' %}" download>
-                <button type="button" id="downloadEPW">Download EPW</button>
+                <button type="button" id="downloadEPW" style='width:33%;'>Download EPW</button>
             </a>
             <a id="rdf" href="{% static '' %}" download>
-                <button type="button" id="downloadRDF">DownloadRDF</button>
+                <button type="button" id="downloadRDF" style='width:33%;'>Download RDF</button>
             </a>
-            <button type="button" id="sparql">SPARQL</button>
+            <button type="button" id="sparql" style='width:33%;'>SPARQL</button>
         </p>
     </div>
+
+    <div class="w3-row" id="tableContainer" style="visibility: hidden;" align="center">
+        <div class="w3-col" style="width:10%"><p></p></div>
+        <div class="w3-col" style="width:80%"><p>
+        <div class="table-responsive-sm">
+            <table id="myTable" class = "table table-bordered table-striped table-hover">
+                <thread> 
+                    <tr align="center">
+                        <th bgcolor="#9bffbc">Country Code</th>
+                        <th bgcolor="#9bffbc">Link</th>
+                        <th bgcolor="#9bffbc">Generate Files</th>
+                    </tr>
+                </thread>
+            </table>
+        </div>
+        </p></div>
+        <div class="w3-col" style="width:10%"><p></p></div>
+    </div>
+
 
     <!-- RESULT FROM CALLING MAP -->
 
@@ -282,32 +291,37 @@
         function numberProducts(data){
                 productos = data["cities"];
                 var items = [];
+                var contador = 0;
                 $.each(productos,function(key, val){
                     items.push("<tr>");
                     items.push("<td id=''"+key+"''>"+val.adm0_a3+"</td>");
-                    items.push("<td onclick='redirectTo(\""+ val.link + "\")' id='"+val.link+"'>"+val.link+"</td>");
+                    items.push("<td id='"+val.link+"'>"+val.link+"</td>");
+                    items.push("<td onclick='redirectTo(\""+ val.link +"\","+"\""+contador+"\")' id='Download'><button type='button' style='width:100%;'>Generate Files</button><div class='container' id='Loading"+contador+"' style='visibility: hidden;' align='center'><div class='spinner-border spinner-border-sm'></div></div></td>");
                     items.push("</tr>");
+                    contador += 1;
                 })
                 $('<tbody/>',{html:items.join("")}).appendTo("table");
             }
 
-            function redirectTo(link){
-                $.ajax({
-                    type : 'POST',
-                    url : '/makeExtractAndConversion',
-                    data : JSON.stringify({
-                        code : link
-                    }),
-                    success : (data, textStatus, jqXHR) => {
-                        console.log(data,textStatus,jqXHR)
-                        rdf = data['RDF']
-                        epw = data['EPW']
-                        document.getElementById('rdf').href=rdf
-                        document.getElementById('epw').href=epw
-                    },
-                    contentType : 'application/json',
-                    dataType : 'json'
-                });
+            function redirectTo(link,contador){
+                $("#Loading"+contador).css('visibility','visible');
+                    $.ajax({
+                        type : 'POST',
+                        url : '/makeExtractAndConversion',
+                        data : JSON.stringify({
+                            code : link
+                        }),
+                        success : (data, textStatus, jqXHR) => {
+                            console.log(data,textStatus,jqXHR)
+                            rdf = data['RDF']
+                            epw = data['EPW']
+                            document.getElementById('rdf').href=rdf
+                            document.getElementById('epw').href=epw
+                            $("#Loading"+contador).css('visibility','hidden');
+                        },
+                        contentType : 'application/json',
+                        dataType : 'json'
+                    });
             }
         // AQUÍ ESTÁ LA PARTE DEL MAPA
 
@@ -429,7 +443,7 @@
                     });
                     layer.bindPopup(function (layer){
                         // console.log(layer.feature.properties.adm0_a3);
-                        console.log('BC:' + buttonClicked);
+                        // console.log('BC:' + buttonClicked);
                         if(buttonClicked == 'Climate1'){
                             $.ajax({
                                 type : 'POST',
@@ -502,7 +516,7 @@
 let buttonClicked = ''
 function clickButton(id){
         buttonClicked = id;
-        console.log(id)
+        // console.log(id)
         if (id == 'Climate1'){
             Map(geoLocations);
         }
