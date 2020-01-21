@@ -14,10 +14,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
      <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=13" />
     <link rel="shortcut icon" type="image/png" href="{% static 'converter/favicon2.ico' %}"/>
         <title>File2RDF</title>
 </head>
@@ -28,7 +29,8 @@
                 <h1 align="center" class="font-weight-bold, p-3 mb-2 bg-primary text-white">RDF File Converter</h1>
             </div>
         </div>
-    </p>   
+    </p>
+    
 
     <div class="container">
         <div class="tab">
@@ -151,6 +153,20 @@
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for link.." title="Type in a link">
     </div>
 
+    <div class="container" id="tabsGDSPARQL">
+        <h3 class="title mt-5" align="center">Results</h3>
+        <nav class="navbar navbar-expand-md navbar-dark ">
+            <div class="mx-auto my-2 order-0 order-md-1 position-relative">
+                <div class="" id="">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link focus " id="nav-GDown-tab" data-toggle="tab" href="#nav-GDown" role="tab" aria-controls="nav-GDown" aria-selected="true">Generate and Download</a>
+                        <a class="nav-item nav-link" id="nav-SPARQL-tab" data-toggle="tab" href="#nav-SPARQL" role="tab" aria-controls="nav-SPARQL" aria-selected="false">SPARQL</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
     <div class="container" id="DownloadContainer" style="visibility: hidden;">
         <h3 align="center">Results</h3>
         <p align="center">
@@ -180,6 +196,12 @@
         </div>
         </p></div>
         <div class="w3-col" style="width:10%"><p></p></div>
+    </div>
+
+    <div class="container">
+        <div class="form-group">
+            <textarea class="form-control" placeholder="Write your SPARQL query here ..." id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
     </div>
 
 

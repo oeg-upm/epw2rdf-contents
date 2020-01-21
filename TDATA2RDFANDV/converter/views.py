@@ -87,6 +87,8 @@ def extract_Convert(request):
 			for file in glob.glob("converter/static/converter/*.epw"):
 				os.remove(file)
 
+		
+
 		response = json.loads(request.body)
 		link = takeData(response)
 		data = extractEPWFile(link) # get data from EPW file that is inside Zip File
@@ -109,6 +111,9 @@ def extract_Convert(request):
 		createEPW(data,city)
 
 		# print(propertiesFile)
+
+		
+
 		makeSH(propertiesFile)
 
 		if not os.getcwd().endswith("DataStorage"):

@@ -86,3 +86,68 @@ body {font-family: Arial;}
 #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
 }
+
+
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+
+/* TABS */
+
+.redbg{
+  /* background: red!important; */
+  background: rgb(255,174,6);
+  background: linear-gradient(90deg,#ffa209 0%, #ea003e 100%);
+  color: white!important;
+}
+body{
+  font-family: 'Quicksand', sans-serif!important;
+}
+a{
+  font-weight: 700!important;
+  background: linear-gradient(90deg,#ffa209 0%, #ea003e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.whiteText{
+  color: #ffffff!important;
+  background: inherit!important;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.snapColor{
+  font-weight: 700!important;
+  background: linear-gradient(90deg,#ffa209 0%, #ff4a27 100%)!important;
+  -webkit-background-clip: text!important;
+  -webkit-text-fill-color: transparent!important;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+  color: #ffffff;
+  background-color: #fff;
+  border-top-color:#ffae06!important;
+  border-left-color: #ffae06!important;
+  border-right-color: #ffae06!important;
+  border-bottom-color: #ffffff!important;
+
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover{
+  color: #ffffff;
+  background-color: #fff;
+  border-top-color:#ffae06!important;
+  border-left-color: #ffae06!important;
+  border-right-color: #ffae06!important;
+  border-bottom-color: #ffffff!important;
+
+}
+.inheritBg{
+  background: inherit!important;
+}
+.nav-tabs {
+  border-bottom: 1px solid #ffae06!important;
+}
+
+.icon {
+  padding-right: 10px;
+  vertical-align: middle;
+}
+
