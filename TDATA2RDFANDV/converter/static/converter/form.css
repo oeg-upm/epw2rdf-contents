@@ -67,7 +67,7 @@ body {font-family: Arial;}
   margin-bottom: 12px;
 }
 
-#myTable {
+/* #myTable {
   border-collapse: collapse;
   width: 100%;
   border: 1px solid #ddd;
@@ -85,7 +85,7 @@ body {font-family: Arial;}
 
 #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
-}
+} */
 
 
 /* ---------------------------------------------------------------------------------------------------------------------------- */
@@ -102,10 +102,14 @@ body{
   font-family: 'Quicksand', sans-serif!important;
 }
 a{
+  font-size: large;
   font-weight: 700!important;
   background: linear-gradient(90deg,#ffa209 0%, #ea003e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.colorLink{
+  -webkit-text-fill-color: black!important;
 }
 
 .whiteText{
@@ -116,11 +120,21 @@ a{
 }
 
 .snapColor{
+  font-size: large;
   font-weight: 700!important;
-  background: linear-gradient(90deg,#ffa209 0%, #ff4a27 100%)!important;
+  background: linear-gradient(90deg,#fff018 0%, #fd2a00 100%)!important;
   -webkit-background-clip: text!important;
   -webkit-text-fill-color: transparent!important;
 }
+
+.snapColor2{
+  font-size: 40px;
+  font-weight: 700!important;
+  background: linear-gradient(90deg,#fff018 0%, #fd2a00 100%)!important;
+  -webkit-background-clip: text!important;
+  -webkit-text-fill-color: transparent!important;
+}
+
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color: #ffffff;
   background-color: #fff;
@@ -130,6 +144,17 @@ a{
   border-bottom-color: #ffffff!important;
 
 }
+
+.snapColor{
+  color: #ffffff;
+  background-color: #fff;
+  border-top-color:#ffae06!important;
+  border-left-color: #ffae06!important;
+  border-right-color: #ffae06!important;
+  border-bottom-color: #ffae06!important;
+
+}
+
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover{
   color: #ffffff;
   background-color: #fff;
