@@ -95,16 +95,27 @@ body {font-family: Arial;}
 .redbg{
   /* background: red!important; */
   background: rgb(255,174,6);
-  background: linear-gradient(90deg,#ffa209 0%, #ea003e 100%);
+  background: linear-gradient(90deg,#7ec7e4 0%, #0f8fc2 100%);
   color: white!important;
 }
+
+
+.redbg2{
+  /* background: red!important; */
+  background: rgb(255,174,6);
+  font-size: 18px;
+  background: linear-gradient(90deg,#7ec7e4 0%, #0f8fc2 100%);
+  color: white!important;
+}
+
+
 body{
   font-family: 'Quicksand', sans-serif!important;
 }
 a{
   font-size: large;
   font-weight: 700!important;
-  background: linear-gradient(90deg,#ffa209 0%, #ea003e 100%);
+  background: linear-gradient(90deg,#7ec7e4 0%, #0f8fc2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -122,7 +133,7 @@ a{
 .snapColor{
   font-size: large;
   font-weight: 700!important;
-  background: linear-gradient(90deg,#fff018 0%, #fd2a00 100%)!important;
+  background: linear-gradient(90deg,#7ec7e4 0%, #0f8fc2 100%)!important;
   -webkit-background-clip: text!important;
   -webkit-text-fill-color: transparent!important;
 }
@@ -130,7 +141,7 @@ a{
 .snapColor2{
   font-size: 40px;
   font-weight: 700!important;
-  background: linear-gradient(90deg,#fff018 0%, #fd2a00 100%)!important;
+  background: linear-gradient(90deg,#7ec7e4 0%, #0f8fc2 100%)!important;
   -webkit-background-clip: text!important;
   -webkit-text-fill-color: transparent!important;
 }
@@ -138,9 +149,9 @@ a{
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color: #ffffff;
   background-color: #fff;
-  border-top-color:#ffae06!important;
-  border-left-color: #ffae06!important;
-  border-right-color: #ffae06!important;
+  border-top-color:#60badd!important;
+  border-left-color: #60badd!important;
+  border-right-color: #60badd!important;
   border-bottom-color: #ffffff!important;
 
 }
@@ -148,27 +159,27 @@ a{
 .snapColor{
   color: #ffffff;
   background-color: #fff;
-  border-top-color:#ffae06!important;
-  border-left-color: #ffae06!important;
-  border-right-color: #ffae06!important;
-  border-bottom-color: #ffae06!important;
+  border-top-color:#60badd!important;
+  border-left-color: #60badd!important;
+  border-right-color: #60badd!important;
+  border-bottom-color: #60badd!important;
 
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover{
   color: #ffffff;
   background-color: #fff;
-  border-top-color:#ffae06!important;
-  border-left-color: #ffae06!important;
-  border-right-color: #ffae06!important;
-  border-bottom-color: #ffffff!important;
+  border-top-color:#60badd!important;
+  border-left-color: #60badd!important;
+  border-right-color: #60badd!important;
+  border-bottom-color: #60badd!important;
 
 }
 .inheritBg{
   background: inherit!important;
 }
 .nav-tabs {
-  border-bottom: 1px solid #ffae06!important;
+  border-bottom: 1px solid #60badd!important;
 }
 
 .icon {
