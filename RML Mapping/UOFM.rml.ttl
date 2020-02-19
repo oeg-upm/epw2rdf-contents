@@ -15,9 +15,9 @@ map:map_AtmosphericPhenomenon1_0 rml:logicalSource map:source_10;
     rdfs:label "AtmosphericPhenomenon1";
     rr:subjectMap map:s_10;
     rr:predicateObjectMap map:pom_40, map:pom_41, map:pom_42.
-map:map_CeillingHeight_0 rml:logicalSource map:source_11;
+map:map_CeilingHeight_0 rml:logicalSource map:source_11;
     a rr:TriplesMap;
-    rdfs:label "CeillingHeight";
+    rdfs:label "CeilingHeight";
     rr:subjectMap map:s_11;
     rr:predicateObjectMap map:pom_43, map:pom_44.
 map:map_DataSourcesAndUncertaintyFlags_0 rml:logicalSource map:source_1;
@@ -84,7 +84,7 @@ map:om_0 a rr:ObjectMap;
     rr:constant "http://epw.linkeddata.es/vocab#EPW";
     rr:termType rr:IRI.
 map:om_1 a rr:ObjectMap;
-    rr:constant "http://dbpedia.org/resource/algiers";
+    rr:constant "http://dbpedia.org/resource/Ceuta";
     rr:termType rr:Literal.
 map:om_10 a rr:ObjectMap;
     rml:reference "DryBulbTemperature";
@@ -100,31 +100,31 @@ map:om_12 a rr:ObjectMap;
 map:om_13 a rr:ObjectMap;
     rml:reference "ExtraterrestrialHorizontalRadiation";
     rr:termType rr:Literal;
-    rr:datatype <weat:WattHourPerSquareMetre>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/WattHourPerSquareMetre>.
 map:om_14 a rr:ObjectMap;
     rml:reference "GlobalHorizontalRadiation";
     rr:termType rr:Literal;
-    rr:datatype <weat:WattHourPerSquareMetre>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/WattHourPerSquareMetre>.
 map:om_15 a rr:ObjectMap;
     rml:reference "DiffuseHorizontalRadiation";
     rr:termType rr:Literal;
-    rr:datatype <weat:WattHourPerSquareMetre>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/WattHourPerSquareMetre>.
 map:om_16 a rr:ObjectMap;
     rml:reference "Albedo";
     rr:termType rr:Literal;
-    rr:datatype <weat:WattHourPerSquareMetre>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/WattHourPerSquareMetre>.
 map:om_17 a rr:ObjectMap;
     rml:reference "AerosolOpticalDepth";
     rr:termType rr:Literal;
-    rr:datatype <weat:Thousandths>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/Thousandths>.
 map:om_18 a rr:ObjectMap;
     rml:reference "DirectNormalRadiation";
     rr:termType rr:Literal;
-    rr:datatype <weat:WattHourPerSquareMetre>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/WattHourPerSquareMetre>.
 map:om_19 a rr:ObjectMap;
     rml:reference "ExtraterrestrialDirectNormalRadiation";
     rr:termType rr:Literal;
-    rr:datatype <weat:WattHourPerSquareMetre>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/WattHourPerSquareMetre>.
 map:om_2 a rr:ObjectMap;
     rml:reference "Year";
     rr:termType rr:Literal;
@@ -132,7 +132,7 @@ map:om_2 a rr:ObjectMap;
 map:om_20 a rr:ObjectMap;
     rml:reference "HorizontalInfraredRadiationIntensity";
     rr:termType rr:Literal;
-    rr:datatype <weat:WattHourPerSquareMetre>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/WattHourPerSquareMetre>.
 map:om_21 a rr:ObjectMap;
     rr:constant "http://epw.linkeddata.es/vocab#EPW";
     rr:termType rr:IRI.
@@ -202,11 +202,11 @@ map:om_37 a rr:ObjectMap;
 map:om_38 a rr:ObjectMap;
     rml:reference "OpaqueSkyCover";
     rr:termType rr:Literal;
-    rr:datatype <weat:TenthsOfCoverage>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/TenthsOfCoverage>.
 map:om_39 a rr:ObjectMap;
     rml:reference "TotalSkyCover";
     rr:termType rr:Literal;
-    rr:datatype <weat:TenthsOfCoverage>.
+    rr:datatype <http://www.oeg-weather.es/2020/weat/TenthsOfCoverage>.
 map:om_4 a rr:ObjectMap;
     rml:reference "Day";
     rr:termType rr:Literal;
@@ -226,7 +226,7 @@ map:om_43 a rr:ObjectMap;
     rr:constant "http://epw.linkeddata.es/vocab#EPW";
     rr:termType rr:IRI.
 map:om_44 a rr:ObjectMap;
-    rml:reference "CeillingHeight";
+    rml:reference "CeilingHeight";
     rr:termType rr:Literal;
     rr:datatype <http://www.ontology-of-units-of-measure.org/resource/om-2/metre>.
 map:om_45 a rr:ObjectMap;
@@ -347,7 +347,7 @@ map:pm_42 a rr:PredicateMap;
 map:pm_43 a rr:PredicateMap;
     rr:constant rdf:type.
 map:pm_44 a rr:PredicateMap;
-    rr:constant <http://epw.linkeddata.es/vocab#ceillingHeight>.
+    rr:constant <http://epw.linkeddata.es/vocab#ceilingHeight>.
 map:pm_45 a rr:PredicateMap;
     rr:constant rdf:type.
 map:pm_46 a rr:PredicateMap;
@@ -524,77 +524,77 @@ map:pom_9 a rr:PredicateObjectMap;
     rr:predicateMap map:pm_9;
     rr:objectMap map:om_9.
 map:s_0 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}".
 map:s_1 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/{DataSourceAndUncertaintyFlags}".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/{DataSourceAndUncertaintyFlags}".
 map:s_10 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/atmosphericPhenomenon1/wind".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/atmosphericPhenomenon1/wind".
 map:s_11 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/ceillingHeight".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/ceilingHeight".
 map:s_12 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/presentWeatherCodes".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/presentWeatherCodes".
 map:s_13 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/presentWeatherObservation".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/presentWeatherObservation".
 map:s_14 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/visibility".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/visibility".
 map:s_2 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/temperature1".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/temperature1".
 map:s_3 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/radiation1".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/radiation1".
 map:s_4 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/humidity1".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/humidity1".
 map:s_5 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/illuminance".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/illuminance".
 map:s_6 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/pressure1".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/pressure1".
 map:s_7 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/precipitation1".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/precipitation1".
 map:s_8 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/precipitation1/".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/precipitation1/".
 map:s_9 a rr:SubjectMap;
-    rr:template "http://epw.linkeddata.es/resources/algiers/{Year}-{Month}-{Day}-{Hour}-{Minute}/skyCover1".
+    rr:template "http://epw.linkeddata.es/resources/ceuta/{Year}-{Month}-{Day}-{Hour}-{Minute}/skyCover1".
 map:source_0 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_1 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_10 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_11 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_12 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_13 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_14 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_2 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_3 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_4 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_5 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_6 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_7 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_8 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.
 map:source_9 a rml:LogicalSource;
-    rml:source "ALGIERS.csv";
+    rml:source "/app/data/Ceuta.csv";
     rml:referenceFormulation ql:CSV.

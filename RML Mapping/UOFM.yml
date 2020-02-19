@@ -8,23 +8,24 @@ prefixes:
     xsd: http://www.w3.org/2001/XMLSchema#
     fno: http://w3id.org/function/ontology#
     epw: http://epw.linkeddata.es/vocab#
-    epwalgiers: http://epw.linkeddata.es/resources/algiers/
+    epwalgiers: http://epw.linkeddata.es/resources/Ceuta/
     s4city: https://w3id.org/def/saref4city#
     time: https://w3id.org/2006/time#
     ssn: http://www.w3.org/ns/ssn/
     sosa: http://www.w3.org/ns/sosa/
     om: http://www.ontology-of-units-of-measure.org/resource/om-2/
     geo: http://www.w3.org/2003/01/geo/wgs84_pos#
+    weat: http://www.oeg-weather.es/2020/weat/
 
 
 mappings:
     algiersWeatherOntology:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)
         po:
             - [a,epw:EPW]
-            - [epw:city,http://dbpedia.org/resource/algiers]
+            - [epw:city,http://dbpedia.org/resource/Ceuta]
             - [epw:year,$(Year),xsd:integer]
             - [epw:month,$(Month),xsd:integer]
             - [epw:day,$(Day),xsd:integer]
@@ -33,16 +34,16 @@ mappings:
     
     DataSourcesAndUncertaintyFlags:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/$(DataSourceAndUncertaintyFlags)
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/$(DataSourceAndUncertaintyFlags)
         po:
             - [a,epw:EPW]
             - [epw:dataSourceAndUncertaintyFlags,$(DataSourceAndUncertaintyFlags),xsd:string]
     
     Temperature1:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/temperature1
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/temperature1
         po:
             - [a,epw:EPW]
             - [epw:dryBulbTemperature,$(DryBulbTemperature),om:degreeCelsius]
@@ -51,7 +52,7 @@ mappings:
     # Temperature2:
     #     sources:
     #         - []
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/temperature2
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/temperature2
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:apparentTemperature,$(APPARENTTEMPERATURE),xsd:decimal]
@@ -67,8 +68,8 @@ mappings:
     
     Radiation1:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/radiation1
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/radiation1
         po:
             - [a,epw:EPW]
             - [epw:extraterrestrialHorizontalRadiation,$(ExtraterrestrialHorizontalRadiation),weat:WattHourPerSquareMetre]
@@ -83,15 +84,15 @@ mappings:
     # Radiation2:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/radiation2
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/radiation2
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:uvIndex,$(UVINDEX),xsd:decimal]
     
     Humidity1:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/humidity1
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/humidity1
         po:
             - [a,epw:EPW]
             - [epw:relativeHumidity,$(RelativeHumidity),om:percent]
@@ -99,15 +100,15 @@ mappings:
     # Humidity2:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/humidity2
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/humidity2
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:humidity,$(HUMIDITY),xsd:decimal]
 
     Illuminance:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/illuminance
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/illuminance
         po:
             - [a,epw:EPW]
             - [epw:diffuseHorizontalIlluminance,$(DiffuseHorizontalIlluminance),om:lux]
@@ -117,8 +118,8 @@ mappings:
     
     Pressure1:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/pressure1
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/pressure1
         po:
             - [a,epw:EPW]
             - [epw:atmosphericStationPressure,$(AtmosphericStationPressure),om:pascal]
@@ -126,15 +127,15 @@ mappings:
     # Pressure2:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/pressure2
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/pressure2
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:pressure,$(PRESSURE),xsd:decimal]
     
     Precipitation1:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/precipitation1
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/precipitation1
         po:
             - [a,epw:EPW]
             - [epw:liquidPrecipitationDepth,$(LiquidPrecipitationDepth),om:millimetre]
@@ -144,7 +145,7 @@ mappings:
     # Precipitation2:
     #     sources:
     #         - []  ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/precipitation2
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/precipitation2
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:precipAccumulation,$(PRECIPACCUMULATION),xsd:decimal]
@@ -156,8 +157,8 @@ mappings:
     
     Snow:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/precipitation1/
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/precipitation1/
         po:
             - [a,epw:EPW]
             - [epw:daysSinceLastSnowfall,$(DaysSinceLastSnowfall),om:day]
@@ -166,7 +167,7 @@ mappings:
     # Storm:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/precipitation2/
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/precipitation2/
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:nearestStormDistance,$(NEARESTSTORMDISTANCE),xsd:decimal]
@@ -174,8 +175,8 @@ mappings:
     
     SkyCover1:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/skyCover1
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/skyCover1
         po:
             - [a,epw:EPW]
             - [epw:opaqueSkyCover,$(OpaqueSkyCover),weat:TenthsOfCoverage]
@@ -184,7 +185,7 @@ mappings:
     # Skycover2:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/skyCover2
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/skyCover2
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:cloudCover,$(CLOUDCOVER),xsd:decimal]
@@ -192,7 +193,7 @@ mappings:
     # Time:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/time
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/time
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:apparentTemperatureHighTime,$(APPARENTTEMPERATUREHIGHTIME),xsd:decimal]
@@ -212,8 +213,8 @@ mappings:
         
     AtmosphericPhenomenon1:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/atmosphericPhenomenon1/wind
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/atmosphericPhenomenon1/wind
         po:
             - [a,epw:EPW]
             - [epw:windDirection,$(WindDirection),om:degree]
@@ -222,24 +223,24 @@ mappings:
     # AtmosphericPhenomenon2:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/atmosphericPhenomenon2/wind
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/atmosphericPhenomenon2/wind
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:windBearing,$(WindBearing),xsd:decimal]
     #         - [dsky,windGust,$(WindGust),xsd:deecimal]
 
-    CeillingHeight:
+    CeilingHeight:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/ceillingHeight
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/ceilingHeight
         po:
             - [a,epw:EPW]
-            - [epw:ceillingHeight,$(CeillingHeight),om:metre]
+            - [epw:ceilingHeight,$(CeilingHeight),om:metre]
 
     # MoonPhase:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/moonPhase
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/moonPhase
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:moonPhase,$(MoonPhase),xsd:decimal]
@@ -247,31 +248,31 @@ mappings:
     # Ozone:
     #     sources:
     #         - [] ESTE SOURCE DEBE DE PERTENECER A UN JSON QUE SE CREE A PARTIR DE UNA LLAMADA A DARK SKY API
-    #     s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/ozone
+    #     s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/ozone
     #     po:
     #         - [a,dsky:DSKY]
     #         - [dsky:ozone,$(Ozone),xsd:decimal]
 
     PresentWeatherCodes:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/presentWeatherCodes
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/presentWeatherCodes
         po:
             - [a,epw:EPW]
             - [epw:presentWeatherCodes,$(PresentWeatherCodes),xsd:string]
 
     PresentWeatherObservation:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/presentWeatherObservation
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/presentWeatherObservation
         po:
             - [a,epw:EPW]
             - [epw:presentWeatherObservation,$(PresentWeatherObservation),xsd:decimal]
 
     Visibility:
         sources:
-            - [ALGIERS.csv~csv]
-        s: http://epw.linkeddata.es/resources/algiers/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/visibility
+            - [/app/data/Ceuta.csv~csv]
+        s: http://epw.linkeddata.es/resources/ceuta/$(Year)-$(Month)-$(Day)-$(Hour)-$(Minute)/visibility
         po:
             - [a,epw:EPW]
             - [epw:visibility,$(Visibility),om:kilometre]

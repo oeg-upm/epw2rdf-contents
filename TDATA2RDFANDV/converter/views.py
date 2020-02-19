@@ -99,6 +99,7 @@ def extract_Convert(request):
 		headers = str(str(headers).strip('[]').replace("'","").split(', ')).strip('[]').replace(", ",",")
 		
 		headers = str(headers).strip('[]').replace("'","").replace(", ",",")
+		# print(headers)
 
 		parseToCSV(data, numberRowstoSkip, headers, city) # parse data to csv
 
@@ -114,7 +115,7 @@ def extract_Convert(request):
 
 		
 
-		makeSH(propertiesFile)
+		# makeSH(propertiesFile)
 
 		if not os.getcwd().endswith("DataStorage"):
 			os.chdir("converter/DataStorage")

@@ -21,7 +21,7 @@ def parseToCSV(dataset,numberRowstoSkip,headers,cityName):
 
     for line in contents:
         line = line.strip('\n').split(',')
-        line = str(line).strip('[]').replace("'","")
+        line = str(line).strip('[]').replace("'","").replace(", ",",")
         documentCTD.write(line + '\n') 
 
     documentCTD.close()
