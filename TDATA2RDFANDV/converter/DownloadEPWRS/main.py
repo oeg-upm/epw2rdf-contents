@@ -1,8 +1,9 @@
-from converter.DownloadEPWRS.createEPWFile import createEPWFile
+from converter.DownloadEPWRS.createEPWFile import createEPWFile, createEPWZip
 from converter.DownloadEPWRS.EnergyPlusScraper import continentGetLink, scrapeEP
 from converter.DownloadEPWRS.getDate import getDate
 from converter.DownloadEPWRS.jsonReader import jsonReader
-from converter.DownloadEPWRS.OneBuildingScraper import continentLink,scrapeOB
+from converter.DownloadEPWRS.OneBuildingScraper import continentLinker, scrapeOB
+from converter.DownloadEPWRS.extractFile import extractEPWFile
 import os
 import shutil
 
@@ -40,9 +41,17 @@ def main(data):
             return finalDateList
 
     elif source == "OneBuilding":
-        return
+        continentLink = continentLinker(continent)
+        epwLinkList = scrapeOB(city,country,continentLink)
+        for url in epwLinkList:
+            data,name = extractEPWFile(url)
+            createEPWZip(data,name)
+        
+        finalDateList, returnEPWListFiles = getDate(year)
 
-    else:
-        return
+        if returnEPWListFiles != []:
+            return returnEPWListFiles
+        else:
+            return finalDateList
 
-main(data)
+#main(data)

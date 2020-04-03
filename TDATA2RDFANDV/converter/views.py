@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import shutil
@@ -148,20 +148,15 @@ def downloadEPW(request):
 		response = json.loads(request.POST['data'])
 		# return HttpResponse(file, content_type='application/zip')
 		resultList = main(response)
-		print(resultList)
+		#print(resultList)
 		if resultList[0].endswith('.epw'):
 			onlyfiles = [f for f in listdir('converter/DownloadEPWRS/tmpFiles') if isfile(join('converter/DownloadEPWRS/tmpFiles/', f))]
-			#return HttpResponse(file, content_type='application/zip')
-			print('1',onlyfiles)
 			os.mkdir('converter/DownloadEPWRS/tmpFiles/EPW')
 			for result in resultList:
 				shutil.move("converter/DownloadEPWRS/tmpFiles/"+result, "converter/DownloadEPWRS/tmpFiles/EPW/"+result)
 			zipdir("converter/DownloadEPWRS/tmpFiles/EPW/","converter/DownloadEPWRS/tmpFiles/EPW.zip",True)
-			ZIPFILE_NAME = "converter/DownloadEPWRS/tmpFiles/EPW.zip"
-			#return HttpResponse("converter/DownloadEPWRS/tmpFiles/EPW.zip", content_type='application/zip')
-			response = HttpResponse(ZIPFILE_NAME, content_type='application/force-download')
-			response['Content-Disposition'] = 'attachment; filename='+ZIPFILE_NAME
-			return response
+			zip_file = open("converter/DownloadEPWRS/tmpFiles/EPW.zip",'rb')
+			return FileResponse(zip_file)
 
 		else:
 			resultList = ','.join(resultList)
