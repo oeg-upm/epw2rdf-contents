@@ -156,8 +156,13 @@ def downloadEPW(request):
 			os.mkdir('converter/DownloadEPWRS/tmpFiles/EPW')
 			for result in resultList:
 				shutil.move("converter/DownloadEPWRS/tmpFiles/"+result, "converter/DownloadEPWRS/tmpFiles/EPW/"+result)
-				zipdir("converter/DownloadEPWRS/tmpFiles/EPW/","converter/DownloadEPWRS/tmpFiles/EPW.zip",True)
-				return HttpResponse("converter/DownloadEPWRS/tmpFiles/EPW.zip", content_type='application/zip')
+			zipdir("converter/DownloadEPWRS/tmpFiles/EPW/","converter/DownloadEPWRS/tmpFiles/EPW.zip",True)
+			ZIPFILE_NAME = "converter/DownloadEPWRS/tmpFiles/EPW.zip"
+			#return HttpResponse("converter/DownloadEPWRS/tmpFiles/EPW.zip", content_type='application/zip')
+			response = HttpResponse(ZIPFILE_NAME, content_type='application/force-download')
+			response['Content-Disposition'] = 'attachment; filename='+ZIPFILE_NAME
+			return response
+
 		else:
 			resultList = ','.join(resultList)
 			dictionary = {
