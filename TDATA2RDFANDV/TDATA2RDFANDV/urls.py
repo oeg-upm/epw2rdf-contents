@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from converter.views import index, mapData, extract_Convert, mapDataEnergyPlus
+from converter.views import index, mapData, extract_Convert, mapDataEnergyPlus, downloadEPW
 
 
 
@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^$', index),
     url(r'getInfoMap/', mapData),
     url(r'getInfoMapEP/', mapDataEnergyPlus),
-    url(r'makeExtractAndConversion', extract_Convert)
+    url(r'makeExtractAndConversion/', extract_Convert),
+    url(r'downloadEPW/',downloadEPW)
 ]

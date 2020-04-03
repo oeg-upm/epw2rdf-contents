@@ -5,6 +5,8 @@ import json
 import shutil
 import pathlib
 import glob, os
+from os import listdir
+from os.path import isfile, join
 
 
 # Create your views here.
@@ -21,6 +23,8 @@ from converter.Functions.makePropertiesFile import createFileProperties, removeF
 from converter.Functions.makeTTLFile import createFileTTL, removeFileTTL # create R2RML file
 from converter.Functions.makeSH import makeSH
 from converter.Functions.createEPWFile import removeFileEPW, createEPW
+from converter.DownloadEPWRS.main import main
+from converter.DownloadEPWRS.zipdir import zipdir
 # directory to storage data == DataStorage
 
 
@@ -137,3 +141,27 @@ def extract_Convert(request):
 def extract_ConvertEnergyPlus(request):
 	if request.method == "POST":
 		return
+
+@csrf_exempt
+def downloadEPW(request):
+	if request.method == "POST":
+		response = json.loads(request.POST['data'])
+		# return HttpResponse(file, content_type='application/zip')
+		resultList = main(response)
+		print(resultList)
+		if resultList[0].endswith('.epw'):
+			onlyfiles = [f for f in listdir('converter/DownloadEPWRS/tmpFiles') if isfile(join('converter/DownloadEPWRS/tmpFiles/', f))]
+			#return HttpResponse(file, content_type='application/zip')
+			print('1',onlyfiles)
+			os.mkdir('converter/DownloadEPWRS/tmpFiles/EPW')
+			for result in resultList:
+				shutil.move("converter/DownloadEPWRS/tmpFiles/"+result, "converter/DownloadEPWRS/tmpFiles/EPW/"+result)
+				zipdir("converter/DownloadEPWRS/tmpFiles/EPW/","converter/DownloadEPWRS/tmpFiles/EPW.zip",True)
+				return HttpResponse("converter/DownloadEPWRS/tmpFiles/EPW.zip", content_type='application/zip')
+		else:
+			resultList = ','.join(resultList)
+			dictionary = {
+				'info' : 'Your year does not coincide with any of the years established within the epw files, please select one of the following',
+				'years' : resultList
+			}
+			return JsonResponse(dictionary,safe=False)
