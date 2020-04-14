@@ -5,7 +5,8 @@ data = {
         "country" : "Spain",
         "continent" : "Europe",
         "year" : 1984,
-        "source" : "EnergyPlus"
+        "source" : "EnergyPlus",
+        "output" : "link" # "output" : "file"
         }
 
 def jsonReader(data):
@@ -14,7 +15,15 @@ def jsonReader(data):
     continent = data["continent"]
     year = data["year"]
     source = data["source"]
-    return city, country, continent, year, source
+    out = data["output"]
+    return city, country, continent, year, source, out
+
+def jsonReaderYears(data):
+    city = data["city"]
+    country = data["country"]
+    continent = data["continent"]
+    source = data["source"]
+    return city, country, continent, source
     
 
 #city, country, continent, year, source = jsonReader(data)

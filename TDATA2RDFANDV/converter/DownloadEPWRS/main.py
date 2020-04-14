@@ -19,13 +19,15 @@ data = {
 
 def main(data):
 
+    linkList = []
+
     if not os.path.exists('converter/DownloadEPWRS/tmpFiles'):
         os.mkdir('converter/DownloadEPWRS/tmpFiles')
     else:    
         shutil.rmtree('converter/DownloadEPWRS/tmpFiles')
         os.mkdir('converter/DownloadEPWRS/tmpFiles')
 
-    city, country, continent, year, source = jsonReader(data)
+    city, country, continent, year, source, out = jsonReader(data)
 
     if source == "EnergyPlus":
         continentLink = continentGetLink(continent)
@@ -36,13 +38,22 @@ def main(data):
         finalDateList, returnEPWListFiles = getDate(year)
 
         if returnEPWListFiles != []:
-            return returnEPWListFiles
+            if out == "file":
+                return returnEPWListFiles
+            elif out == "link":
+                for link in epwLinkList:
+                    link2 = link.split("/")
+                    link2 = link2[-1]
+                    if link2 in returnEPWListFiles:
+                        linkList.append(link)
+                return linkList
         else:
             return finalDateList
 
     elif source == "OneBuilding":
         continentLink = continentLinker(continent)
         epwLinkList = scrapeOB(city,country,continentLink)
+
         for url in epwLinkList:
             data,name = extractEPWFile(url)
             createEPWZip(data,name)
@@ -50,7 +61,15 @@ def main(data):
         finalDateList, returnEPWListFiles = getDate(year)
 
         if returnEPWListFiles != []:
-            return returnEPWListFiles
+            if out == "file":
+                return returnEPWListFiles
+            elif out == "link":
+                for link in epwLinkList:
+                    link2 = link.split("/")
+                    link2 = link2[-1].replace(".zip",".epw")
+                    if link2 in returnEPWListFiles:
+                        linkList.append(link)
+                return linkList
         else:
             return finalDateList
 

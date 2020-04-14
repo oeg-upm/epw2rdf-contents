@@ -24,6 +24,7 @@ from converter.Functions.makeTTLFile import createFileTTL, removeFileTTL # creat
 from converter.Functions.makeSH import makeSH
 from converter.Functions.createEPWFile import removeFileEPW, createEPW
 from converter.DownloadEPWRS.main import main
+from converter.DownloadEPWRS.mainYear import mainYear
 from converter.DownloadEPWRS.zipdir import zipdir
 # directory to storage data == DataStorage
 
@@ -146,10 +147,8 @@ def extract_ConvertEnergyPlus(request):
 def downloadEPW(request):
 	if request.method == "POST":
 		response = json.loads(request.POST['data'])
-		# return HttpResponse(file, content_type='application/zip')
 		resultList = main(response)
-		#print(resultList)
-		if resultList[0].endswith('.epw'):
+		if resultList[0].endswith('.epw') and not resultList[0].startswith("http"):
 			onlyfiles = [f for f in listdir('converter/DownloadEPWRS/tmpFiles') if isfile(join('converter/DownloadEPWRS/tmpFiles/', f))]
 			os.mkdir('converter/DownloadEPWRS/tmpFiles/EPW')
 			for result in resultList:
@@ -157,6 +156,14 @@ def downloadEPW(request):
 			zipdir("converter/DownloadEPWRS/tmpFiles/EPW/","converter/DownloadEPWRS/tmpFiles/EPW.zip",True)
 			zip_file = open("converter/DownloadEPWRS/tmpFiles/EPW.zip",'rb')
 			return FileResponse(zip_file)
+		
+		elif resultList[0].startswith("http"):
+			resultList = ','.join(resultList)
+			dictionary = {
+				'info' : 'The links of the epw files that you have requested are as follows:',
+				'links' : resultList
+			}
+			return JsonResponse(dictionary,safe=False)
 
 		else:
 			resultList = ','.join(resultList)
@@ -165,3 +172,15 @@ def downloadEPW(request):
 				'years' : resultList
 			}
 			return JsonResponse(dictionary,safe=False)
+
+
+@csrf_exempt
+def getEPWYears(request):
+	if request.method == "POST":
+		response = json.loads(request.POST['data'])
+		resultList = mainYear(response)
+		resultList = ','.join(resultList)
+		dictionary = {
+			'years' : resultList
+		}
+		return JsonResponse(dictionary,safe=False)
