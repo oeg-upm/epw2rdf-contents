@@ -42,6 +42,7 @@ openapi_info = openapi.Info(
 schema_view = get_schema_view(
    openapi_info,
    public=True,
+   url='https://weather.bimerr.iot.linkeddata.es/',
    permission_classes=(permissions.AllowAny,),
 )
 
