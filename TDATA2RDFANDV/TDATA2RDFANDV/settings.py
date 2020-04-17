@@ -25,7 +25,7 @@ SECRET_KEY = 't%z-8%l0n3@z)08w#+knzb7m$vpc58&vvm^8gx!3s&js0&-jyn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "192.168.122.214"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "192.168.122.214", "weather.bimerr.iot.linkeddata.es"]
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,26 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+
+
+REST_FRAMEWORK = {
+    # Parser classes priority-wise for Swagger
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.JSONParser',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}
+
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'DEFAULT_GENERATOR_CLASS' : 'drf_yasg.generators.OpenAPISchemaGenerator',
+    'DEFAULT_INFO': 'TDATA2RDFANDV.urls.openapi_info',
+}

@@ -4,6 +4,7 @@ from os.path import isfile, join
 
 
 def getDate(year):
+    year = str(year)
     finalDateList = []
     returnEPWListFiles = []
 

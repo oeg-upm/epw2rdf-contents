@@ -1,0 +1,161 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API",
+        "description": "Test description",
+        "termsOfService": "https://www.google.com/policies/terms/",
+        "contact": {
+            "email": "sgonzalez@delicias.dia.fi.upm.es"
+        },
+        "license": {
+            "name": "BSD License"
+        },
+        "version": "v1"
+    },
+    "basePath": "/",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "basic": {
+            "type": "basic"
+        }
+    },
+    "security": [
+        {
+            "basic": []
+        }
+    ],
+    "paths": {
+        "/downloadEPW/": {
+            "post": {
+                "operationId": "downloadEPW_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "city": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "continent": {
+                                    "type": "string"
+                                },
+                                "year": {
+                                    "type": "integer"
+                                },
+                                "source": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "city": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "continent": {
+                                    "type": "string"
+                                },
+                                "year": {
+                                    "type": "integer"
+                                },
+                                "source": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "downloadEPW"
+                ]
+            },
+            "parameters": []
+        },
+        "/getEPWYears/": {
+            "post": {
+                "operationId": "getEPWYears_create",
+                "description": "---",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "getEPWYears"
+                ]
+            },
+            "parameters": []
+        },
+        "/getInfoMap/": {
+            "post": {
+                "operationId": "getInfoMap_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "getInfoMap"
+                ]
+            },
+            "parameters": []
+        },
+        "/getInfoMapEP/": {
+            "post": {
+                "operationId": "getInfoMapEP_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "getInfoMapEP"
+                ]
+            },
+            "parameters": []
+        },
+        "/makeExtractAndConversion/": {
+            "post": {
+                "operationId": "makeExtractAndConversion_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "makeExtractAndConversion"
+                ]
+            },
+            "parameters": []
+        }
+    },
+    "definitions": {}
+}

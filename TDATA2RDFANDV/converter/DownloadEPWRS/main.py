@@ -29,8 +29,10 @@ def main(data):
 
     city, country, continent, year, source, out = jsonReader(data)
 
+
     if source == "EnergyPlus":
         continentLink = continentGetLink(continent)
+
         epwLinkList = scrapeEP(city,country,continentLink)
 
         createEPWFile(epwLinkList)
@@ -49,6 +51,7 @@ def main(data):
                 return linkList
         else:
             return finalDateList
+
 
     elif source == "OneBuilding":
         continentLink = continentLinker(continent)

@@ -8,6 +8,12 @@ import glob, os
 from os import listdir
 from os.path import isfile, join
 
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.response import Response
+from rest_framework import status
+
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 # Create your views here.
 
@@ -29,12 +35,11 @@ from converter.DownloadEPWRS.zipdir import zipdir
 # directory to storage data == DataStorage
 
 
-
 def index(request):
 	return render(request,'converter/page.html')
 
 
-
+@api_view(['POST'])
 @csrf_exempt # ONEBUILDIND.ORG WEATHER MAP
 def mapData(request):
 	if request.method == "POST":
@@ -54,6 +59,8 @@ def mapData(request):
 
 		return JsonResponse(jsonDictionary,safe=False)
 
+
+@api_view(['POST'])
 @csrf_exempt # ENERGY PLUS WEATHER MAP
 def mapDataEnergyPlus(request):
 	if request.method == "POST":
@@ -72,6 +79,8 @@ def mapDataEnergyPlus(request):
 
 		return JsonResponse(jsonDictionary,safe=False)
 
+
+@api_view(['POST'])
 @csrf_exempt # EXTRACT DATA FROM LINK FROM ONEBUILDING.ORG WEATHER
 def extract_Convert(request):
 	if request.method == "POST":
@@ -138,15 +147,41 @@ def extract_Convert(request):
 
 		return JsonResponse(dictionary,safe=False)
 
+
+
 @csrf_exempt
 def extract_ConvertEnergyPlus(request):
 	if request.method == "POST":
-		return
+		return 
 
+
+
+
+
+from .models import downlEPW
+import coreapi
+from rest_framework.schemas import AutoSchema
+
+
+
+@swagger_auto_schema(method='POST', request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT, 
+    properties={
+			'city': openapi.Schema(type=openapi.TYPE_STRING),
+			'country': openapi.Schema(type=openapi.TYPE_STRING,),
+			'continent':openapi.Schema(type=openapi.TYPE_STRING,),
+			'year':openapi.Schema(type=openapi.TYPE_INTEGER,),
+			'source':openapi.Schema(type=openapi.TYPE_STRING),
+			'output':openapi.Schema(type=openapi.TYPE_STRING),
+	}
+))
+
+
+@api_view(['POST'])
 @csrf_exempt
 def downloadEPW(request):
 	if request.method == "POST":
-		response = json.loads(request.POST['data'])
+		response = request.data
 		resultList = main(response)
 		if resultList[0].endswith('.epw') and not resultList[0].startswith("http"):
 			onlyfiles = [f for f in listdir('converter/DownloadEPWRS/tmpFiles') if isfile(join('converter/DownloadEPWRS/tmpFiles/', f))]
@@ -171,16 +206,28 @@ def downloadEPW(request):
 				'info' : 'Your year does not coincide with any of the years established within the epw files, please select one of the following',
 				'years' : resultList
 			}
-			return JsonResponse(dictionary,safe=False)
+			
+			return JsonResponse(dictionary, safe=False)
 
 
+@swagger_auto_schema(method='POST', request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT, 
+    properties={
+			'city': openapi.Schema(type=openapi.TYPE_STRING),
+			'country': openapi.Schema(type=openapi.TYPE_STRING,),
+			'continent':openapi.Schema(type=openapi.TYPE_STRING,),
+			'source':openapi.Schema(type=openapi.TYPE_STRING),
+	}
+))
+
+@api_view(['POST'])
 @csrf_exempt
 def getEPWYears(request):
 	if request.method == "POST":
-		response = json.loads(request.POST['data'])
+		response = request.data
 		resultList = mainYear(response)
 		resultList = ','.join(resultList)
 		dictionary = {
 			'years' : resultList
 		}
-		return JsonResponse(dictionary,safe=False)
+		return JsonResponse(dictionary,safe=False,)
