@@ -164,17 +164,31 @@ from rest_framework.schemas import AutoSchema
 
 
 
-@swagger_auto_schema(method='POST', request_body=openapi.Schema(
-    type=openapi.TYPE_OBJECT, 
-    properties={
-			'city': openapi.Schema(type=openapi.TYPE_STRING),
-			'country': openapi.Schema(type=openapi.TYPE_STRING,),
-			'continent':openapi.Schema(type=openapi.TYPE_STRING,),
-			'year':openapi.Schema(type=openapi.TYPE_INTEGER,),
-			'source':openapi.Schema(type=openapi.TYPE_STRING),
-			'output':openapi.Schema(type=openapi.TYPE_STRING),
+@swagger_auto_schema(
+	method='POST',
+	operation_description="Obtain EPW files from one specific year.",
+	request_body=openapi.Schema(
+		type=openapi.TYPE_OBJECT,
+		properties={
+				'city': openapi.Schema(type=openapi.TYPE_STRING,example="Madrid"),
+				'country': openapi.Schema(type=openapi.TYPE_STRING,example="Spain"),
+				'continent':openapi.Schema(type=openapi.TYPE_STRING,example="Europe"),
+				'year':openapi.Schema(type=openapi.TYPE_INTEGER,example="1989"),
+				'source':openapi.Schema(type=openapi.TYPE_STRING,example="EnergyPlus or OneBuilding"),
+				'output':openapi.Schema(type=openapi.TYPE_STRING,example="file or link"),
+		}
+	),
+	responses={
+		200:openapi.Schema(
+			type=openapi.TYPE_OBJECT,
+			description="If the year is in the EPW files, the response will be a zip file (if you want to download this file you have to do the curl call with an external terminal writing at the end --output 'EPW.zip'). If the year is not in the EPW files, the response will be a json with the years that these files contain, as below you can see:",
+			properties={
+				'info': openapi.Schema(type=openapi.TYPE_STRING,example="Your year does not coincide with any of the years established within the epw files, please select one of the following"),
+				'years': openapi.Schema(type=openapi.TYPE_STRING,example="1985,1986,1987,1989,1990,1991,1993,1994,1999"),
+			},
+		),
 	}
-))
+)
 
 
 @api_view(['POST'])
@@ -210,15 +224,27 @@ def downloadEPW(request):
 			return JsonResponse(dictionary, safe=False)
 
 
-@swagger_auto_schema(method='POST', request_body=openapi.Schema(
-    type=openapi.TYPE_OBJECT, 
-    properties={
-			'city': openapi.Schema(type=openapi.TYPE_STRING),
-			'country': openapi.Schema(type=openapi.TYPE_STRING,),
-			'continent':openapi.Schema(type=openapi.TYPE_STRING,),
-			'source':openapi.Schema(type=openapi.TYPE_STRING),
+@swagger_auto_schema(
+	method='POST',
+	operation_description=" Obtain the years contained in the EPW documents belonging to the city indicated.",
+	request_body=openapi.Schema(
+		type=openapi.TYPE_OBJECT, 
+		properties={
+				'city': openapi.Schema(type=openapi.TYPE_STRING,example="Madrid"),
+				'country': openapi.Schema(type=openapi.TYPE_STRING,example="Spain"),
+				'continent':openapi.Schema(type=openapi.TYPE_STRING,example="Europe"),
+				'source':openapi.Schema(type=openapi.TYPE_STRING,example="EnergyPlus or OneBuilding"),
+		}
+	),
+	responses={
+		200:openapi.Schema(
+			type=openapi.TYPE_OBJECT,
+			properties={
+				'years': openapi.Schema(type=openapi.TYPE_STRING,example="1985,1986,1987,1989,1990,1991,1993,1994,1999"),
+			},
+		),
 	}
-))
+)
 
 @api_view(['POST'])
 @csrf_exempt
