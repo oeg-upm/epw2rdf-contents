@@ -32,6 +32,9 @@
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
         integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
         crossorigin=""></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=17" />
     <link rel="shortcut icon" type="image/png" href="{% static 'converter/favicon2.ico' %}" />
@@ -53,21 +56,12 @@
         <nav class="navbar navbar-expand-md navbar-dark ">
             <div class="mx-auto my-2 order-0 order-md-1 position-relative">
                 <div class="" id="">
-                    <!-- <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link focus" id="nav-File2RDF-tab" data-toggle="tab" href="#nav-File2RDF"
                             role="tab" aria-controls="nav-File2RDF" aria-selected="true">File2RDF</a>
                         <a class="nav-item nav-link" id="nav-RDF2File-tab" data-toggle="tab" href="#nav-RDF2File"
                             role="tab" aria-controls="nav-RDF2File" aria-selected="false">RDF2File</a>
-                    </div> -->
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                          <a class="nav-link" data-toggle="tab" href="#nav-File2RDF">File2RDF</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" data-toggle="tab" href="#nav-RDF2File">RDF2File</a>
-                        </li>
-                      </ul>
-
+                    </div>
                 </div>
             </div>
         </nav>
