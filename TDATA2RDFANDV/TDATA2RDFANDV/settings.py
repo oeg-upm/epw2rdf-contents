@@ -25,7 +25,7 @@ SECRET_KEY = 't%z-8%l0n3@z)08w#+knzb7m$vpc58&vvm^8gx!3s&js0&-jyn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "192.168.122.214", "weather.bimerr.iot.linkeddata.es"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "192.168.122.214", "weather.bimerr.iot.linkeddata.es", "192.168.1.56"]
 
 
 # Application definition
