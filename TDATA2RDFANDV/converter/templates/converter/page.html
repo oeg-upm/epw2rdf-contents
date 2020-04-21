@@ -29,7 +29,7 @@
         integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
         crossorigin=""></script>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=17" />
+    <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=24" />
     <link rel="shortcut icon" type="image/png" href="{% static 'converter/favicon2.ico' %}" />
     <title>File2RDF</title>
 </head>
@@ -39,7 +39,13 @@
     <div class="w-100 redbg">
         <div class="container" align="center">
             <div class="row">
-                <h1 class="display-4">EPW Tracker</h1>
+                <div class="column">
+                    <h1 class="display-4">EPW Tracker</h1>
+                </div>
+                <div class="column"></div>
+                <div style="text-align: left;padding-top: 10mm; font-size: 15px;" class="column">
+                    <a align="center" class="redbg3" href="https://weather.bimerr.iot.linkeddata.es/docs/">See other weather data fetching services…</a>
+                </div>
             </div>
         </div>
     </div>

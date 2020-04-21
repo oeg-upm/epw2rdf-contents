@@ -107,6 +107,11 @@ body {font-family: Arial;}
   color: white!important;
 }
 
+.redbg3{
+  font-size: 15px;
+  -webkit-text-fill-color: white!important;
+}
+
 
 body{
   font-family: 'Quicksand', sans-serif!important;
@@ -183,6 +188,14 @@ a{
 
 .icon {
   padding-right: 10px;
+  vertical-align: middle;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
   vertical-align: middle;
 }
 
