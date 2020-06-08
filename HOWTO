@@ -1,0 +1,2 @@
+- Go into TDATA2RDFANDV
+- Execute this command --> python3 manage.py runserver

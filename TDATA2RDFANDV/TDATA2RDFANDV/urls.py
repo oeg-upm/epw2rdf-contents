@@ -16,8 +16,35 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from converter.views import index, mapData, extract_Convert, mapDataEnergyPlus, downloadEPW
 
+from rest_framework_swagger.views import get_swagger_view
+
+from converter.views import index, mapData, extract_Convert, mapDataEnergyPlus, downloadEPW, getEPWYears
+
+
+schema_view = get_swagger_view(title='API')
+
+
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+
+openapi_info = openapi.Info(
+      title="API",
+      default_version='v1',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="sgonzalez@delicias.dia.fi.upm.es"),
+      license=openapi.License(name="BSD License"),
+   )
+
+schema_view = get_schema_view(
+   openapi_info,
+   public=True,
+   url='https://weather.bimerr.iot.linkeddata.es/', # CHANGE
+   permission_classes=(permissions.AllowAny,),
+)
 
 
 urlpatterns = [
@@ -25,6 +52,10 @@ urlpatterns = [
     url(r'^$', index),
     url(r'getInfoMap/', mapData),
     url(r'getInfoMapEP/', mapDataEnergyPlus),
-    url(r'makeExtractAndConversion/', extract_Convert),
-    url(r'downloadEPW/',downloadEPW)
+    url(r'makeExtractAndConversion', extract_Convert),
+    url(r'downloadEPW/',downloadEPW, name='save_contact'),
+    url(r'getEPWYears/',getEPWYears, name='get_contact'),
+    url(r'^docs(?P<format>\.json)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    url(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

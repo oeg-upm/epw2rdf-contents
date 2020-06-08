@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import shutil
@@ -8,6 +8,12 @@ import glob, os
 from os import listdir
 from os.path import isfile, join
 
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.response import Response
+from rest_framework import status
+
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 # Create your views here.
 
@@ -119,7 +125,7 @@ def extract_Convert(request):
 
 		
 
-		# makeSH(propertiesFile)
+		makeSH(propertiesFile)
 
 		if not os.getcwd().endswith("DataStorage"):
 			os.chdir("converter/DataStorage")
@@ -142,26 +148,106 @@ def extract_ConvertEnergyPlus(request):
 	if request.method == "POST":
 		return
 
+
+
+
+
+from .models import downlEPW
+import coreapi
+from rest_framework.schemas import AutoSchema
+
+
+
+@swagger_auto_schema(
+	method='POST',
+	operation_description="Obtain EPW files from one specific year.",
+	request_body=openapi.Schema(
+		type=openapi.TYPE_OBJECT,
+		properties={
+				'city': openapi.Schema(type=openapi.TYPE_STRING,example="Madrid"),
+				'country': openapi.Schema(type=openapi.TYPE_STRING,example="Spain"),
+				'continent':openapi.Schema(type=openapi.TYPE_STRING,example="Europe"),
+				'year':openapi.Schema(type=openapi.TYPE_INTEGER,example="1989"),
+				'source':openapi.Schema(type=openapi.TYPE_STRING,example="EnergyPlus or OneBuilding"),
+				'output':openapi.Schema(type=openapi.TYPE_STRING,example="file or link"),
+		}
+	),
+	responses={
+		200:openapi.Schema(
+			type=openapi.TYPE_OBJECT,
+			description="If the year is in the EPW files, the response will be a zip file (if you want to download this file you have to do the curl call with an external terminal writing at the end --output 'EPW.zip'). If the year is not in the EPW files, the response will be a json with the years that these files contain, as below you can see:",
+			properties={
+				'info': openapi.Schema(type=openapi.TYPE_STRING,example="Your year does not coincide with any of the years established within the epw files, please select one of the following"),
+				'years': openapi.Schema(type=openapi.TYPE_STRING,example="1985,1986,1987,1989,1990,1991,1993,1994,1999"),
+			},
+		),
+	}
+)
+
+
+@api_view(['POST'])
 @csrf_exempt
 def downloadEPW(request):
 	if request.method == "POST":
-		response = json.loads(request.POST['data'])
-		# return HttpResponse(file, content_type='application/zip')
+		response = request.data
 		resultList = main(response)
-		print(resultList)
-		if resultList[0].endswith('.epw'):
+		if resultList[0].endswith('.epw') and not resultList[0].startswith("http"):
 			onlyfiles = [f for f in listdir('converter/DownloadEPWRS/tmpFiles') if isfile(join('converter/DownloadEPWRS/tmpFiles/', f))]
-			#return HttpResponse(file, content_type='application/zip')
-			print('1',onlyfiles)
 			os.mkdir('converter/DownloadEPWRS/tmpFiles/EPW')
 			for result in resultList:
 				shutil.move("converter/DownloadEPWRS/tmpFiles/"+result, "converter/DownloadEPWRS/tmpFiles/EPW/"+result)
-				zipdir("converter/DownloadEPWRS/tmpFiles/EPW/","converter/DownloadEPWRS/tmpFiles/EPW.zip",True)
-				return HttpResponse("converter/DownloadEPWRS/tmpFiles/EPW.zip", content_type='application/zip')
+			zipdir("converter/DownloadEPWRS/tmpFiles/EPW/","converter/DownloadEPWRS/tmpFiles/EPW.zip",True)
+			zip_file = open("converter/DownloadEPWRS/tmpFiles/EPW.zip",'rb')
+			return FileResponse(zip_file)
+		
+		elif resultList[0].startswith("http"):
+			resultList = ','.join(resultList)
+			dictionary = {
+				'info' : 'The links of the epw files that you have requested are as follows:',
+				'links' : resultList
+			}
+			return JsonResponse(dictionary,safe=False)
+
 		else:
 			resultList = ','.join(resultList)
 			dictionary = {
 				'info' : 'Your year does not coincide with any of the years established within the epw files, please select one of the following',
 				'years' : resultList
 			}
-			return JsonResponse(dictionary,safe=False)
+			
+			return JsonResponse(dictionary, safe=False)
+
+
+@swagger_auto_schema(
+	method='POST',
+	operation_description=" Obtain the years contained in the EPW documents belonging to the city indicated.",
+	request_body=openapi.Schema(
+		type=openapi.TYPE_OBJECT, 
+		properties={
+				'city': openapi.Schema(type=openapi.TYPE_STRING,example="Madrid"),
+				'country': openapi.Schema(type=openapi.TYPE_STRING,example="Spain"),
+				'continent':openapi.Schema(type=openapi.TYPE_STRING,example="Europe"),
+				'source':openapi.Schema(type=openapi.TYPE_STRING,example="EnergyPlus or OneBuilding"),
+		}
+	),
+	responses={
+		200:openapi.Schema(
+			type=openapi.TYPE_OBJECT,
+			properties={
+				'years': openapi.Schema(type=openapi.TYPE_STRING,example="1985,1986,1987,1989,1990,1991,1993,1994,1999"),
+			},
+		),
+	}
+)
+
+@api_view(['POST'])
+@csrf_exempt
+def getEPWYears(request):
+	if request.method == "POST":
+		response = request.data
+		resultList = mainYear(response)
+		resultList = ','.join(resultList)
+		dictionary = {
+			'years' : resultList
+		}
+		return JsonResponse(dictionary,safe=False,)

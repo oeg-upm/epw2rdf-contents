@@ -1,8 +1,9 @@
-from converter.DownloadEPWRS.createEPWFile import createEPWFile
+from converter.DownloadEPWRS.createEPWFile import createEPWFile, createEPWZip
 from converter.DownloadEPWRS.EnergyPlusScraper import continentGetLink, scrapeEP
 from converter.DownloadEPWRS.getDate import getDate
 from converter.DownloadEPWRS.jsonReader import jsonReader
-from converter.DownloadEPWRS.OneBuildingScraper import continentLink,scrapeOB
+from converter.DownloadEPWRS.OneBuildingScraper import continentLinker, scrapeOB
+from converter.DownloadEPWRS.extractFile import extractEPWFile
 import os
 import shutil
 
@@ -18,16 +19,20 @@ data = {
 
 def main(data):
 
+    linkList = []
+
     if not os.path.exists('converter/DownloadEPWRS/tmpFiles'):
         os.mkdir('converter/DownloadEPWRS/tmpFiles')
     else:    
         shutil.rmtree('converter/DownloadEPWRS/tmpFiles')
         os.mkdir('converter/DownloadEPWRS/tmpFiles')
 
-    city, country, continent, year, source = jsonReader(data)
+    city, country, continent, year, source, out = jsonReader(data)
+
 
     if source == "EnergyPlus":
         continentLink = continentGetLink(continent)
+
         epwLinkList = scrapeEP(city,country,continentLink)
 
         createEPWFile(epwLinkList)
@@ -35,14 +40,40 @@ def main(data):
         finalDateList, returnEPWListFiles = getDate(year)
 
         if returnEPWListFiles != []:
-            return returnEPWListFiles
+            if out == "file":
+                return returnEPWListFiles
+            elif out == "link":
+                for link in epwLinkList:
+                    link2 = link.split("/")
+                    link2 = link2[-1]
+                    if link2 in returnEPWListFiles:
+                        linkList.append(link)
+                return linkList
         else:
             return finalDateList
 
+
     elif source == "OneBuilding":
-        return
+        continentLink = continentLinker(continent)
+        epwLinkList = scrapeOB(city,country,continentLink)
 
-    else:
-        return
+        for url in epwLinkList:
+            data,name = extractEPWFile(url)
+            createEPWZip(data,name)
+        
+        finalDateList, returnEPWListFiles = getDate(year)
 
-main(data)
+        if returnEPWListFiles != []:
+            if out == "file":
+                return returnEPWListFiles
+            elif out == "link":
+                for link in epwLinkList:
+                    link2 = link.split("/")
+                    link2 = link2[-1].replace(".zip",".epw")
+                    if link2 in returnEPWListFiles:
+                        linkList.append(link)
+                return linkList
+        else:
+            return finalDateList
+
+#main(data)
