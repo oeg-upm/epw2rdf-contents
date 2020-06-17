@@ -606,27 +606,55 @@
         }
 
         function initMap() {
+
+            function refreshMap() {
+                var remove = document.getElementById('map');
+                remove.parentNode.removeChild(remove)
+                var p = document.getElementById('mapJumbotron')
+                var element = document.createElement('div');
+                element.setAttribute('id', 'map');
+                p.appendChild(element)
+            }
+
+            refreshMap();
+
+            var map = L.map('map');
+
+            map.createPane('labels');
+
+            // This pane is above markers but below popups
+            map.getPane('labels').style.zIndex = 650;
+
+            // Layers in this pane are non-interactive and do not obscure mouse/touch events
+            map.getPane('labels').style.pointerEvents = 'none';
+
+            var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+            var positron = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: cartodbAttribution
+            }).addTo(map);
+
+
+            function onEachFeature(feature, layer){
+                layer.bindPopup(function (layer){
+                    return '' + layer.feature.properties.nameunit;
+                });
+            }
+
             
-            var myLatlng = {lat: 40.416729, lng: -3.7033393 };
-
-            var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 4, center: myLatlng});
-
-            // Create the initial InfoWindow.
-            var infoWindow = new google.maps.InfoWindow(
-                {content: 'Click the map to get Lat/Lng!', position: myLatlng});
-            infoWindow.open(map);
-
-            // Configure the click listener.
-            map.addListener('click', function(mapsMouseEvent) {
-            // Close the current InfoWindow.
-            infoWindow.close();
-
-            // Create a new InfoWindow.
-            infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
-            infoWindow.setContent(mapsMouseEvent.latLng.toString());
-            infoWindow.open(map);
+            map.on('click', function(e){
+                var coord = e.latlng;
+                var lat = coord.lat;
+                var lng = coord.lng;
+                var c = [lat,lng];
+                var marker = L.marker(c, {
+                    title: "Latitude: "+lat+", Longitude: "+lng
+                }).addTo(map);
             });
+            
+
+            
+            
         }
 
         let buttonClicked = ''
