@@ -6,6 +6,10 @@ html, body {
 
 #map { width: 1000PX; height: 700px; position: relative; outline: none; }
 
+#map2 {
+  height: 50%;  /* The height is 400 pixels */
+  width: 50%;  /* The width is the width of the web page */
+ }
 
 body {font-family: Arial;}
 

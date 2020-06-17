@@ -21,6 +21,12 @@
         crossorigin="" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+    <script>
+    $(function(){
+        $("#map2").load("/static/converter/map.html"); 
+      });
+    </script> 
+
 
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
@@ -73,6 +79,7 @@
                     <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Convert your file</h2>
                 </p>
             </div>
+            
             <p>
                 <div class="container">
                     <form>
@@ -88,41 +95,11 @@
                 </div>
             </p>
 
-            <div class="container">
-                <p>
-                    <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Search for Data</h2>
-                </p>
-            </div>
-
-            <!-- SEARCH DATA -->
-            <p>
-                <div class="container">
-                    <div class="form-row">
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" id="Search" value="" name="Search"
-                                onkeyup="autoComplete()" placeholder="Make your search here...">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <select id="inputState" class="form-control">
-                                <option selected>Where you want to search?</option>
-                                <option>Weather Data</option>
-                                <option>Buildings</option>
-                                <option>Etc...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mt-3" align="center">
-                        <button type="submit" value="Search" id="send" class="btn snapColor"
-                            onclick="makeSearch()">Submit</button>
-                    </div>
-                </div>
-            </p>
-            <!-- SEARCH DATA -->
 
 
             <div class="container">
                 <p>
-                    <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Use Interactive Search</h2>
+                    <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Weather Interactive Search</h2>
                 </p>
             </div>
 
@@ -155,6 +132,8 @@
                                     class="btn snapColor">Climate-OneBuilding</button>
                                 <button type="button" id="Energy" onclick="clickButton('Energy')"
                                     class="btn snapColor">Energy Plus</button>
+                                <button type="button" id="DarkSkyAPI" onclick="clickButton('DarkSkyAPI')"
+                                    class="btn snapColor">DarkSkyAPI</button>
                             </div>
                         </div>
                     </p>
@@ -164,6 +143,7 @@
                         <div class="container" style="visibility: hidden;" id="mapContainer2">
                             <div class="jumbotron" style="visibility: hidden;" id="mapJumbotron">
                                 <div id='map' style="visibility: hidden;"></div>
+                                <div id='map2' style="visibility: hidden;"></div>
                             </div>
                         </div>
                     </p>
@@ -263,6 +243,11 @@
         <div class="container tab-pane fade" id="nav-RDF2File" role="tabpanel" aria-labelledby="nav-File2RDF-tab">
             <p>
                 <div class="container">
+                    <div class="container">
+                        <p>
+                            <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">WORK IN PROGRESS</h2>
+                        </p>
+                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-9">
                             <form>
@@ -298,9 +283,42 @@
 
     {% csrf_token %}
 
-    <script type="text/javascript" src="{% static 'converter/worldEnPl.js' %}"></script>
-    <script type="text/javascript" src="{% static 'converter/oneBuilding.js' %}"></script>
+    <script type="text/javascript" src="{% static 'converter/EnergyPlusMapData.js' %}"></script>
+    <script type="text/javascript" src="{% static 'converter/OneBuildingMapData.js' %}"></script>
     <script type="text/javascript" src="{% static 'converter/oceans.js' %}"></script>
+
+    <script>
+      function initMap() {
+        var myLatlng = {lat: 40.416729, lng: -3.7033393 };
+
+        var map2 = new google.maps.Map(
+            document.getElementById('map2'), {zoom: 4, center: myLatlng});
+
+        // Create the initial InfoWindow.
+        var infoWindow = new google.maps.InfoWindow(
+            {content: 'Click the map to get Lat/Lng!', position: myLatlng});
+        infoWindow.open(map2);
+
+        // Configure the click listener.
+        map2.addListener('click', function(mapsMouseEvent) {
+          // Close the current InfoWindow.
+          infoWindow.close();
+
+          // Create a new InfoWindow.
+          infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
+          infoWindow.setContent(mapsMouseEvent.latLng.toString());
+          infoWindow.open(map2);
+        });
+      }
+    </script>
+            <!--Load the API from the specified URL
+            * The async attribute allows the browser to render the page while the API loads
+            * The key parameter will contain your own API key (which is not needed for this tutorial)
+            * The callback parameter executes the initMap() function
+            -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRUM95T0LVCi6-o4c6y-6BsKXlzi66uxo&callback=initMap">
+    </script>
 
 
 
@@ -324,14 +342,6 @@
         }
 
 
-
-        document.body.onkeydown = function (e) {
-            if (e.keyCode == 13) {
-                makeSearch();
-
-            }
-        };
-
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -353,6 +363,16 @@
         $(document).on("click", '#Energy', function () {
             $("#mapContainer").css('visibility', 'visible');
             $("#map").css('visibility', 'visible');
+            $("#mapContainer2").css('visibility', 'visible');
+            $("#mapJumbotron").css('visibility', 'visible');
+            $("#tableContainer").css('visibility', 'visible');
+            $("#tableContainerSearch").css('visibility', 'visible');
+            $("#DownloadContainer").css('visibility', 'visible');
+        })
+        $(document).on("click", '#DarkSkyAPI', function () {
+            $("#mapContainer").css('visibility', 'visible');
+            $("#map").css('visibility', 'hidden');
+            $("#map2").css('visibility', 'visible');
             $("#mapContainer2").css('visibility', 'visible');
             $("#mapJumbotron").css('visibility', 'visible');
             $("#tableContainer").css('visibility', 'visible');

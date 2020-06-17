@@ -46,7 +46,7 @@ def mapData(request):
 		response = json.loads(request.body)
 		data = takeData(response)
 		# print(data)
-		with open('converter/static/converter/taxonomyCities.json') as jsonFile:
+		with open('converter/static/converter/taxonomyCitiesOneBuilding.json') as jsonFile:
 			jsonData = json.load(jsonFile)
 
 		jsonDictionary ={'cities':[]}
@@ -64,7 +64,7 @@ def mapDataEnergyPlus(request):
 	if request.method == "POST":
 		response = json.loads(request.body)
 		data = takeData(response)
-		with open('converter/static/converter/taxonomyCitiesEPlus.json') as jsonFile:
+		with open('converter/static/converter/taxonomyCitiesEnergyPlus.json') as jsonFile:
 			jsonData = json.load(jsonFile)
 			# print(jsonData)
 			
