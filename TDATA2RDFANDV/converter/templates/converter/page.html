@@ -21,12 +21,9 @@
         crossorigin="" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <script>
-    $(function(){
-        $("#map2").load("/static/converter/map.html"); 
-      });
-    </script> 
-
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRUM95T0LVCi6-o4c6y-6BsKXlzi66uxo&callback=initMap">
+    </script>
 
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
@@ -143,7 +140,6 @@
                         <div class="container" style="visibility: hidden;" id="mapContainer2">
                             <div class="jumbotron" style="visibility: hidden;" id="mapJumbotron">
                                 <div id='map' style="visibility: hidden;"></div>
-                                <div id='map2' style="visibility: hidden;"></div>
                             </div>
                         </div>
                     </p>
@@ -287,38 +283,6 @@
     <script type="text/javascript" src="{% static 'converter/OneBuildingMapData.js' %}"></script>
     <script type="text/javascript" src="{% static 'converter/oceans.js' %}"></script>
 
-    <script>
-      function initMap() {
-        var myLatlng = {lat: 40.416729, lng: -3.7033393 };
-
-        var map2 = new google.maps.Map(
-            document.getElementById('map2'), {zoom: 4, center: myLatlng});
-
-        // Create the initial InfoWindow.
-        var infoWindow = new google.maps.InfoWindow(
-            {content: 'Click the map to get Lat/Lng!', position: myLatlng});
-        infoWindow.open(map2);
-
-        // Configure the click listener.
-        map2.addListener('click', function(mapsMouseEvent) {
-          // Close the current InfoWindow.
-          infoWindow.close();
-
-          // Create a new InfoWindow.
-          infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
-          infoWindow.setContent(mapsMouseEvent.latLng.toString());
-          infoWindow.open(map2);
-        });
-      }
-    </script>
-            <!--Load the API from the specified URL
-            * The async attribute allows the browser to render the page while the API loads
-            * The key parameter will contain your own API key (which is not needed for this tutorial)
-            * The callback parameter executes the initMap() function
-            -->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRUM95T0LVCi6-o4c6y-6BsKXlzi66uxo&callback=initMap">
-    </script>
 
 
 
@@ -453,7 +417,7 @@
         }
         // AQUÍ ESTÁ LA PARTE DEL MAPA
 
-        function Map(data) {
+        function Map2(data) {
 
             function refreshMap() {
                 var remove = document.getElementById('map');
@@ -641,15 +605,44 @@
             }
         }
 
+        function initMap() {
+            
+            var myLatlng = {lat: 40.416729, lng: -3.7033393 };
+
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 4, center: myLatlng});
+
+            // Create the initial InfoWindow.
+            var infoWindow = new google.maps.InfoWindow(
+                {content: 'Click the map to get Lat/Lng!', position: myLatlng});
+            infoWindow.open(map);
+
+            // Configure the click listener.
+            map.addListener('click', function(mapsMouseEvent) {
+            // Close the current InfoWindow.
+            infoWindow.close();
+
+            // Create a new InfoWindow.
+            infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
+            infoWindow.setContent(mapsMouseEvent.latLng.toString());
+            infoWindow.open(map);
+            });
+        }
+
         let buttonClicked = ''
         function clickButton(id) {
             buttonClicked = id;
+            document.getElementById("map").innerHTML="";
             // console.log(id)
             if (id == 'Climate1') {
-                Map(geoLocations);
+
+                Map2(geoLocations);
             }
             else if (id == 'Energy') {
-                Map(geoLocations1);
+                Map2(geoLocations1);
+            }
+            else if (id == 'DarkSkyAPI') {
+                initMap();
             }
         }
 
