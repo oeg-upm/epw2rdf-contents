@@ -21,15 +21,21 @@
         crossorigin="" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRUM95T0LVCi6-o4c6y-6BsKXlzi66uxo&callback=initMap">
-    </script>
-
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
         integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
         crossorigin=""></script>
     {% load static %}
+
+
+    <!-- CSS and JS files for Search Box -->
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+
+
     <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=24" />
     <link rel="shortcut icon" type="image/png" href="{% static 'converter/favicon2.ico' %}" />
     <title>File2RDF</title>
@@ -144,7 +150,7 @@
                         </div>
                     </p>
 
-                    <div class="container" id="tabsGDSPARQL">
+                    <div class="container" id="tabsGDSPARQL" style="visibility: hidden;">
                         <div class="container">
                             <p>
                                 <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Results</h2>
@@ -323,6 +329,7 @@
             $("#tableContainer").css('visibility', 'visible');
             $("#tableContainerSearch").css('visibility', 'visible');
             $("#DownloadContainer").css('visibility', 'visible');
+            $("#tabsGDSPARQL").css('visibility', 'visible');
         })
         $(document).on("click", '#Energy', function () {
             $("#mapContainer").css('visibility', 'visible');
@@ -332,16 +339,17 @@
             $("#tableContainer").css('visibility', 'visible');
             $("#tableContainerSearch").css('visibility', 'visible');
             $("#DownloadContainer").css('visibility', 'visible');
+            $("#tabsGDSPARQL").css('visibility', 'visible');
         })
         $(document).on("click", '#DarkSkyAPI', function () {
             $("#mapContainer").css('visibility', 'visible');
-            $("#map").css('visibility', 'hidden');
-            $("#map2").css('visibility', 'visible');
+            $("#map").css('visibility', 'visible');
             $("#mapContainer2").css('visibility', 'visible');
             $("#mapJumbotron").css('visibility', 'visible');
-            $("#tableContainer").css('visibility', 'visible');
-            $("#tableContainerSearch").css('visibility', 'visible');
-            $("#DownloadContainer").css('visibility', 'visible');
+            $("#tableContainer").css('visibility', 'hidden');
+            $("#tableContainerSearch").css('visibility', 'hidden');
+            $("#DownloadContainer").css('visibility', 'hidden');
+            $("#tabsGDSPARQL").css('visibility', 'hidden');
         })
         $(document).on("click", '#BuildingsData', function () {
             $("#WeatherData2").css('visibility', 'hidden');
@@ -352,6 +360,7 @@
             $("#tableContainer").css('visibility', 'hidden');
             $("#tableContainerSearch").css('visibility', 'hidden');
             $("#DownloadContainer").css('visibility', 'hidden');
+            $("#tabsGDSPARQL").css('visibility', 'hidden');
         })
         $(document).on("click", '#Etc', function () {
             $("#WeatherData2").css('visibility', 'hidden');
@@ -362,6 +371,7 @@
             $("#tableContainer").css('visibility', 'hidden');
             $("#tableContainerSearch").css('visibility', 'hidden');
             $("#DownloadContainer").css('visibility', 'hidden');
+            $("#tabsGDSPARQL").css('visibility', 'hidden');
         })
         $(document).on("click", '#tab2', function () {
             $("#WeatherData2").css('visibility', 'hidden');
@@ -372,6 +382,7 @@
             $("#tableContainer").css('visibility', 'hidden');
             $("#tableContainerSearch").css('visibility', 'hidden');
             $("#DownloadContainer").css('visibility', 'hidden');
+            $("#tabsGDSPARQL").css('visibility', 'hidden');
         })
 
 
@@ -618,7 +629,7 @@
 
             refreshMap();
 
-            var map = L.map('map');
+            var map = L.map('map').setView([0, 0],2);
 
             map.createPane('labels');
 
@@ -628,28 +639,47 @@
             // Layers in this pane are non-interactive and do not obscure mouse/touch events
             map.getPane('labels').style.pointerEvents = 'none';
 
-            var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-            var positron = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: cartodbAttribution
+            var positron = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
 
-            function onEachFeature(feature, layer){
-                layer.bindPopup(function (layer){
-                    return '' + layer.feature.properties.nameunit;
-                });
-            }
+            var popup = L.popup();
 
+            var marker = {};
             
             map.on('click', function(e){
                 var coord = e.latlng;
                 var lat = coord.lat;
                 var lng = coord.lng;
                 var c = [lat,lng];
-                var marker = L.marker(c, {
-                    title: "Latitude: "+lat+", Longitude: "+lng
-                }).addTo(map);
+                if (marker != undefined) {
+                    map.removeLayer(marker);
+                };
+
+                //Add a marker to show where you clicked.
+                marker = L.marker([lat,lng]).addTo(map);
+
+                popup
+                .setLatLng(e.latlng)
+                .setContent("Latitude: "+lat+ "<br>Longitude: "+lng)
+                .openOn(map);
+            });
+
+            var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+            var results = new L.LayerGroup().addTo(map);
+
+            searchControl.on('results', function(data){
+            results.clearLayers();
+            for (var i = data.results.length - 1; i >= 0; i--) {
+                results.addLayer(L.marker(data.results[i].latlng));
+                popup
+                .setLatLng(data.results[i].latlng)
+                .setContent("Latitude: "+data.results[i].latlng.lat.toString()+ "<br>Longitude: "+data.results[i].latlng.lng.toString())
+                .openOn(map);
+            }
             });
             
 
@@ -660,10 +690,7 @@
         let buttonClicked = ''
         function clickButton(id) {
             buttonClicked = id;
-            document.getElementById("map").innerHTML="";
-            // console.log(id)
             if (id == 'Climate1') {
-
                 Map2(geoLocations);
             }
             else if (id == 'Energy') {
