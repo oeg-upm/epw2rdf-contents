@@ -1,0 +1,17 @@
+{
+    "datasources": [
+        {
+            "id": "Json Values minutely",
+            "type": "JsonDatasource",
+            "arguments": [
+                "$.minutely[*]"
+            ],
+            "connector": {
+                "arguments": [
+                    "./data/Europe-Madrid(40.42_-3.69).json"
+                ],
+                "type": "LocalFileConnector"
+            }
+        }
+    ]
+}

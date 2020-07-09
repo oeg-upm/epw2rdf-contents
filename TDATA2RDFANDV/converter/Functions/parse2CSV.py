@@ -3,18 +3,18 @@ from converter.Functions.skip_addRows import skipRows_addHeader
 
 
 # Funciones para borrar y crear los documentos csv
-from converter.Functions.remove_create_open import createFile,openFile,removeFile
+from converter.Functions.helpCSV import createFile,openFile,removeFile
 
 # Función para recoger todos los documentos pertenecientes a la extensión epw
 # from glob import glob
 
 # documents = glob("Documents/*.epw") # Cogemos todos los documentos pertenecientes a la extensión epw
 
-def parseToCSV(dataset,numberRowstoSkip,headers,cityName):
+def parseToCSV(dataset,numberRowstoSkip,headers,epwName):
 
     contents = skipRows_addHeader(numberRowstoSkip,dataset,headers)
 
-    city = ''+ cityName +'.csv'
+    city = ''+ epwName +'.csv'
     
     removeFile(city)
     documentCTD = createFile(city)

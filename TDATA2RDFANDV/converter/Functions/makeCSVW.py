@@ -9,7 +9,7 @@ def removeFileJSON():
     else:
         return
 
-def createFileJson(dataset):
+def createFileJson(dataset,epwName):
     documentJSON=open("converter/DataStorage/metadata.json", "a+")
     documentJSON.write("""{
     "@context": "http://www.w3.org/ns/csvw",
@@ -17,11 +17,8 @@ def createFileJson(dataset):
     "tables":[]}
     """)
     documentJSON.close()
-    firstLine = dataset[0]
-    firstLine = firstLine.split(',')
-    cityName = firstLine[1].replace('/',' ').replace(' ','_').replace('__','').replace('-','_')
 
-    url = cityName + ".csv"
+    url = epwName + ".csv"
 
     a_dict = {
     "url" : url,
@@ -268,6 +265,4 @@ def createFileJson(dataset):
     with open('converter/DataStorage/metadata.json', 'w') as f:
         json.dump(data, f, indent=4)
         
-
-    return cityName
     

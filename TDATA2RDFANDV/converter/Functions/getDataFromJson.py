@@ -1,16 +1,17 @@
 import json
 
 
-def getJsonData(city):
+def getJsonData(epwName):
 
-    city += ".csv"
+    epwName += ".csv"
 
     with open('converter/DataStorage/metadata.json') as f:
         data = json.load(f)
 
     numberRowstoSkip = data['skipRows']
+    f.close()
 
     for url in data['tables']:
-        if url['url'] == city:
+        if url['url'] == epwName:
             headers = [str(header['name']).strip(' ').replace("'","") for header in url['tableSchema']['columns']]
             return headers, numberRowstoSkip

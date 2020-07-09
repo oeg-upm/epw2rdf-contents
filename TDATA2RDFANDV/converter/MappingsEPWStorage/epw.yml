@@ -1,0 +1,609 @@
+prefixes:
+  saref: "https://saref.etsi.org/core/"
+  weat1: "https://bimerr.iot.linkeddata.es/resource/weather/"
+  weat2: "https://bimerr.iot.linkeddata.es/def/weather#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  om: "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
+
+
+mappings:
+  DryBulbTemperature:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:DryBulbTemperature
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DryBulbTemperatureMeasurement~iri]
+  
+  DryBulbTemperatureMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DryBulbTemperatureMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(DryBulbTemperature)]
+      - [saref:isMeasuredIn, om:degreeCelsius]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+  
+  DewPointTemperature:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:DewPointTemperature
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DewPointTemperatureMeasurement~iri]
+  
+  DewPointTemperatureMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DewPointTemperatureMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(DewPointTemperature)]
+      - [saref:isMeasuredIn, om:degreeCelsius]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  RelativeHumidity:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:RelativeHumidity
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/RelativeHumidityMeasurement~iri]
+  
+  RelativeHumidityMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/RelativeHumidityMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(RelativeHumidity)]
+      - [saref:isMeasuredIn, om:percent]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  AtmosphericStationPressure:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:AtmosphericStationPressure
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/AtmosphericStationPressureMeasurement~iri]
+  
+  AtmosphericStationPressureMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/AtmosphericStationPressureMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(AtmosphericStationPressure)]
+      - [saref:isMeasuredIn, om:pascal]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  ExtraterrestrialHorizontalRadiation:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:ExtraterrestrialHorizontalRadiation
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ExtraterrestrialHorizontalRadiationMeasurement~iri]
+  
+  ExtraterrestrialHorizontalRadiationMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ExtraterrestrialHorizontalRadiationMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(ExtraterrestrialHorizontalRadiation)]
+      - [saref:isMeasuredIn, weat2:wattHourPerSquareMetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  ExtraterrestrialDirectNormalRadiation:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:ExtraterrestrialDirectNormalRadiation
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ExtraterrestrialDirectNormalRadiationMeasurement~iri]
+  
+  ExtraterrestrialDirectNormalRadiationMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ExtraterrestrialDirectNormalRadiationMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(ExtraterrestrialDirectNormalRadiation)]
+      - [saref:isMeasuredIn, weat2:wattHourPerSquareMetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  HorizontalInfraredRadiationIntensity:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:HorizontalInfraredRadiationIntensity
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/HorizontalInfraredRadiationIntensityMeasurement~iri]
+  
+  HorizontalInfraredRadiationIntensityMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/HorizontalInfraredRadiationIntensityMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(HorizontalInfraredRadiationIntensity)]
+      - [saref:isMeasuredIn, weat2:wattHourPerSquareMetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  GlobalHorizontalRadiation:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:GlobalHorizontalRadiation
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/GlobalHorizontalRadiationMeasurement~iri]
+  
+  GlobalHorizontalRadiationMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/GlobalHorizontalRadiationMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(GlobalHorizontalRadiation)]
+      - [saref:isMeasuredIn, weat2:wattHourPerSquareMetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  DirectNormalRadiation:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:DirectNormalRadiation
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DirectNormalRadiationMeasurement~iri]
+  
+  DirectNormalRadiationMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DirectNormalRadiationMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(DirectNormalRadiation)]
+      - [saref:isMeasuredIn, weat2:wattHourPerSquareMetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  DiffuseHorizontalRadiation:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:DiffuseHorizontalRadiation
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DiffuseHorizontalRadiationMeasurement~iri]
+  
+  DiffuseHorizontalRadiationMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DiffuseHorizontalRadiationMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(DiffuseHorizontalRadiation)]
+      - [saref:isMeasuredIn, weat2:wattHourPerSquareMetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  GlobalHorizontalIlluminance:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:GlobalHorizontalIlluminance
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/GlobalHorizontalIlluminanceMeasurement~iri]
+  
+  GlobalHorizontalIlluminanceMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/GlobalHorizontalIlluminanceMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(GlobalHorizontalIlluminance)]
+      - [saref:isMeasuredIn, om:lux]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  DirectNormalIlluminance:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:DirectNormalIlluminance
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DirectNormalIlluminanceMeasurement~iri]
+  
+  DirectNormalIlluminanceMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DirectNormalIlluminanceMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(DirectNormalIlluminance)]
+      - [saref:isMeasuredIn, om:lux]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  DiffuseHorizontalIlluminance:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:DiffuseHorizontalIlluminance
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DiffuseHorizontalIlluminanceMeasurement~iri]
+  
+  DiffuseHorizontalIlluminanceMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DiffuseHorizontalIlluminanceMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(DiffuseHorizontalIlluminance)]
+      - [saref:isMeasuredIn, om:lux]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  ZenithLuminance:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:ZenithLuminance
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ZenithLuminanceMeasurement~iri]
+  
+  ZenithLuminanceMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ZenithLuminanceMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(ZenithLuminance)]
+      - [saref:isMeasuredIn, om:candelaPerSquareMetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  WindDirection:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:WindDirection
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/WindDirectionMeasurement~iri]
+  
+  WindDirectionMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/WindDirectionMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(WindDirection)]
+      - [saref:isMeasuredIn, om:degree]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  WindSpeed:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:WindSpeed
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/WindSpeedMeasurement~iri]
+  
+  WindSpeedMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/WindSpeedMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(WindSpeed)]
+      - [saref:isMeasuredIn, om:metrePerSecond-Time]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  TotalSkyCover:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:TotalSkyCover
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/TotalSkyCoverMeasurement~iri]
+  
+  TotalSkyCoverMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/TotalSkyCoverMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(TotalSkyCover)]
+      - [saref:isMeasuredIn, weat2:tenthsOfCoverage]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  OpaqueSkyCover:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:OpaqueSkyCover
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/OpaqueSkyCoverMeasurement~iri]
+  
+  OpaqueSkyCoverMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/OpaqueSkyCoverMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(OpaqueSkyCover)]
+      - [saref:isMeasuredIn, weat2:tenthsOfCoverage]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  Visibility:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:Visibility
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/VisibilityMeasurement~iri]
+  
+  VisibilityMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/VisibilityMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(Visibility)]
+      - [saref:isMeasuredIn, om:kilometre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  CeilingHeight:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:CeilingHeight
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/CeilingHeightMeasurement~iri]
+  
+  CeilingHeightMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/CeilingHeightMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(CeilingHeight)]
+      - [saref:isMeasuredIn, om:metre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  PrecipitableWater:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:PrecipitableWater
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/PrecipitableWaterMeasurement~iri]
+  
+  PrecipitableWaterMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/PrecipitableWaterMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(PrecipitableWater)]
+      - [saref:isMeasuredIn, om:millimetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  AerosolOpticalDepth:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:AerosolOpticalDepth
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/AerosolOpticalDepthMeasurement~iri]
+  
+  AerosolOpticalDepthMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/AerosolOpticalDepthMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(AerosolOpticalDepth)]
+      - [saref:isMeasuredIn, weat2:thousandths]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  SnowDepth:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:SnowDepth
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/SnowDepthMeasurement~iri]
+  
+  SnowDepthMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/SnowDepthMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(SnowDepth)]
+      - [saref:isMeasuredIn, om:centimetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  DaysSinceLastSnowfall:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:DaysSinceLastSnowfall
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DaysSinceLastSnowfallMeasurement~iri]
+  
+  DaysSinceLastSnowfallMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DaysSinceLastSnowfallMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(DaysSinceLastSnowfall)]
+      - [saref:isMeasuredIn, om:day]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  DaysSinceLastSnowfall:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:DaysSinceLastSnowfall
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DaysSinceLastSnowfallMeasurement~iri]
+  
+  DaysSinceLastSnowfallMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DaysSinceLastSnowfallMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(DaysSinceLastSnowfall)]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  LiquidPrecipitationDepth:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:LiquidPrecipitationDepth
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/LiquidPrecipitationDepthMeasurement~iri]
+  
+  LiquidPrecipitationDepthMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/LiquidPrecipitationDepthMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(LiquidPrecipitationDepth)]
+      - [saref:isMeasuredIn, om:millimetre]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  LiquidPrecipitationQuantity:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:LiquidPrecipitationQuantity
+    po:
+      - [saref:relatesToMeasurement, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/LiquidPrecipitationQuantityMeasurement~iri]
+  
+  LiquidPrecipitationQuantityMeasurement:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/LiquidPrecipitationQuantityMeasurement
+    po:
+      - [saref:measurementMadeBy, weat1:$(adm03)/$(city)/$(wmo)/Device~iri]
+      - [saref:hasTimeStamp, $(Year)-$(Month)-$(Day)-$(Hour), xsd:dateTime]
+      - [saref:hasValue, $(LiquidPrecipitationQuantity)]
+      - [saref:isMeasuredIn, om:hour]
+      - [weat2:isDefinitionOf, weat1:$(epwName)~iri]
+
+  EPWName:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.epw[*]']
+    s: weat2:$(epwName)
+    po:
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DryBulbTemperatureMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DewPointTemperatureMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/RelativeHumidityMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/AtmosphericStationPressureMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ExtraterrestrialHorizontalRadiationMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ExtraterrestrialDirectNormalRadiationMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/HorizontalInfraredRadiationIntensityMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/GlobalHorizontalRadiationMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DirectNormalRadiationMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DiffuseHorizontalRadiationMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/GlobalHorizontalIlluminanceMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DirectNormalIlluminanceMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DiffuseHorizontalIlluminanceMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/ZenithLuminanceMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/WindDirectionMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/WindSpeedMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/TotalSkyCoverMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/OpaqueSkyCoverMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/VisibilityMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/CeilingHeightMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/PrecipitableWaterMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/AerosolOpticalDepthMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/SnowDepthMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/DaysSinceLastSnowfallMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/AlbedoMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/LiquidPrecipitationDepthMeasurement~iri]
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(Year)-$(Month)-$(Day)-$(Hour)/LiquidPrecipitationQuantityMeasurement~iri]
+
+  GroundTemperatureDepth:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.groundTemperatures[*]']
+    s: weat2:GroundTemperatureDepth/$(groundTemperatureDepth)
+    po:
+      - [saref:isMeasuredIn, om:metre~iri]
+      - [saref:hasValue, $(groundTemperatureDepth)]
+
+  GroundConductivity:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.groundTemperatures[*]']
+    s: weat2:GroundConductivity/$(groundTemperatureDepth)
+    po:
+      - [saref:isMeasuredIn, om:wattPerMetreKelvin~iri]
+      - [saref:hasValue, $(groundConductivity)]
+
+  GroundDensity:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.groundTemperatures[*]']
+    s: weat2:GroundDensity/$(groundTemperatureDepth)
+    po:
+      - [saref:isMeasuredIn, om:kilogramPerCubicmetre~iri]
+      - [saref:hasValue, $(groundDensity)]
+
+  GroundSpecificHeat:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.groundTemperatures[*]']
+    s: weat2:GroundSpecificHeat/$(groundTemperatureDepth)
+    po:
+      - [saref:isMeasuredIn, om:joulePerKiligram~iri]
+      - [saref:hasValue, $(groundSpecificHeat)]
+
+  GroundTemperature:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.groundTemperatures[*]']
+    s: weat2:GroundTemperature/$(groundTemperatureDepth)
+    po:
+      - [saref:isMeasuredIn, om:degreeCelsius~iri]
+      - [saref:hasValue, January:$(january) - February:$(february) - March:$(march) - April:$(april) - May:$(may) - June:$(june) - July:$(july) - August:$(august) - September$(september) - October:$(october) - November:$(november) - December:$(december)]
+
+  Location:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.location[*]']
+    s: weat1:$(adm03)/$(city)/$(wmo)/Device
+    po:
+      - [weat2:locatedIn, weat1:city/$(city)~iri]
+      - [weat2:locatedIn, weat1:country/$(country)~iri]
+      - [weat2:locatedIn, weat1:$(adm03)/$(city)/$(wmo)/spatialThing/Point~iri]
+
+  Point:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.location[*]']
+    s: weat1:$(adm03)/$(city)/$(wmo)/spatialThing/Point
+    po:
+      - [geo:lat, $(lat)]
+      - [geo:long, $(long)]
+      - [geo:alt, $(alt)]
+
+  Periods:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.typical_extremePeriods[*]']
+    s: weat2:$(typeOfPeriod)
+    po:
+      - [weat1:observedInSeason, weat1:$(adm03)/$(city)/$(wmo)/$(typeOfPeriod)/$(season)]
+
+  PeriodsSeason:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.typical_extremePeriods[*]']
+    s: weat1:$(adm03)/$(city)/$(wmo)/$(typeOfPeriod)/$(season)
+    po:
+      - [weat2:firstDate, $(firstDate), xsd:dateTime]
+      - [weat2:lastDate, $(lastDate), xsd:dateTime]
+      - [weat2:isDefinitionOf, weat1:$(epwName)]
+
+  PeriodsEPWName:
+    sources:
+      - ['ESP_Albacete-082800_SWEC.json~jsonpath', '$.typical_extremePeriods[*]']
+    s: weat1:$(epwName)
+    po:
+      - [weat2:isDefinedBy, weat1:$(adm03)/$(city)/$(wmo)/$(typeOfPeriod)/$(season)]
+  

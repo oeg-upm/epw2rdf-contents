@@ -18,6 +18,8 @@ def extractEPWFile(url):
 
     name = url.split('/')[-1].replace('.zip','')
 
+    zipfiles.close()
+
     return data, name
 
 url = 'http://climate.onebuilding.org/WMO_Region_6_Europe/ESP_Spain/MD_Madrid/ESP_MD_Madrid-Cuatro.Vientos.AP.082230_TMYx.2004-2018.zip'

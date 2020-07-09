@@ -27,3 +27,5 @@ def createFileJSON(link,countryCode):
 
     with open("Data/taxonomyCitiesEnergyPlus.json", 'w') as f:
         json.dump(data, f, indent=4)
+
+    f.close()

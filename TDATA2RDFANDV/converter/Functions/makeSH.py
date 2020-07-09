@@ -1,8 +1,17 @@
 import os
 
-def makeSH(propertiesFile):
+def makeSHEPW(name): # CHANGE
     if os.getcwd().endswith("DataStorage"):
-        command = "cd ../MorphRDB \n java -cp .:morph-rdb.jar:dependency/* es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCSVRunner .. DataStorage/" + propertiesFile + ""
+        command = "cd ../Helio \n java -jar helio.jar -p '../MappingsEPWStorage' -o '../Results/"+ name + ".nt'"
     else:
-        command = "cd converter/MorphRDB \n java -cp .:morph-rdb.jar:dependency/* es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCSVRunner .. DataStorage/" + propertiesFile + ""
+        command = "cd converter/Helio \n java -jar helio.jar -p '../MappingsEPWStorage' -o '../Results/"+ name + ".nt'"
+
+    os.system(command)
+
+def makeSHJSON(name): # CHANGE
+    if os.getcwd().endswith("DataStorage"):
+        command = "cd ../Helio \n java -jar helio.jar -p '../MappingsDSAPIStorage' -o '../Results/"+ name + ".nt'"
+    else:
+        command = "cd converter/Helio \n java -jar helio.jar -p '../MappingsDSAPIStorage' -o '../Results/"+ name + ".nt'"
+
     os.system(command)

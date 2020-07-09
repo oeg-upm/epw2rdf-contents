@@ -1,0 +1,17 @@
+{
+    "datasources": [
+        {
+            "id": "Json Values current",
+            "type": "JsonDatasource",
+            "arguments": [
+                "$.current[*]"
+            ],
+            "connector": {
+                "arguments": [
+                    "./data/Europe-Madrid(40.42_-3.69).json"
+                ],
+                "type": "LocalFileConnector"
+            }
+        }
+    ]
+}

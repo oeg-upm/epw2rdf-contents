@@ -1,0 +1,17 @@
+{
+    "datasources": [
+        {
+            "id": "EPW Values groundTemperatures",
+            "type": "JsonDatasource",
+            "arguments": [
+                "$.groundTemperatures[*]"
+            ],
+            "connector": {
+                "arguments": [
+                    "../DataStorage/ESP_Albacete-082800_SWEC.json"
+                ],
+                "type": "LocalFileConnector"
+            }
+        }
+    ]
+}

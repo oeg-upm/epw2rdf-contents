@@ -1,0 +1,17 @@
+{
+    "datasources": [
+        {
+            "id": "EPW Values periods",
+            "type": "JsonDatasource",
+            "arguments": [
+                "$.typical_extremePeriods[*]"
+            ],
+            "connector": {
+                "arguments": [
+                    "../DataStorage/ESP_Albacete-082800_SWEC.json"
+                ],
+                "type": "LocalFileConnector"
+            }
+        }
+    ]
+}

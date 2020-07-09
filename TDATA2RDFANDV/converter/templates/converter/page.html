@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>File2RDF</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-autocomplete/1.3.5/jquery.easy-autocomplete.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/easy-autocomplete/1.3.5/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -28,144 +32,88 @@
     {% load static %}
 
 
+
+
     <!-- CSS and JS files for Search Box -->
     <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
 
-    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+    <script
+        src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 
 
-    <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=24" />
+    <link rel="stylesheet" type="text/css" href="{% static 'converter/form.css' %}?version=34" />
     <link rel="shortcut icon" type="image/png" href="{% static 'converter/favicon2.ico' %}" />
     <title>File2RDF</title>
 </head>
 
+
+
+<!-- BODY -->
+
 <body>
+    <div id="page-container">
+        <div id="content-wrap">
 
-    <div class="w-100 redbg">
-        <div class="container" align="center">
-            <div class="row">
-                <div class="column">
-                    <h1 class="display-4">EPW Tracker</h1>
-                </div>
-                <div class="column"></div>
-                <div style="text-align: left;padding-top: 10mm; font-size: 15px;" class="column">
-                    <a align="center" class="redbg3" href="https://weather.bimerr.iot.linkeddata.es/docs/">See other weather data fetching services…</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FILE TO RDF TAB -->
-    <div class="container" id="tabsFile2RDF">
-        <nav class="navbar navbar-expand-md navbar-dark ">
-            <div class="mx-auto my-2 order-0 order-md-1 position-relative">
-                <div class="" id="">
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link focus" id="nav-File2RDF-tab" data-toggle="tab" href="#nav-File2RDF"
-                            role="tab" aria-controls="nav-File2RDF" aria-selected="true">File2RDF</a>
-                        <a class="nav-item nav-link" id="nav-RDF2File-tab" data-toggle="tab" href="#nav-RDF2File"
-                            role="tab" aria-controls="nav-RDF2File" aria-selected="false">RDF2File</a>
+            <div class="w-100 redbg">
+                <div class="container" align="center">
+                    <div class="row">
+                        <div class="column">
+                            <h1 class="display-4" onClick="history.go(0);">EPW Tracker</h1>
+                        </div>
+                        <div class="column"></div>
+                        <div style="text-align: left;padding-top: 10mm; font-size: 15px;" class="column">
+                            <a align="center" class="redbg3" href="https://weather.bimerr.iot.linkeddata.es/docs/">See other
+                                weather data fetching services…</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </nav>
-    </div>
 
-    <!-- TABS FILE TO RDF -->
-
-    <div class="tab-content" id="nav-tabContent">
-        <div class="container tab-pane fade" id="nav-File2RDF" role="tabpanel" aria-labelledby="nav-File2RDF-tab">
-            <div class="container">
-                <p>
-                    <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Convert your file</h2>
-                </p>
-            </div>
-            
-            <p>
-                <div class="container">
-                    <form>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" value="" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file to convert to RDF</label>
-                        </div>
-                        <div class="mt-3" align="center">
-                            <button type="submit" value="customFile" class="btn snapColor"
-                                onclick="convertFile()">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </p>
-
-
-
-            <div class="container">
-                <p>
-                    <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Weather Interactive Search</h2>
-                </p>
-            </div>
-
-            <div class="container" id="tabsInteractiveSearch">
+            <!-- FILE TO RDF TAB -->
+            <div class="container" id="tabsFile2RDF">
                 <nav class="navbar navbar-expand-md navbar-dark ">
                     <div class="mx-auto my-2 order-0 order-md-1 position-relative">
                         <div class="" id="">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link focus" id="nav-WeatherData-tab" data-toggle="tab"
-                                    href="#nav-WeatherData" role="tab" aria-controls="nav-WeatherData"
-                                    aria-selected="true">Weather Data</a>
-                                <a class="nav-item nav-link" id="nav-BuildingsData-tab" data-toggle="tab"
-                                    href="#nav-BuildingsData" role="tab" aria-controls="nav-BuildingsData"
-                                    aria-selected="false">Buildings Data</a>
-                                <a class="nav-item nav-link" id="nav-Etc-tab" data-toggle="tab" href="#nav-Etc"
-                                    role="tab" aria-controls="nav-Etc" aria-selected="false">Etc...</a>
+                                <a class="nav-item nav-link focus   " id="nav-File2RDF-tab" data-toggle="tab" href="#nav-File2RDF"
+                                    role="tab" aria-controls="nav-File2RDF" aria-selected="true">File2RDF</a>
+                                <a class="nav-item nav-link" id="nav-SPARQL-tab" data-toggle="tab" href="#nav-SPARQL" role="tab"
+                                    aria-controls="nav-SPARQL" aria-selected="false">SPARQL</a>
                             </div>
                         </div>
                     </div>
                 </nav>
             </div>
 
+            <!-- TABS FILE TO RDF -->
+
             <div class="tab-content" id="nav-tabContent">
-                <div class="container tab-pane fade" id="nav-WeatherData" role="tabpanel"
-                    aria-labelledby="nav-WeatherData-tab">
-                    <p>
-                        <div class="container" align="center">
-                            <div class="btn-group btn-group-lg" align="center" id="WeatherData2">
-                                <button type="button" id="Climate1" onclick="clickButton('Climate1')"
-                                    class="btn snapColor">Climate-OneBuilding</button>
-                                <button type="button" id="Energy" onclick="clickButton('Energy')"
-                                    class="btn snapColor">Energy Plus</button>
-                                <button type="button" id="DarkSkyAPI" onclick="clickButton('DarkSkyAPI')"
-                                    class="btn snapColor">DarkSkyAPI</button>
-                            </div>
-                        </div>
-                    </p>
+                <div class="container tab-pane fade" id="nav-File2RDF" role="tabpanel" aria-labelledby="nav-File2RDF-tab">
+                    <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-                    <p id="mapContainer" style="visibility: hidden;">
-                        <div class="container" style="visibility: hidden;" id="mapContainer2">
-                            <div class="jumbotron" style="visibility: hidden;" id="mapJumbotron">
-                                <div id='map' style="visibility: hidden;"></div>
-                            </div>
-                        </div>
-                    </p>
+                    <div class="container">
+                        <p>
+                        <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Weather Interactive Search</h2>
+                        </p>
+                    </div>
 
-                    <div class="container" id="tabsGDSPARQL" style="visibility: hidden;">
-                        <div class="container">
-                            <p>
-                                <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Results</h2>
-                            </p>
-                        </div>
+                    <div class="container" id="tabsInteractiveSearch">
                         <nav class="navbar navbar-expand-md navbar-dark ">
                             <div class="mx-auto my-2 order-0 order-md-1 position-relative">
                                 <div class="" id="">
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link focus" id="nav-GDown-tab" data-toggle="tab"
-                                            href="#nav-GDown" role="tab" aria-controls="nav-GDown"
-                                            aria-selected="true">Generate and Download</a>
-                                        <a class="nav-item nav-link" id="nav-SPARQL-tab" data-toggle="tab"
-                                            href="#nav-SPARQL" role="tab" aria-controls="nav-SPARQL"
-                                            aria-selected="false">SPARQL</a>
+                                        <a class="nav-item nav-link focus" id="nav-WeatherData-tab" data-toggle="tab"
+                                            href="#nav-WeatherData" role="tab" aria-controls="nav-WeatherData"
+                                            aria-selected="true">Weather Data</a>
+                                        <a class="nav-item nav-link" id="nav-BuildingsData-tab" data-toggle="tab"
+                                            href="#nav-BuildingsData" role="tab" aria-controls="nav-BuildingsData"
+                                            aria-selected="false">Buildings Data</a>
+                                        <a class="nav-item nav-link" id="nav-Etc-tab" data-toggle="tab" href="#nav-Etc"
+                                            role="tab" aria-controls="nav-Etc" aria-selected="false">Materlials Data</a>
                                     </div>
                                 </div>
                             </div>
@@ -173,544 +121,245 @@
                     </div>
 
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="container tab-pane fade" id="nav-GDown" role="tabpanel"
-                            aria-labelledby="nav-GDown-tab">
-                            <div class="container" id="DownloadContainer">
-                                <p align="center">
-                                    <a id="epw" class="colorLink" href="{% static '' %}" download>
-                                        <button type="button" id="downloadEPW" class="btn snapColor"
-                                            style='width:33%;'>Download EPW</button>
-                                    </a>
-                                    <a id="rdf" class="colorLink" href="{% static '' %}" download>
-                                        <button type="button" id="downloadRDF" class="btn snapColor"
-                                            style='width:33%;'>Download RDF</button>
-                                    </a>
-                                </p>
-                                <div class="container" id="tableContainerSearch">
-                                    <input type="text" id="myInput" onkeyup="myFunction()"
-                                        placeholder="Search for link.." title="Type in a link">
-                                </div>
+                        <div class="container tab-pane fade" id="nav-WeatherData" role="tabpanel"
+                            aria-labelledby="nav-WeatherData-tab">
 
-                                <div class="w3-row" id="tableContainer">
-                                    <div class="w3-col">
-                                        <p></p>
-                                    </div>
-                                    <div class="w3-col">
-                                        <p>
-                                            <div class="table-responsive-sm">
-                                                <table id="myTable"
-                                                    class="table table-bordered table-striped table-hover">
-                                                    <thread>
-                                                        <tr align="center">
-                                                            <th class="redbg2">Country Code</th>
-                                                            <th class="redbg2">Link</th>
-                                                            <th class="redbg2">Generate Files</th>
-                                                        </tr>
-                                                    </thread>
-                                                </table>
+
+                            <div class="container" id="tabsWeather">
+                                <nav class="navbar navbar-expand-md navbar-dark ">
+                                    <div class="mx-auto my-2 order-0 order-md-1 position-relative">
+                                        <div class="" id="">
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <a class="nav-item nav-link focus" id="nav-Climate-tab" data-toggle="tab"
+                                                    href="#climatetab" role="tab" aria-controls="nav-Climate"
+                                                    aria-selected="true" onclick="clickButton('Climate1')">Climate One
+                                                    Building</a>
+                                                <a class="nav-item nav-link" id="nav-Energy-tab" data-toggle="tab"
+                                                    href="#climatetab" role="tab" aria-controls="nav-Energy"
+                                                    aria-selected="false" onclick="clickButton('Energy')">Energy Plus</a>
+                                                <a class="nav-item nav-link" id="nav-DSAPI-tab" data-toggle="tab"
+                                                    href="#darkskytab" role="tab" aria-controls="nav-DSAPI"
+                                                    aria-selected="false" onclick="clickButton('DarkSkyAPI')">DarkSkyAPI</a>
                                             </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="jumbotron jumbotron-fluid container"  align="center"
+                                style="visibility: hidden; background-color: #EBFFFF;" id="mapWrapper">
+                                <div id="map"></div>
+                            </div>
+                            <div class="tab-content" id="nav-tabContent2">
+                                <div class="container tab-pane fade" id="climatetab" role="tabpanel"
+                                    aria-labelledby="nav-Climate-tab" aria-labelledby="nav-Energy-tab">
+                                    <div class="container" id="tabsGDSPARQL">
+                                        <div class="container">
+                                            <p>
+                                            <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Results</h2>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="container" id="DownloadContainer">
+                                        <p align="center">
+                                            <a id="epw" class="colorLink" href="{% static '' %}" download>
+                                                <button type="button" id="downloadEPW" class="btn snapColor"
+                                                    style='width:33%;'>Download EPW</button>
+                                            </a>
+                                            <a id="rdf" class="colorLink" href="{% static '' %}" download>
+                                                <button type="button" id="downloadRDF" class="btn snapColor"
+                                                    style='width:33%;'>Download RDF</button>
+                                            </a>
                                         </p>
+                                        <div class="container" id="tableContainerSearch">
+                                            <input type="text" id="myInput" onkeyup="myFunction()"
+                                                placeholder="Search for link.." title="Type in a link">
+                                        </div>
+
+                                        <div class="w3-row" id="tableContainer">
+                                            <div class="w3-col">
+                                                <p></p>
+                                            </div>
+                                            <div class="w3-col">
+                                                <p>
+                                                <div class="table-responsive-sm">
+                                                    <table id="myTable" class="table table-bordered table-striped table-hover">
+                                                        <thread>
+                                                            <tr align="center">
+                                                                <th class="redbg2">Country Code</th>
+                                                                <th class="redbg2">Link</th>
+                                                                <th class="redbg2">Generate Files</th>
+                                                            </tr>
+                                                        </thread>
+                                                    </table>
+                                                </div>
+                                                </p>
+                                            </div>
+                                            <div class="w3-col">
+                                                <p></p>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="w3-col">
-                                        <p></p>
-                                    </div>
+
+
                                 </div>
 
-                            </div>
-                        </div>
-                        <div class="container tab-pane fade" id="nav-SPARQL" role="tabpanel"
-                            aria-labelledby="nav-SPARQL-tab">
-                            <div class="container">
-                                <div class="form-group">
-                                    <textarea class="form-control" placeholder="Write your SPARQL query here ..."
-                                        id="SPARQLTextArea" rows="3"></textarea>
+                                <div class="container tab-pane fade" id="darkskytab" role="tabpanel"
+                                    aria-labelledby="nav-Climate-tab">
+
+                                    <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">Insert the coordinates of
+                                        latitude and longitude below</h2>
+
+                                    <form class="jumbotron container" id="jumbotronCoordinates">
+                                        <p>
+                                        <div align=center>
+                                            <button class="btn btn-primary redbgbutton" align="center" type="button"
+                                                data-toggle="collapse" data-target="#demo" aria-expanded="false"
+                                                aria-controls="demo">
+                                                How to use
+                                            </button>
+                                        </div>
+                                        <p></p>
+                                        <div id="demo" class="collapse">
+                                            First, click on the map to obtain the latitude and longitude coordinates belonging
+                                            to a point.
+
+                                            If you do not want to click on the map, there is a place finder in the upper left
+                                            corner, where you can enter the place you are looking for.
+
+                                            Finally, with the coordinates obtained, they must be entered in the boxes below in
+                                            order to obtain the meteorological data belonging to that coordinate.
+                                        </div>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="latitude"
+                                                    placeholder="Add Latitude here...">
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="longitude"
+                                                    placeholder="Add Longitude here...">
+                                            </div>
+                                        </div>
+                                        <p></p>
+                                        <div>
+                                            <button type="button" class="btn btn-info btn-lg btn-block redbgbutton"
+                                                onclick="getDarkSkyAPIData()">Submit</button>
+                                        </div>
+                                        <p> </p>
+                                    </form>
                                 </div>
                             </div>
+
+                            <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+                        </div>
+
+                        <div class="container tab-pane fade" id="nav-BuildingsData" role="tabpanel"
+                            aria-labelledby="nav-BuildingsData-tab">
+                            <h1 align="center" class="snapColor2">Work in Progress</h1>
+                        </div>
+
+                        <div class="container tab-pane fade" id="nav-Etc" role="tabpanel" aria-labelledby="nav-Etc-tab">
+                            <h1 align="center" class="snapColor2">Work in Progress</h1>
                         </div>
                     </div>
-
                 </div>
 
-                <div class="container tab-pane fade" id="nav-BuildingsData" role="tabpanel"
-                    aria-labelledby="nav-BuildingsData-tab">
-                    <h1 align="center" class="snapColor2">Work in Progress</h1>
+
+
+
+                <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+                <div class="container tab-pane fade" id="nav-SPARQL" role="tabpanel" aria-labelledby="nav-File2RDF-tab">
+                    <p>
+                    <div class="container">
+                        <div class="container">
+                            <p>
+                            <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">SPARQL QUERIES</h2>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" value="" id="customFileRDF">
+                                <label class="custom-file-label" for="customFileRDF">Choose RDF file to make SPARQL queries...
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mt-3" align="center">
+                            <button type="submit" value="customFileRDF" class="btn snapColor"
+                                onclick="convertFileRDF()">Submit File</button>
+                        </div>
+
+                        <p></p>
+
+                        <div class="form-group">
+                            <textarea class="form-control" id="queries" rows="10">PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT * WHERE {
+            ?sub ?pred ?obj .
+        }
+        LIMIT 10</textarea>
+                        </div>
+                        <div class="mt-3" align="center">
+                            <button type="submit" value="queries" class="btn snapColor"
+                                onclick="convertFileRDF()">Submit Querie</button>
+                        </div>
+
+                    </div>
+                    </p>
                 </div>
 
-                <div class="container tab-pane fade" id="nav-Etc" role="tabpanel" aria-labelledby="nav-Etc-tab">
-                    <h1 align="center" class="snapColor2">Work in Progress</h1>
-                </div>
+                
+
             </div>
         </div>
 
-        <div class="container tab-pane fade" id="nav-RDF2File" role="tabpanel" aria-labelledby="nav-File2RDF-tab">
-            <p>
-                <div class="container">
-                    <div class="container">
-                        <p>
-                            <h2 align="center" class="font-weight-bold, p-3 mb-2 redbg">WORK IN PROGRESS</h2>
-                        </p>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-9">
-                            <form>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" value="" id="customFileRDF">
-                                    <label class="custom-file-label" for="customFileRDF">Choose RDF file to convert
-                                        to... </label>
-                                </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <select id="inputStateRDF" class="form-control">
-                                <option selected>Convert to...?</option>
-                                <option>Weather Data</option>
-                                <option>Buildings Data</option>
-                                <option>Etc...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mt-3" align="center">
-                        <button type="submit" value="customFileRDF" class="btn btn-success"
-                            onclick="convertFileRDF()">Submit</button>
-                    </div>
+        
+        <!-- <footer class="footer">
+            <div class="container">
+            <div class="row">
+                <div class="column">
+                    <img class="img" src ="{% static 'converter/footerImages/bimerr.jpg' %}" width="320" height="180">
                 </div>
-            </p>
-        </div>
+                
+                <div class="column">
+                    <img class="img" src ="{% static 'converter/footerImages/upm.png' %}" width="340" height="180">
+                </div>
 
+                <div class="column">
+                    <img class="img" src ="{% static 'converter/footerImages/OEG.png' %}" width="280" height="180">
+                </div>
 
+                <p></p>
+            </div>
+            </div>
+        </footer> -->
     </div>
 
+    <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
     <!-- SCRIPTS -->
-
-    {% csrf_token %}
-
-    <script type="text/javascript" src="{% static 'converter/EnergyPlusMapData.js' %}"></script>
-    <script type="text/javascript" src="{% static 'converter/OneBuildingMapData.js' %}"></script>
-    <script type="text/javascript" src="{% static 'converter/oceans.js' %}"></script>
-
-
-
-
-    <script>
-
-        let jsonDataMap;
-
-
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-
-        $(".custom-file-input").on("change", function () {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-
-        //  CÓDIGO PARA BOTONES Y TABS OCULTAR Y MOSTRAR
-        $(document).on("click", '#WeatherData', function () {
-            $("#WeatherData2").css('visibility', 'visible');
-        })
-        $(document).on("click", '#Climate1', function () {
-            $("#mapContainer").css('visibility', 'visible');
-            $("#map").css('visibility', 'visible');
-            $("#mapContainer2").css('visibility', 'visible');
-            $("#mapJumbotron").css('visibility', 'visible');
-            $("#tableContainer").css('visibility', 'visible');
-            $("#tableContainerSearch").css('visibility', 'visible');
-            $("#DownloadContainer").css('visibility', 'visible');
-            $("#tabsGDSPARQL").css('visibility', 'visible');
-        })
-        $(document).on("click", '#Energy', function () {
-            $("#mapContainer").css('visibility', 'visible');
-            $("#map").css('visibility', 'visible');
-            $("#mapContainer2").css('visibility', 'visible');
-            $("#mapJumbotron").css('visibility', 'visible');
-            $("#tableContainer").css('visibility', 'visible');
-            $("#tableContainerSearch").css('visibility', 'visible');
-            $("#DownloadContainer").css('visibility', 'visible');
-            $("#tabsGDSPARQL").css('visibility', 'visible');
-        })
-        $(document).on("click", '#DarkSkyAPI', function () {
-            $("#mapContainer").css('visibility', 'visible');
-            $("#map").css('visibility', 'visible');
-            $("#mapContainer2").css('visibility', 'visible');
-            $("#mapJumbotron").css('visibility', 'visible');
-            $("#tableContainer").css('visibility', 'hidden');
-            $("#tableContainerSearch").css('visibility', 'hidden');
-            $("#DownloadContainer").css('visibility', 'hidden');
-            $("#tabsGDSPARQL").css('visibility', 'hidden');
-        })
-        $(document).on("click", '#BuildingsData', function () {
-            $("#WeatherData2").css('visibility', 'hidden');
-            $("#mapContainer").css('visibility', 'hidden');
-            $("#map").css('visibility', 'hidden');
-            $("#mapContainer2").css('visibility', 'hidden');
-            $("#mapJumbotron").css('visibility', 'hidden');
-            $("#tableContainer").css('visibility', 'hidden');
-            $("#tableContainerSearch").css('visibility', 'hidden');
-            $("#DownloadContainer").css('visibility', 'hidden');
-            $("#tabsGDSPARQL").css('visibility', 'hidden');
-        })
-        $(document).on("click", '#Etc', function () {
-            $("#WeatherData2").css('visibility', 'hidden');
-            $("#mapContainer").css('visibility', 'hidden');
-            $("#map").css('visibility', 'hidden');
-            $("#mapContainer2").css('visibility', 'hidden');
-            $("#mapJumbotron").css('visibility', 'hidden');
-            $("#tableContainer").css('visibility', 'hidden');
-            $("#tableContainerSearch").css('visibility', 'hidden');
-            $("#DownloadContainer").css('visibility', 'hidden');
-            $("#tabsGDSPARQL").css('visibility', 'hidden');
-        })
-        $(document).on("click", '#tab2', function () {
-            $("#WeatherData2").css('visibility', 'hidden');
-            $("#mapContainer").css('visibility', 'hidden');
-            $("#map").css('visibility', 'hidden');
-            $("#mapContainer2").css('visibility', 'hidden');
-            $("#mapJumbotron").css('visibility', 'hidden');
-            $("#tableContainer").css('visibility', 'hidden');
-            $("#tableContainerSearch").css('visibility', 'hidden');
-            $("#DownloadContainer").css('visibility', 'hidden');
-            $("#tabsGDSPARQL").css('visibility', 'hidden');
-        })
-
-
-        // CÓDIGO PARA BOTONES Y TABS OCULTAR Y MOSTRAR
-
-
-        // CÓDIGO PARA IMPRIMIR DATOS EN TABLA DE LOS DOCUMENTOS
-
-        function numberProducts(data) {
-            productos = data["cities"];
-            var items = [];
-            var contador = 0;
-            $.each(productos, function (key, val) {
-                items.push("<tr>");
-                items.push("<td id=''" + key + "''>" + val.adm0_a3 + "</td>");
-                items.push("<td id='" + val.link + "'>" + val.link + "</td>");
-                items.push("<td onclick='redirectTo(\"" + val.link + "\"," + "\"" + contador + "\")' id='Download' class='p-2'><button type='button'>Generate Files</button><div class='container' id='Loading" + contador + "' style='visibility: hidden;' align='center'><div class='spinner-border spinner-border-sm' role='status'><span class='sr-only'>Loading...</span></div></div></td>");
-                items.push("</tr>");
-                contador += 1;
-            })
-            $('<tbody/>', { html: items.join("") }).appendTo("table");
-        }
-
-        function redirectTo(link, contador) {
-            $("#Loading" + contador).css('visibility', 'visible');
-            $.ajax({
-                type: 'POST',
-                url: '/makeExtractAndConversion',
-                data: JSON.stringify({
-                    code: link
-                }),
-                success: (data, textStatus, jqXHR) => {
-                    console.log(data, textStatus, jqXHR)
-                    rdf = data['RDF']
-                    epw = data['EPW']
-                    document.getElementById('rdf').href = rdf
-                    document.getElementById('epw').href = epw
-                    $("#Loading" + contador).css('visibility', 'hidden');
-                },
-                contentType: 'application/json',
-                dataType: 'json'
-            });
-        }
-        // AQUÍ ESTÁ LA PARTE DEL MAPA
-
-        function Map2(data) {
-
-            function refreshMap() {
-                var remove = document.getElementById('map');
-                remove.parentNode.removeChild(remove)
-                var p = document.getElementById('mapJumbotron')
-                var element = document.createElement('div');
-                element.setAttribute('id', 'map');
-                p.appendChild(element)
-            }
-
-            refreshMap();
-
-            var map = L.map('map');
-
-            map.createPane('labels');
-
-            // This pane is above markers but below popups
-            map.getPane('labels').style.zIndex = 650;
-
-            // Layers in this pane are non-interactive and do not obscure mouse/touch events
-            map.getPane('labels').style.pointerEvents = 'none';
-
-            var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
-
-            var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-                attribution: cartodbAttribution
-            }).addTo(map);
-
-            var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-                attribution: cartodbAttribution,
-                pane: 'labels'
-            }).addTo(map);
-
-
-
-            function getColor(d) {
-                return d == 1 ? '#800026' :
-                    d == 2 ? '#1570BF' :
-                        d == 3 ? '#38A673' :
-                            d == 4 ? '#F2D129' :
-                                d == 5 ? '#F26430' :
-                                    d == 6 ? '#F22F1D' :
-                                        d == 7 ? '#F22E62' :
-                                            '#092601';
-            }
-
-            function style(feature) {
-                return {
-                    fillColor: getColor(
-                        feature.properties.mapcolor7),
-                    weight: 1,
-                    opacity: 1,
-                    color: 'white',
-                    dashArray: '',
-                    fillOpacity: 0.3
-                };
-            }
-
-
-            L.geoJson(data, { style: style }).addTo(map);
-
-
-
-            geojson = L.geoJson(data).addTo(map);
-            geojson = L.geoJson(geoOceans).addTo(map)
-
-
-
-            map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 2);
-
-
-            function highlightFeature(e) {
-                var layer = e.target;
-
-                layer.setStyle({
-                    weight: 1,
-                    color: '#FFFF',
-                    dashArray: '',
-                    opacity: 1,
-                    fillOpacity: 1
-                });
-
-
-
-                if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                    layer.bringToFront();
-                }
-            }
-
-
-
-            function resetHighlight(e) {
-                geojson.resetStyle(e.target);
-            }
-
-
-
-
-            var geojson;
-            // ... our listeners
-            geojson = L.geoJson(data);
-
-            function zoomToFeature(e) {
-                map.fitBounds(e.target.getBounds());
-            }
-
-
-
-
-            function onEachFeature(feature, layer) {
-                layer.on({
-                    mouseover: highlightFeature,
-                    mouseout: resetHighlight,
-                    click: zoomToFeature
-                });
-                layer.bindPopup(function (layer) {
-                    // console.log(layer.feature.properties.adm0_a3);
-                    // console.log('BC:' + buttonClicked);
-                    if (buttonClicked == 'Climate1') {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/getInfoMap/',
-                            data: JSON.stringify({
-                                code: layer.feature.properties.adm0_a3
-                            }),
-                            success: (data, textStatus, jqXHR) => {
-                                console.log(data, textStatus, jqXHR)
-                                jsonDataMap = data
-                                $('table > tbody > tr > td').parent().remove();
-                                numberProducts(data)
-                            },
-                            contentType: 'application/json',
-                            dataType: 'json'
-                        });
-                    }
-                    else if (buttonClicked == 'Energy') {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/getInfoMapEP/',
-                            data: JSON.stringify({
-                                code: layer.feature.properties.adm0_a3
-                            }),
-                            success: (data, textStatus, jqXHR) => {
-                                console.log(data, textStatus, jqXHR)
-                                jsonDataMap = data
-                                $('table > tbody > tr > td').parent().remove();
-                                numberProducts(data)
-                            },
-                            contentType: 'application/json',
-                            dataType: 'json'
-                        });
-                    }
-
-
-                    return layer.feature.properties.name;
-                });
-
-            }
-
-            geojson = L.geoJson(data, {
-                style: style,
-                onEachFeature: onEachFeature
-            }).addTo(map);
-
-
-            //  AQUÍ TERMINA LA PARTE DEL MAPA
-        }
-
-        function myFunction() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-
-        function initMap() {
-
-            function refreshMap() {
-                var remove = document.getElementById('map');
-                remove.parentNode.removeChild(remove)
-                var p = document.getElementById('mapJumbotron')
-                var element = document.createElement('div');
-                element.setAttribute('id', 'map');
-                p.appendChild(element)
-            }
-
-            refreshMap();
-
-            var map = L.map('map').setView([0, 0],2);
-
-            map.createPane('labels');
-
-            // This pane is above markers but below popups
-            map.getPane('labels').style.zIndex = 650;
-
-            // Layers in this pane are non-interactive and do not obscure mouse/touch events
-            map.getPane('labels').style.pointerEvents = 'none';
-
-
-            var positron = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-
-            var popup = L.popup();
-
-            var marker = {};
-            
-            map.on('click', function(e){
-                var coord = e.latlng;
-                var lat = coord.lat;
-                var lng = coord.lng;
-                var c = [lat,lng];
-                if (marker != undefined) {
-                    map.removeLayer(marker);
-                };
-
-                //Add a marker to show where you clicked.
-                marker = L.marker([lat,lng]).addTo(map);
-
-                popup
-                .setLatLng(e.latlng)
-                .setContent("Latitude: "+lat+ "<br>Longitude: "+lng)
-                .openOn(map);
-            });
-
-            var searchControl = new L.esri.Controls.Geosearch().addTo(map);
-
-            var results = new L.LayerGroup().addTo(map);
-
-            searchControl.on('results', function(data){
-            results.clearLayers();
-            for (var i = data.results.length - 1; i >= 0; i--) {
-                results.addLayer(L.marker(data.results[i].latlng));
-                popup
-                .setLatLng(data.results[i].latlng)
-                .setContent("Latitude: "+data.results[i].latlng.lat.toString()+ "<br>Longitude: "+data.results[i].latlng.lng.toString())
-                .openOn(map);
-            }
-            });
-            
-
-            
-            
-        }
-
-        let buttonClicked = ''
-        function clickButton(id) {
-            buttonClicked = id;
-            if (id == 'Climate1') {
-                Map2(geoLocations);
-            }
-            else if (id == 'Energy') {
-                Map2(geoLocations1);
-            }
-            else if (id == 'DarkSkyAPI') {
-                initMap();
-            }
-        }
-
-
-
-    </script>
-
-
 
 
 
     <!--    FIN SCRIPTS -->
 
 </body>
+
+{% csrf_token %}
+
+<script type="text/javascript" src="{% static 'converter/EnergyPlusMapData.js' %}"></script>
+<script type="text/javascript" src="{% static 'converter/OneBuildingMapData.js' %}"></script>
+<script type="text/javascript" src="{% static 'converter/oceans.js' %}"></script>
+<script type="text/javascript" src="{% static 'converter/codePage/code.js' %}?version=3"></script>
+
 
 </html>

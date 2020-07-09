@@ -77,3 +77,6 @@ def getMapDataEnergyPlus():
 
     with open('Data/EnergyPlusMapData.json', 'w') as g:
         json.dump(dataset, g, indent=4)
+
+    f.close()
+    g.close()

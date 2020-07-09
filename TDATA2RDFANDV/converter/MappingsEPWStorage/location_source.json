@@ -1,0 +1,17 @@
+{
+    "datasources": [
+        {
+            "id": "EPW Values location",
+            "type": "JsonDatasource",
+            "arguments": [
+                "$.location[*]"
+            ],
+            "connector": {
+                "arguments": [
+                    "../DataStorage/ESP_Albacete-082800_SWEC.json"
+                ],
+                "type": "LocalFileConnector"
+            }
+        }
+    ]
+}

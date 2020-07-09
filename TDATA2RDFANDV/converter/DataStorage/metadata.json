@@ -3,7 +3,7 @@
     "skipRows": 8,
     "tables": [
         {
-            "url": "Ceuta.csv",
+            "url": "ESP_Albacete-082800_SWEC.csv",
             "tableSchema": {
                 "columns": [
                     {

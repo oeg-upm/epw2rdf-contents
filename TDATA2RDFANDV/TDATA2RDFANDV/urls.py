@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 
 from rest_framework_swagger.views import get_swagger_view
 
-from converter.views import index, mapData, extract_Convert, mapDataEnergyPlus, downloadEPW, getEPWYears
+from converter.views import index, mapData, extract_Convert, extract_ConvertEnergyPlus, extract_ConvertDarkSkyAPI, mapDataEnergyPlus, downloadEPW, getEPWYears
 
 
 schema_view = get_swagger_view(title='API')
@@ -53,6 +53,8 @@ urlpatterns = [
     url(r'getInfoMap/', mapData),
     url(r'getInfoMapEP/', mapDataEnergyPlus),
     url(r'makeExtractAndConversion', extract_Convert),
+    url(r'makeECEnergyPlus', extract_ConvertEnergyPlus),
+    url(r'makeECDarkSkyAPI', extract_ConvertDarkSkyAPI),
     url(r'downloadEPW/',downloadEPW, name='save_contact'),
     url(r'getEPWYears/',getEPWYears, name='get_contact'),
     url(r'^docs(?P<format>\.json)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

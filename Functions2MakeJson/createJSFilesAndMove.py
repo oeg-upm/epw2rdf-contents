@@ -32,6 +32,7 @@ def createJSFileEnergyPlus():
     json.dump(data, document_js, ensure_ascii=False, indent=4)
 
     document_js.close()
+    json_file.close()
 
 
 def createJSFileOneBuilding():
@@ -48,6 +49,7 @@ def createJSFileOneBuilding():
     json.dump(data, document_js, ensure_ascii=False, indent=4)
 
     document_js.close()
+    json_file.close()
 
 
 def removeDataFromStatic():
