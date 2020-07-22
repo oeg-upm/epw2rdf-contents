@@ -4,10 +4,12 @@ import os
 
 
 def createDSAPIMappings(json_name,json_path): # PASAR COMO PARÁMETRO JSON_NAME PARA PODER HACER LO DE LOS DIRECTORIOS
+    removeLocationSource()
     removeCurrentlySource()
     removeDailySource()
     removeHourlySource()
     removeMinutelySource()
+    createLocationSource(json_name)
     createCurrentlySource(json_name)
     createMinutelySource(json_name)
     createHourlySource(json_name)
@@ -17,6 +19,13 @@ def createDSAPIMappings(json_name,json_path): # PASAR COMO PARÁMETRO JSON_NAME 
 def removeCurrentlySource():# MappingsDSAPIStorage tendrá que ser el nombre del directorio asignado a la persona --> borrarlo al cabo de una hora
     if os.path.exists("converter/MappingsDSAPIStorage/currently_data_source.json"):
         os.remove("converter/MappingsDSAPIStorage/currently_data_source.json")
+        return
+    else:
+        return
+
+def removeLocationSource():# MappingsDSAPIStorage tendrá que ser el nombre del directorio asignado a la persona --> borrarlo al cabo de una hora
+    if os.path.exists("converter/MappingsDSAPIStorage/location_data_source.json"):
+        os.remove("converter/MappingsDSAPIStorage/location_data_source.json")
         return
     else:
         return
@@ -50,15 +59,30 @@ def createCurrentlySource(json_name): # DSAPIDataStorage tendrá que ser una car
     json_file = {}
     json_file['datasources'] = []
     json_file['datasources'].append({
-          "id" : "Json Values currently",
+          "id" : "Json Values current",
           "type" : "JsonDatasource",
-          "arguments" : ["$.currently[*]"],
+          "arguments" : ["$.current[*]"],
           "connector"  : {
            "arguments" : ["../DSAPIDataStorage/" + json_name + ".json"],
            "type" : "LocalFileConnector"
           }
         })
     document = open("converter/MappingsDSAPIStorage/currently_data_source.json", "w")
+    json.dump(json_file, document, indent=4)
+
+def createLocationSource(json_name): # DSAPIDataStorage tendrá que ser una carpeta dentro de un directorio con el nombre del fichero asignado a la persona --> borrarlo al cabo de una hora
+    json_file = {}
+    json_file['datasources'] = []
+    json_file['datasources'].append({
+          "id" : "Json Values Location",
+          "type" : "JsonDatasource",
+          "arguments" : ["$.location[*]"],
+          "connector"  : {
+           "arguments" : ["../DSAPIDataStorage/" + json_name + ".json"],
+           "type" : "LocalFileConnector"
+          }
+        })
+    document = open("converter/MappingsDSAPIStorage/location_data_source.json", "w")
     json.dump(json_file, document, indent=4)
 
 def createMinutelySource(json_name): # DSAPIDataStorage tendrá que ser una carpeta dentro de un directorio con el nombre del fichero asignado a la persona --> borrarlo al cabo de una hora

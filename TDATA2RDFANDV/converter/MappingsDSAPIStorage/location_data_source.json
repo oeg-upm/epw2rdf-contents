@@ -1,0 +1,17 @@
+{
+    "datasources": [
+        {
+            "id": "Json Values Location",
+            "type": "JsonDatasource",
+            "arguments": [
+                "$.location[*]"
+            ],
+            "connector": {
+                "arguments": [
+                    "../DSAPIDataStorage/America-Sao_Paulo(-15.78_-47.93).json"
+                ],
+                "type": "LocalFileConnector"
+            }
+        }
+    ]
+}

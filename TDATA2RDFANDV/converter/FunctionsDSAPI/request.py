@@ -41,6 +41,18 @@ def manageJsonData(json_data, city, new_latitude, new_longitude, timezone):
         "city" : city
     })
 
+    data2 = {
+            "latitude" : float(new_latitude),
+            "longitude" : float(new_longitude),
+            "city" : city
+            }
+
+    json_data.update({
+        "location": [
+            data2
+        ]
+    })
+
     if 'current' in json_data:
         json_data['current'].update({
             "latitude" : float(new_latitude),
@@ -54,21 +66,27 @@ def manageJsonData(json_data, city, new_latitude, new_longitude, timezone):
 
         if 'rain' in json_data['current']:
             if type(json_data['current']['rain']) == dict:
-                res = list(json_data['current']['rain'].keys())[0] 
-                rain = json_data['current']['rain'][res]
-                del json_data['current']['rain']
-                json_data['current'].update({
-                    "rain" : rain
-                })
+                try:
+                    res = list(json_data['current']['rain'].keys())[0] 
+                    rain = json_data['current']['rain'][res]
+                    del json_data['current']['rain']
+                    json_data['current'].update({
+                        "rain" : rain
+                    })
+                except:
+                    pass
 
         if 'snow' in json_data['current']:
             if type(json_data['current']['snow']) == dict:
-                res = list(json_data['current']['snow'].keys())[0] 
-                snow = json_data['current']['snow'][res]
-                del json_data['current']['snow']
-                json_data['current'].update({
-                    "snow" : snow
-                })
+                try:
+                    res = list(json_data['current']['snow'].keys())[0] 
+                    snow = json_data['current']['snow'][res]
+                    del json_data['current']['snow']
+                    json_data['current'].update({
+                        "snow" : snow
+                    })
+                except:
+                    pass
 
         makeTempModel(json_data['current'])
 
@@ -97,21 +115,27 @@ def manageJsonData(json_data, city, new_latitude, new_longitude, timezone):
             
             if 'rain' in elem:
                 if type(elem['rain']) == dict:
-                    res = list(elem['rain'].keys())[0] 
-                    rain = elem['rain'][res]
-                    del elem['rain']
-                    elem.update({
-                        "rain" : rain
-                    })
+                    try:
+                        res = list(elem['rain'].keys())[0] 
+                        rain = elem['rain'][res]
+                        del elem['rain']
+                        elem.update({
+                            "rain" : rain
+                        })
+                    except:
+                        pass
             
             if 'snow' in elem:
                 if type(elem['snow']) == dict:
-                    res = list(elem['snow'].keys())[0] 
-                    snow = elem['snow'][res]
-                    del elem['snow']
-                    elem.update({
-                        "snow" : snow
-                    })
+                    try:
+                        res = list(elem['snow'].keys())[0] 
+                        snow = elem['snow'][res]
+                        del elem['snow']
+                        elem.update({
+                            "snow" : snow
+                        })
+                    except:
+                        pass
 
             makeTempModel(elem)
 
@@ -130,21 +154,27 @@ def manageJsonData(json_data, city, new_latitude, new_longitude, timezone):
             
             if 'rain' in elem:
                 if type(elem['rain']) == dict:
-                    res = list(elem['rain'].keys())[0] 
-                    rain = elem['rain'][res]
-                    del elem['rain']
-                    elem.update({
-                        "rain" : rain
-                    })
+                    try:
+                        res = list(elem['rain'].keys())[0] 
+                        rain = elem['rain'][res]
+                        del elem['rain']
+                        elem.update({
+                            "rain" : rain
+                        })
+                    except:
+                        pass
 
             if 'snow' in elem:
                 if type(elem['snow']) == dict:
-                    res = list(elem['snow'].keys())[0] 
-                    snow = elem['snow'][res]
-                    del elem['snow']
-                    elem.update({
-                        "snow" : snow
-                    })
+                    try:
+                        res = list(elem['snow'].keys())[0] 
+                        snow = elem['snow'][res]
+                        del elem['snow']
+                        elem.update({
+                            "snow" : snow
+                        })
+                    except:
+                        pass
 
             makeTempModel(elem)
     
@@ -163,21 +193,27 @@ def manageJsonData(json_data, city, new_latitude, new_longitude, timezone):
 
             if 'rain' in elem:
                 if type(elem['rain']) == dict:
-                    res = list(elem['rain'].keys())[0] 
-                    rain = elem['rain'][res]
-                    del elem['rain']
-                    elem.update({
-                        "rain" : rain
-                    })
+                    try:
+                        res = list(elem['rain'].keys())[0] 
+                        rain = elem['rain'][res]
+                        del elem['rain']
+                        elem.update({
+                            "rain" : rain
+                        })
+                    except:
+                        pass
 
             if 'snow' in elem:
                 if type(elem['snow']) == dict:
-                    res = list(elem['snow'].keys())[0] 
-                    snow = elem['snow'][res]
-                    del elem['snow']
-                    elem.update({
-                        "snow" : snow
-                    })
+                    try:
+                        res = list(elem['snow'].keys())[0] 
+                        snow = elem['snow'][res]
+                        del elem['snow']
+                        elem.update({
+                            "snow" : snow
+                        })
+                    except:
+                        pass
             
             makeTempModel(elem)
     

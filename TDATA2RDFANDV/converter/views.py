@@ -35,6 +35,7 @@ from converter.Functions.parse2CSV import parseToCSV  # parse epw file to csv
 from converter.Functions.makeSH import makeSHEPW, makeSHJSON
 from converter.Functions.createEPWFile import createEPW
 from converter.Functions.createJSONFile import create8LinesJson
+from converter.Functions.sendVirtuoso import sendEPWVirtuoso, sendJSONVirtuoso
 from converter.Functions.createMappingFiles import createMappings
 from converter.FunctionsDSAPI.request import makeRequest
 from converter.FunctionsDSAPI.createMappingFiles import createDSAPIMappings
@@ -112,6 +113,8 @@ def extract_Convert(request):
             for file in glob.glob("converter/static/converter/*.epw"):
                 os.remove(file)
 
+        
+
         response = json.loads(request.body)
         link = takeData(response)
         # get data from EPW file that is inside Zip File
@@ -142,11 +145,17 @@ def extract_Convert(request):
 
         create8LinesJson(data, numberRowstoSkip, epwName)
 
-        # Create mapping files with epwName
-
         createMappings(epwName)
 
+        # Create mapping files with epwName
+
+        print('Starting Transformation')
+
         makeSHEPW(epwName)  # IMPORTANTE DESCOMENTAR PARA ENSEÑAR HELIO
+
+        print('Sending to Virtuoso')
+
+        sendEPWVirtuoso(epwName)
 
         if not os.getcwd().endswith("DataStorage"):
             os.chdir("converter/DataStorage")
@@ -163,6 +172,8 @@ def extract_Convert(request):
                 }
         # shutil.move(file, '../../converter/static/converter/')
         # shutil.move(epw, '../../converter/static/converter/')
+
+        
 
         return JsonResponse(dictionary, safe=False)
 
@@ -196,8 +207,6 @@ def extract_ConvertEnergyPlus(request):
         epwName = link.split('/')[-1].replace('.epw', '').replace(".", "-")
         createFileJson(data, epwName)  # Create csvw.json
 
-        print(len(data))
-
         headers, numberRowstoSkip = getJsonData(epwName)
 
         # Get the headers properly
@@ -223,7 +232,13 @@ def extract_ConvertEnergyPlus(request):
 
         createMappings(epwName)
 
+        print('Starting Transformation')
+
         makeSHEPW(epwName)  # IMPORTANTE DESCOMENTAR PARA ENSEÑAR HELIO
+
+        print('Sending to Virtuoso')
+
+        sendEPWVirtuoso(epwName)
 
         if not os.getcwd().endswith("DataStorage"):
             os.chdir("converter/DataStorage")
@@ -252,6 +267,9 @@ def extract_ConvertDarkSkyAPI(request):
             response['latitude'], response['longitude'])
         createDSAPIMappings(json_name, json_path)
         makeSHJSON(json_name)
+
+        sendJSONVirtuoso(json_name)
+
         return JsonResponse(json_data, safe=False)
 
 

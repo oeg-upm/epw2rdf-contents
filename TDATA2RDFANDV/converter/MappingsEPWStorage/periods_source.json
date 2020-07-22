@@ -8,7 +8,7 @@
             ],
             "connector": {
                 "arguments": [
-                    "../DataStorage/ESP_Albacete-082800_SWEC.json"
+                    "../DataStorage/BRA_Brasilia-833780_IWEC.json"
                 ],
                 "type": "LocalFileConnector"
             }

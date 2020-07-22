@@ -29,7 +29,7 @@
     <groupId>org.apache.jena</groupId>
     <artifactId>jena</artifactId>
     <version>3.6.0</version>
-    <relativePath>..</relativePath>
+    <relativePath>../target/helio</relativePath>
   </parent>
 
   <description>

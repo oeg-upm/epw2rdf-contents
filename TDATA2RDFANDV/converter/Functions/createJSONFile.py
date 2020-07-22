@@ -67,7 +67,11 @@ def create8LinesJson(data,numberRowstoSkip,epwName):
             "september":elem[12],
             "october":elem[13],
             "november":elem[14],
-            "december":elem[15]
+            "december":elem[15],
+            "city":json_location[0],
+            "adm03":json_location[2],
+            "wmo":int(json_location[3]),
+            "epwName":json_location[7]
         })
 
 
@@ -88,49 +92,61 @@ def create8LinesJson(data,numberRowstoSkip,epwName):
             epw[count].replace("\n","").replace("\r","")
             count+=1
 
+        newList = []
+
+        for elem in epw:
+            if elem.isdigit():
+                if "." in elem:
+                    newList.append(float(elem))
+                else:
+                    newList.append(int(elem))
+            else:
+                newList.append(elem)
+
+
+            
+
 
         json_file['epw'].append({
-          "Year": int(epw[0]),
-          "Month": int(epw[1]),
-          "Day": int(epw[2]),
-          "Hour": int(epw[3]),
-          "DryBulbTemperature": float(epw[4]),
-          "DewPointTemperature": float(epw[5]),
-          "RelativeHumidity": float(epw[6]),
-          "AtmosphericStationPressure": float(epw[7]),
-          "ExtraterrestrialHorizontalRadiation": float(epw[8]),
-          "ExtraterrestrialDirectNormalRadiation": float(epw[9]),
-          "HorizontalInfraredRadiationIntensity": float(epw[10]),
-          "GlobalHorizontalRadiation": float(epw[11]),
-          "DirectNormalRadiation": float(epw[12]),
-          "DiffuseHorizontalRadiation": float(epw[13]),
-          "GlobalHorizontalIlluminance": float(epw[14]),
-          "DirectNormalIlluminance": float(epw[15]),
-          "DiffuseHorizontalIlluminance": float(epw[16]),
-          "ZenithLuminance": float(epw[17]),
-          "WindDirection": float(epw[18]),
-          "WindSpeed": float(epw[19]),
-          "TotalSkyCover": float(epw[20]),
-          "OpaqueSkyCover": float(epw[21]),
-          "Visibility": float(epw[22]),
-          "CeilingHeight": float(epw[23]),
-          "PrecipitableWater": float(epw[24]),
-          "AerosolOpticalDepth": float(epw[25]),
-          "SnowDepth": float(epw[26]),
-          "DaysSinceLastSnowfall": float(epw[27]),
-          "Albedo": float(epw[28]),
-          "LiquidPrecipitationDepth": float(epw[29]),
-          "LiquidPrecipitationQuantity": float(epw[30]),
-          "city" : epw[31],
-          "adm03" : epw[32],
-          "wmo" : int(epw[33]),
-          "epwName" : epw[34]
+          "Year": newList[0],
+          "Month": newList[1],
+          "Day": newList[2],
+          "Hour": newList[3],
+          "DryBulbTemperature": newList[4],
+          "DewPointTemperature": newList[5],
+          "RelativeHumidity": newList[6],
+          "AtmosphericStationPressure": newList[7],
+          "ExtraterrestrialHorizontalRadiation": newList[8],
+          "ExtraterrestrialDirectNormalRadiation": newList[9],
+          "HorizontalInfraredRadiationIntensity": newList[10],
+          "GlobalHorizontalRadiation": newList[11],
+          "DirectNormalRadiation": newList[12],
+          "DiffuseHorizontalRadiation": newList[13],
+          "GlobalHorizontalIlluminance": newList[14],
+          "DirectNormalIlluminance": newList[15],
+          "DiffuseHorizontalIlluminance": newList[16],
+          "ZenithLuminance": newList[17],
+          "WindDirection": newList[18],
+          "WindSpeed": newList[19],
+          "TotalSkyCover": newList[20],
+          "OpaqueSkyCover": newList[21],
+          "Visibility": newList[22],
+          "CeilingHeight": newList[23],
+          "PrecipitableWater": newList[24],
+          "AerosolOpticalDepth": newList[25],
+          "SnowDepth": newList[26],
+          "DaysSinceLastSnowfall": newList[27],
+          "Albedo": newList[28],
+          "LiquidPrecipitationDepth": newList[29],
+          "LiquidPrecipitationQuantity": newList[30],
+          "city" : newList[31],
+          "adm03" : newList[32],
+          "wmo" : newList[33],
+          "epwName" : newList[34]
         })
 
-
-        
     
-    document = open("converter/DataStorage/" + epwName + ".json", "w")
+    document = open("converter/DataStorage/" + epwName + ".json", "a+")
     json.dump(json_file, document, indent=4)
 
     document.close()
