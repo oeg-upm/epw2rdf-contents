@@ -648,7 +648,7 @@ mappings:
     po:
       - [onto:locatedIn, data:city/$(city)~iri]
       - [onto:locatedIn, data:country/$(country)~iri]
-      - [onto:locatedIn, data:Point/$(adm03)_$(city)_$(wmo)~iri]
+      - [geo:location, data:Point/$(adm03)_$(city)_$(wmo)~iri]
 
   Point:
     sources:

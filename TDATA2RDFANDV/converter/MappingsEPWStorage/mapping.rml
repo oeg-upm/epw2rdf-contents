@@ -1261,7 +1261,7 @@ map:pm_182 a rr:PredicateMap;
 map:pm_183 a rr:PredicateMap;
     rr:constant <https://bimerr.iot.linkeddata.es/def/weather#locatedIn>.
 map:pm_184 a rr:PredicateMap;
-    rr:constant <https://bimerr.iot.linkeddata.es/def/weather#locatedIn>.
+    rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#location>.
 map:pm_185 a rr:PredicateMap;
     rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#lat>.
 map:pm_186 a rr:PredicateMap;
@@ -2312,275 +2312,275 @@ map:s_8 a rr:SubjectMap;
 map:s_9 a rr:SubjectMap;
     rr:template "https://bimerr.iot.linkeddata.es/resource/weather/AtmosphericStationPressureMeasurement/{adm03}_{city}_{Year}-{Month}-{Day}-{Hour}".
 map:source_0 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.typical_extremePeriods[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_1 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.typical_extremePeriods[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_10 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_11 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_12 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_13 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_14 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_15 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_16 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_17 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_18 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_19 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_2 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.typical_extremePeriods[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_20 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_21 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_22 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_23 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_24 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_25 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_26 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_27 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_28 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_29 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_3 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_30 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_31 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_32 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_33 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_34 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_35 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_36 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_37 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_38 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_39 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_4 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_40 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_41 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_42 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_43 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_44 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_45 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_46 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_47 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_48 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_49 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_5 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_50 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_51 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_52 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_53 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_54 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_55 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_56 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_57 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_58 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_59 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_6 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_60 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.location[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_61 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.location[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_62 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_63 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_64 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_65 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_66 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.groundTemperatures[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_67 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_7 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_8 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 map:source_9 a rml:LogicalSource;
-    rml:source "../DataStorage/BRA_Brasilia-833780_IWEC.json";
+    rml:source "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json";
     rml:iterator "$.epw[*]";
     rml:referenceFormulation ql:JSONPath.
 

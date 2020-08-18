@@ -153,9 +153,9 @@ def extract_Convert(request):
 
         makeSHEPW(epwName)  # IMPORTANTE DESCOMENTAR PARA ENSEÑAR HELIO
 
-        print('Sending to Virtuoso')
+        #print('Sending to Virtuoso')
 
-        sendEPWVirtuoso(epwName)
+        #sendEPWVirtuoso(epwName)
 
         if not os.getcwd().endswith("DataStorage"):
             os.chdir("converter/DataStorage")
@@ -236,9 +236,9 @@ def extract_ConvertEnergyPlus(request):
 
         makeSHEPW(epwName)  # IMPORTANTE DESCOMENTAR PARA ENSEÑAR HELIO
 
-        print('Sending to Virtuoso')
+        # print('Sending to Virtuoso')
 
-        sendEPWVirtuoso(epwName)
+        # sendEPWVirtuoso(epwName)
 
         if not os.getcwd().endswith("DataStorage"):
             os.chdir("converter/DataStorage")

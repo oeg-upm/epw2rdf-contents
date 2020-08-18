@@ -1384,7 +1384,7 @@ map:pm_182 a rr:PredicateMap;
 map:pm_183 a rr:PredicateMap;
     rr:constant <https://bimerr.iot.linkeddata.es/def/weather#locatedIn>.
 map:pm_184 a rr:PredicateMap;
-    rr:constant <https://bimerr.iot.linkeddata.es/def/weather#locatedIn>.
+    rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#location>.
 map:pm_185 a rr:PredicateMap;
     rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#lat>.
 map:pm_186 a rr:PredicateMap;

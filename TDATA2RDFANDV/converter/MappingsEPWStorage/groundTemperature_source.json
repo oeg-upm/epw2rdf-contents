@@ -8,7 +8,7 @@
             ],
             "connector": {
                 "arguments": [
-                    "../DataStorage/BRA_Brasilia-833780_IWEC.json"
+                    "../DataStorage/JPN_CH_Tokyo-Narita-Intl-AP-476860_TMYx-2004-2018.json"
                 ],
                 "type": "LocalFileConnector"
             }
